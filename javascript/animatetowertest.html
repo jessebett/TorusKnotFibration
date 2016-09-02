@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>MathBox - Empty</title>
+  <script src="node_modules/mathbox/build/mathbox-bundle.js"></script>
+   <script src="math.min.js"></script>
+  <link rel="stylesheet" href="node_modules/mathbox/build/mathbox.css">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+</head>
+<body>
+  <script>
+    var mathbox = mathBox({
+      plugins: ['core', 'controls', 'cursor', 'mathbox'],
+      controls: {
+        // Orbit controls, i.e. Euler angles, with gimbal lock
+        klass: THREE.OrbitControls,
+
+        // Trackball controls, i.e. Free quaternion rotation
+        //klass: THREE.TrackballControls,
+      },
+    });
+    if (mathbox.fallback) throw "WebGL not supported"
+
+    var three = mathbox.three;
+    three.renderer.setClearColor(new THREE.Color(0xFFFFFF), 1.0);
+
+    var time = three.Time.clock;
+
+    // Place camera
+    var camera =
+      mathbox
+      .camera({
+        proxy: true,
+        position: [0,0,5],
+        lookAt:[-1,-1,0],
+      });
+
+
+
+    // 2D cartesian
+      var view =
+      mathbox    
+      .polar({
+      bend: 1,
+      range: [[0, 2*π], [0,2*π/4], [0, 2*π]],
+      scale: [2, 1, 1],
+      helix: 0,
+
+    });
+      // .cartesian({
+      //   range: [[0, 2*math.pi], [0, 2*math.pi],[-1,1]],
+      //   scale: [1, 1,1],
+      // });
+
+          // Axes + grid
+    view
+      // .axis({
+      //   axis: 1,
+      //   width: 3,
+      //   color: 'red'
+      // })
+      // .axis({
+      //   axis: 2,
+      //   width: 3,
+      //   color: 'blue'
+      // })
+      // .axis({
+      //   axis: 3,
+      //   width: 3,
+      //   color: 'blue'
+      // });
+      // .grid({
+      //   width: 2,  
+      //   divideX: 20,
+      //   divideY: 10,        
+      // });
+
+    // Make axes black
+    mathbox.select('axis').set('color', 'black');
+
+    var alpha = 2;
+
+    //Quality of Life
+    var pi = math.pi;
+    var sin = math.sin;
+    var cos = math.cos;
+
+    function mod2pi(x){
+      return (x%(2*pi)+2*pi)%(2*pi)
+    }
+
+
+    // Torus Knot Parameters
+    var p = 2;
+    var q = 3;
+    var m = p/q;
+    var m2 = q/p;
+    var eps=0.01;
+
+
+function SurfaceCut(x){
+        if( x <= 0)
+        {
+          x = NaN;
+        } else if (x >= 2*pi)
+        {
+          x= NaN;
+        }
+        return x
+}
+
+
+
+//First Piecewise Curve
+    function piecewise(x,y,t,n){
+     
+      x= x%(2*pi);
+      var period = (pi)/q;
+      var amplitude = pi/(2*p);
+      var wave = math.abs(4/(pi)*y)**4*((2*amplitude)/pi)*math.asin(sin((x+t/q)*pi/period))+2*pi*n/p-(1/p)*t
+
+
+      return SurfaceCut(wave)
+    }
+
+
+    view.area({
+
+      expr: function(emit,x,y,i,j,t){
+
+          var tau = (-0.25*t)%2*pi;
+
+          var xdom = SurfaceCut(x);
+
+
+          emit(xdom, y,piecewise(x,y,tau,-1));
+          emit(xdom,y, piecewise(x,y,tau,0));
+          emit(xdom,y, piecewise(x,y,tau,1));
+          emit(xdom,y, piecewise(x,y,tau,2));
+         },
+         rangeX:[0,3*pi],
+         rangeY:[0,pi/4],
+         width:300,
+         height:300,
+         channels:3,
+         items:4
+
+    });
+    view.surface({
+      color:'#0074D9',
+      proximity:10000000000,
+      shaded:true,
+      crossed:true,
+
+
+    });
+
+
+//Second Piecewise Curve
+    function piecewise2(x,y,t,n){
+      x= x%(2*pi);
+      var period = (pi)/p;
+      var amplitude = pi/(2*q);
+      var wave = math.abs(4/pi*y)**4*((2*amplitude)/pi)*math.asin(sin((x-t)*pi/period))-2*pi*n/q
+
+      return SurfaceCut(-(wave - pi/q+(1/q)*t))
+    }
+
+
+    view.area({
+
+      expr: function(emit,x,y,i,j,t){
+          var tau = (-0.25*t)%2*pi;
+
+          var xdom = SurfaceCut(-(x-(1/p)*tau)-pi/p);
+
+          emit( piecewise2(x,y,tau,-4)-eps,-y+pi/4+pi/4,xdom);
+          emit( piecewise2(x,y,tau,-3)-eps,-y+pi/4+pi/4,xdom);
+          emit( piecewise2(x,y,tau,-2)-eps,-y+pi/4+pi/4,xdom);
+          emit( piecewise2(x,y,tau,-1)-eps,-y+pi/4+pi/4,xdom);
+          emit( piecewise2(x,y,tau,0)-eps,-y+pi/4+pi/4,xdom);
+          emit( piecewise2(x,y,tau,1)-eps,-y+pi/4+pi/4,xdom);
+          emit( piecewise2(x,y,tau,2)-eps,-y+pi/4+pi/4,xdom);
+         },
+         rangeX:[-4*pi,2*pi],
+         rangeY:[0,pi/4],
+         width:64*6,
+         height:64*6,
+         channels:3,
+         items:7
+
+    });
+    view.surface({
+      color:'#FF4136',
+      proximity:10,
+      opacity:1,
+      shaded:true,
+      closedY:false,
+    });
+
+    // var data = 
+    //   view.interval({
+    //     expr: function(emit,x,i,t){
+    //       emit(x, piecewise(x,0),0);
+    //     },
+    //     width:64,
+    //     channels:3
+    //   });
+
+
+    // var curve =
+    //   view.line({
+    //     id:1,
+    //     width:5,
+    //     color: ['blue','red']
+    //   });
+
+          // Draw ticks and labels
+    var scale =
+      view.scale({
+        divide: 10,
+      });
+    
+    // var ticks =
+    //   view.ticks({
+    //     width: 5,
+    //     size: 15,
+    //     color: 'black',
+    //   });
+    
+    var format =
+      view.format({
+        digits: 2,
+        weight: 'bold',
+      });
+
+
+// Knot Curve
+    function knot(x){
+     return (m2*x)%(2*pi);
+    }
+
+    view.interval({
+      range:[0,2*p*pi],
+      expr: function(emit,x,i,t){
+          emit(x%(2*pi),pi/4, knot(x));
+         },
+         width:64**2,
+         channels:3,
+    });
+    view.line({
+      color:'green',
+      proximity:10,
+      blending:'no'
+    })
+
+    mathbox.set('focus', 1.5);
+
+    // Do stuff with mathbox,
+    // for example: (see docs/intro.md)
+    
+
+
+          // Animate
+    var play = mathbox.play({
+      target: 'polar',
+      pace: 3,
+      to: 3,
+      loop: true,
+      script: [
+        {props: {bend: 0}},
+        {props: {bend: 1}},
+        {props: {bend: 1}},
+        {props: {bend: 0}},
+      ]
+    });
+
+    // // 2D cartesian
+    // var view =
+    //   mathbox
+    //   .cartesian({
+    //     range: [[-2, 2], [-1, 1]],
+    //     scale: [2, 1],
+    //   });
+
+    // // Axes + grid
+    // view
+    //   .axis({
+    //     axis: 1,
+    //     width: 3,
+    //   })
+    //   .axis({
+    //     axis: 2,
+    //     width: 3,
+    //   })
+    //   .grid({
+    //     width: 2,  
+    //     divideX: 20,
+    //     divideY: 10,        
+    //   });
+
+    // // Make axes black
+    // mathbox.select('axis').set('color', 'black');
+
+    // // Calibrate focus distance for units
+    // mathbox.set('focus', 3);
+
+    // // Add some data
+    // var data =
+    //   view
+    //   .interval({
+    //     expr: function (emit, x, i, t) {
+    //       emit(x, Math.sin(x + t));
+    //     },
+    //     width: 64,
+    //     channels: 2,
+    //   });
+    
+    // // Draw a curve
+    // var curve =
+    //   view
+    //   .line({
+    //     width: 5,
+    //     color: '#3090FF',
+    //   });
+
+    // // Draw some points
+    // var points =
+    //   view
+    //   .point({
+    //     size: 8,
+    //     color: '#3090FF',
+    //   });
+    
+    // // Draw vectors
+    // var vector =
+    //   view.interval({
+    //     expr: function (emit, x, i, t) {
+    //       emit(x, 0);
+    //       emit(x, -Math.sin(x + t));
+    //     },
+    //     width: 64,
+    //     channels: 2,
+    //     items: 2,
+    //   })
+    //   .vector({
+    //     end: true,
+    //     width: 5,
+    //     color: '#50A000',
+    //   });
+    
+    // // Draw ticks and labels
+    // var scale =
+    //   view.scale({
+    //     divide: 10,
+    //   });
+    
+    // var ticks =
+    //   view.ticks({
+    //     width: 5,
+    //     size: 15,
+    //     color: 'black',
+    //   });
+    
+    // var format =
+    //   view.format({
+    //     digits: 2,
+    //     weight: 'bold',
+    //   });
+
+    // var labels =
+    //   view.label({
+    //     color: 'red',
+    //     zIndex: 1,
+    //   });
+          
+
+            
+    //
+
+    
+  </script>
+</body>
+</html>
