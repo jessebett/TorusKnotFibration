@@ -1,3 +1,9 @@
 div.cent {
     text-align: center;
 }
+
+iframe.miframe {
+    height: 100%;
+    overflow: hidden;
+    border: none;
+}
