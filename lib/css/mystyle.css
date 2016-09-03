@@ -17,9 +17,7 @@ label.sliderlabel{
 	    background: #0fbfcf;
 }
 
-#torus .sectiondivider{
-    color: black;
-}
+
 
 
 .sectiondivider {
@@ -44,7 +42,7 @@ label.sliderlabel{
   position: static;
   margin-top: -8px;
 }
-.sectiondivider .fa-circle { color: black; }
+.sectiondivider .fa-circle { color: #0fbfcf; }
 
 .sectiondivider h5 {
   font-size:15px;
