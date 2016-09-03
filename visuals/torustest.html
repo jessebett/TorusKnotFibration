@@ -80,22 +80,19 @@
 
 
     <script>
+        var mathbox = mathBox({
+            plugins: ['core', 'controls', 'cursor', 'mathbox'],
+            controls: {
+                // Orbit controls, i.e. Euler angles, with gimbal lock
+                klass: THREE.OrbitControls,
+                parameters: {
+                    noZoom: true
+                },
 
-    var mathbox = mathBox({
-      plugins: ['core', 'controls', 'cursor'],
-      controls: {
-        klass: THREE.TrackballControls,
-        parameters: {
-          noZoom: true
-        },
-      },
-      mathbox: {
-        warmup: 1
-      },
-      loop: {
-        start: window == window.top
-      },
-    });
+                // Trackball controls, i.e. Free quaternion rotation
+                //klass: THREE.TrackballControls,
+            },
+        });
         if (mathbox.fallback) throw "WebGL not supported"
 
         var three = mathbox.three;
