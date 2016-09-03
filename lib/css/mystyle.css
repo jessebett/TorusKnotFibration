@@ -7,3 +7,5 @@ iframe.miframe {
     overflow: hidden;
     border: none;
 }
+
+html{ height: 100%; }
