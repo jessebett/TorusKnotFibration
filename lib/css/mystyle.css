@@ -4,3 +4,7 @@ div.cent {
 
 
 html,body{height:100}
+
+.slider-handle{
+    background: red;
+}
