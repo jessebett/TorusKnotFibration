@@ -8,3 +8,7 @@ iframe.miframe {
     border: none;
 }
 
+html.miframe{
+    height:100%;
+    width: 100%;
+}
