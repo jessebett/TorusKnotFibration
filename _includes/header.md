@@ -2,5 +2,5 @@
 layout: nil
 ---
 
-{% include mystyle.css %}
+{% include /lib/css/mystyle.css %}
 
