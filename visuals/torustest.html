@@ -109,7 +109,7 @@
             .camera({
                 proxy: true,
                 position: [0, 0, 3],
-                lookAt: [0, 0, -0.33]
+                lookAt: [0, 0, 0]
 
             });
 
@@ -119,7 +119,7 @@
         var view =
             mathbox
             .cartesian({
-                position: [0, 0, -0.33],
+                position: [0, 0, 0],
                 range: [
                     [-math.pi, math.pi],
                     [-math.pi, math.pi],
@@ -170,7 +170,11 @@
 
             // return [(R-r*cos(x*b))*((1-a)*y+sin(a*y)),(R-r*cos(b*x))*-cos(a*y),(1-b)*x + r*sin(b*x)]
 
-            return [(R - r * cos(x * b)) * ((1 - a) * y + sin(a * y)), (1 - b) * x + r * sin(b * x), (R - r * cos(b * x)) * -cos(a * y) + 1]
+            return [
+                (R - r * cos(x * b)) * ((1 - a) * y + sin(a * y)), 
+                (1 - b) * x + r * sin(b * x)+1, 
+                (R - r * cos(b * x)) * -cos(a * y) + 1
+            ]
 
         }
 
