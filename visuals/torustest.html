@@ -81,6 +81,9 @@ function slidefunction(){
       controls: {
         // Orbit controls, i.e. Euler angles, with gimbal lock
         klass: THREE.OrbitControls,
+        parameters: {
+          noZoom: true
+        },
 
         // Trackball controls, i.e. Free quaternion rotation
         //klass: THREE.TrackballControls,
@@ -97,7 +100,7 @@ function slidefunction(){
     var camera =
       mathbox
       .camera({
-        proxy: false,
+        proxy: true,
         position: [0,0,3],
       });
 
