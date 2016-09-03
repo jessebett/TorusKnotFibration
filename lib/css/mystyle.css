@@ -12,27 +12,24 @@ html,body{
 
 
 label.sliderlabel{
-    text-align: center;
-    vertical-align: middle;
-    clear: both;
-    float:left;
-    margin-right:15px;
+font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; 
+    font-size: 18px;
+    font-weight: normal;
 }
 .slider-handle {
 	    background: #0fbfcf;
 }
 
-
-.labels{
-    width:30%;
-    float: left;
+table.panel{
+    margin-top: 30px;
+}
+th.labels{
+height: 20px;
     text-align: right;
-    margin-top: 10px;
-    margin-left: 50px;
-    margin-right: -50px;
+
 }
 .controls{
-    width:65%;
     float: left;
-    margin-top: 10px;
+
+    width: 80%;
 }
