@@ -1,0 +1,73 @@
+{
+  "_args": [
+    [
+      "math",
+      "/Users/jesse/Google Drive/KnotFibration/javascript"
+    ]
+  ],
+  "_defaultsLoaded": true,
+  "_engineSupported": true,
+  "_from": "math@*",
+  "_id": "math@0.0.3",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/math",
+  "_nodeVersion": "v0.4.10",
+  "_npmVersion": "1.0.10",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "math",
+    "raw": "math",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "*",
+    "type": "range"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/math/-/math-0.0.3.tgz",
+  "_shasum": "85b020fd54ce10b26abeabfcd7e1f4bdbc46470f",
+  "_shrinkwrap": null,
+  "_spec": "math",
+  "_where": "/Users/jesse/Google Drive/KnotFibration/javascript",
+  "author": {
+    "email": "kaleb@hornsby.ws",
+    "name": "Kaleb Hornsby",
+    "url": "kaleb.hornsby.ws"
+  },
+  "contributors": [
+    {
+      "name": "Kaleb Hornsby",
+      "email": "kaleb@hornsby.ws",
+      "url": "kaleb.hornsby.ws"
+    }
+  ],
+  "dependencies": {},
+  "description": "Mathematical Functions",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "85b020fd54ce10b26abeabfcd7e1f4bdbc46470f",
+    "tarball": "https://registry.npmjs.org/math/-/math-0.0.3.tgz"
+  },
+  "engines": {
+    "node": "> 0.0.0"
+  },
+  "homepage": "kaleb.hornsby.ws/js-math",
+  "main": "math.js",
+  "maintainers": [
+    {
+      "name": "kzh",
+      "email": "kaleb@hornsby.ws"
+    }
+  ],
+  "name": "math",
+  "optionalDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kaleb/js-math.git"
+  },
+  "scripts": {},
+  "version": "0.0.3"
+}
