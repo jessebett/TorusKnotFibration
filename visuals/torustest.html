@@ -93,13 +93,13 @@
                 //klass: THREE.TrackballControls,
             },
             mathbox: {
-                warmup:true
+                warmup:1
             }
         });
         if (mathbox.fallback) throw "WebGL not supported"
 
         var three = mathbox.three;
-        three.renderer.setClearColor(new THREE.Color(0xFFFFFF), 1.0);
+        three.renderer.setClearColor(new THREE.Color('#f8f8f8'), 1.0);
 
         var time = three.Time.clock;
 
@@ -192,8 +192,8 @@
         });
 
         view.surface({
-            shaded: true,
-            color: '#49a7e9',
+            shaded: false,
+            color: '#0fbfcf',
 
         });
 
