@@ -92,6 +92,9 @@
                 // Trackball controls, i.e. Free quaternion rotation
                 //klass: THREE.TrackballControls,
             },
+            mathbox: {
+                warmup:true
+            }
         });
         if (mathbox.fallback) throw "WebGL not supported"
 
@@ -105,9 +108,9 @@
             mathbox
             .camera({
                 proxy: true,
-                position: [0, 0,3],
-                lookAt: [0,0,0]
-                
+                position: [0, 0, 3],
+                lookAt: [0, 0, -0.33]
+
             });
 
 
@@ -116,7 +119,7 @@
         var view =
             mathbox
             .cartesian({
-                position:[0,0,-0.33],
+                position: [0, 0, -0.33],
                 range: [
                     [-math.pi, math.pi],
                     [-math.pi, math.pi],
@@ -125,28 +128,28 @@
                 scale: [1, 1, 1],
             });
 
-               // Axes + grid
-         view
-           .axis({
-             axis: 1,
-             width: 3,
-             color: 'red'
-           })
-           .axis({
-             axis: 2,
-             width: 3,
-             color: 'blue'
-           })
-           .axis({
-             axis: 3,
-             width: 3,
-             color: 'blue'
-           })
-           .grid({
-             width: 2,  
-             divideX: 20,
-             divideY: 10,        
-           });
+        // Axes + grid
+        //         view
+        //           .axis({
+        //             axis: 1,
+        //             width: 3,
+        //             color: 'red'
+        //           })
+        //           .axis({
+        //             axis: 2,
+        //             width: 3,
+        //             color: 'blue'
+        //           })
+        //           .axis({
+        //             axis: 3,
+        //             width: 3,
+        //             color: 'blue'
+        //           })
+        //           .grid({
+        //             width: 2,  
+        //             divideX: 20,
+        //             divideY: 10,        
+        //           });
 
         // // Make axes black
         // mathbox.select('axis').set('color', 'black');
