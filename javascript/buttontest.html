@@ -73,12 +73,10 @@ function slidefunction(){
             var butprop=$('#toggle').prop('checked');
             var butval = $('#toggle').val();
             if (butprop==true) {
-                console.log('true!');
                 $('#toggle').val(1.0);
                 mathbox.select('line').set('opacity',1.0)
             }
             else {
-                console.log('false!');
                 $('#toggle').val();
                 mathbox.select('line').set('opacity',0.0)
             }

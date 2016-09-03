@@ -35,3 +35,8 @@ th.labels{
 
     width: 80%;
 }
+
+
+input.toggle{
+    size:'small'
+}
