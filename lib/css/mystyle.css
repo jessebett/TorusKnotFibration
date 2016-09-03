@@ -1,6 +1,7 @@
 div.cent {
     text-align: center;
     margin-bottom: 10px;
+    margin-top: 20px;
 }
 
 
@@ -9,11 +10,29 @@ html,body{
     font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; 
 }
 
+
 label.sliderlabel{
-   margin-right:20px;
-    font-size: 20px;
+    text-align: center;
+    vertical-align: middle;
+    clear: both;
+    float:left;
+    margin-right:15px;
 }
 .slider-handle {
 	    background: #0fbfcf;
 }
 
+
+.labels{
+    width:30%;
+    float: left;
+    text-align: right;
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-right: -50px;
+}
+.controls{
+    width:65%;
+    float: left;
+    margin-top: 10px;
+}
