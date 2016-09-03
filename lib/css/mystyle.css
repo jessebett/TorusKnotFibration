@@ -1,10 +1,13 @@
 div.cent {
     text-align: center;
+
 }
 
 
-html,body{height:100}
+html,body{height:100;
+font-size: 100;}
 
-.slider-handle{
-    background: red;
+.slider-handle {
+	    background: #111111;
 }
+

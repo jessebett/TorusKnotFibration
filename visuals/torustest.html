@@ -33,24 +33,29 @@
     <script src="../lib/slider/bootstrap-slider.min.js"></script>
 
     <!-- my css -->
-    <link href="../lib/css/mystyle.css">
+    <link href="../lib/css/mystyle.css" rel="stylesheet">
 
 </head>
+    
+
 
 
 <body style="height: 100vh">
+
     <p>
-        <div style="text-align: center;">
+        <div class="cent">
             <input id="slidera" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.0" data-slider-tooltip='hide' />
         </div>
     </p>
     <p>
-        <div style="text-align: center;">
+        <div class="cent">
             <input id="sliderb" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.0" data-slider-tooltip='hide' />
         </div>
     </p>
 
+
     <script>
+        
         // With JQuery
         $('#slidera').slider({
             formatter: function(value) {
@@ -99,7 +104,7 @@
         if (mathbox.fallback) throw "WebGL not supported"
 
         var three = mathbox.three;
-        three.renderer.setClearColor(new THREE.Color('#0fbfcf'), 1.0);
+        three.renderer.setClearColor(new THREE.Color('#f8f8f8'), 1.0);
 
         var time = three.Time.clock;
 
