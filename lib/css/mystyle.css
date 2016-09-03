@@ -1,12 +1,18 @@
 div.cent {
     text-align: center;
-
+    margin-bottom: 10px;
 }
 
 
-html,body{height:100;
-font-size: 100;}
+html,body{
+    height:100;
+    font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; 
+}
 
+label.sliderlabel{
+   margin-right:20px;
+    font-size: 20px;
+}
 .slider-handle {
 	    background: #0fbfcf;
 }

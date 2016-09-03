@@ -36,26 +36,27 @@
     <link href="../lib/css/mystyle.css" rel="stylesheet">
 
 </head>
-    
+
 
 
 
 <body style="height: 100vh">
 
-    <p>
+    <div>
         <div class="cent">
+        <label class="sliderlabel"> Glue Red Edge </label>
             <input id="slidera" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.0" data-slider-tooltip='hide' />
-        </div>
-    </p>
-    <p>
+            </div>
+
+
         <div class="cent">
+        <label class="sliderlabel"> Glue Yellow Edge</label>
             <input id="sliderb" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.0" data-slider-tooltip='hide' />
-        </div>
-    </p>
+            </div>
+    </div>
 
 
     <script>
-        
         // With JQuery
         $('#slidera').slider({
             formatter: function(value) {
@@ -98,7 +99,7 @@
                 //klass: THREE.TrackballControls,
             },
             mathbox: {
-                warmup:1
+                warmup: 1
             }
         });
         if (mathbox.fallback) throw "WebGL not supported"
@@ -124,7 +125,7 @@
         var view =
             mathbox
             .cartesian({
-                position: [0, 0,- 0.33],
+                position: [0, 0, -0.33],
                 range: [
                     [-math.pi, math.pi],
                     [-math.pi, math.pi],
@@ -176,9 +177,7 @@
             // return [(R-r*cos(x*b))*((1-a)*y+sin(a*y)),(R-r*cos(b*x))*-cos(a*y),(1-b)*x + r*sin(b*x)]
 
             return [
-                (R - r * cos(x * b)) * ((1 - a) * y + sin(a * y)), 
-                (1 - b) * x + r * sin(b * x)+1, 
-                (R - r * cos(b * x)) * -cos(a * y) + 1
+                (R - r * cos(x * b)) * ((1 - a) * y + sin(a * y)), (1 - b) * x + r * sin(b * x) + 1, (R - r * cos(b * x)) * -cos(a * y) + 1
             ]
 
         }
