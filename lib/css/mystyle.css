@@ -15,6 +15,7 @@ label.sliderlabel{
 font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; 
     font-size: 18px;
     font-weight: normal;
+        margin-right: 20px;
 }
 .slider-handle {
 	    background: #0fbfcf;
@@ -24,8 +25,9 @@ table.panel{
     margin-top: 30px;
 }
 th.labels{
-height: 20px;
+    height: 20px;
     text-align: right;
+
 
 }
 .controls{
