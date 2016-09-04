@@ -17,6 +17,3 @@ layout: nil
 {% include  /lib/slider/bootstrap-slider.min.css %}
 {% include /lib/slider/bootstrap-slider.min.js %}
 
-<script src="lib/mathbox/build/mathbox-bundle.js"></script>
-<link rel="stylesheet" href="lib/mathbox/build/mathbox.css">
-<meta name="viewport" content="initial-scale=1, maximum-scale=1">
