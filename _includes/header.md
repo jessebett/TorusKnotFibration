@@ -17,5 +17,5 @@ layout: nil
 {% include  /lib/slider/bootstrap-slider.min.css %}
 {% include /lib/slider/bootstrap-slider.min.js %}
 
-{% include /lib/switch/css/bootstrap3/bootstrap-switch.min.css %}
-{% include /lib/switch/js/bootstrap-switch.min.js %}
+{% include TorusKnotFibration/lib/switch/css/bootstrap3/bootstrap-switch.min.css %}
+{% include TorusKnotFibration/lib/switch/js/bootstrap-switch.min.js %}
