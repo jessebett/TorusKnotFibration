@@ -1,1 +1,24 @@
+<html>
 test
+
+<script>
+    var mathbox = mathBox({
+        plugins: ['core', 'controls', 'cursor'],
+        controls: {
+            // Orbit controls, i.e. Euler angles, with gimbal lock
+            klass: THREE.OrbitControls,
+            parameters: {
+                noZoom: true
+            },
+
+            // Trackball controls, i.e. Free quaternion rotation
+            //klass: THREE.TrackballControls,
+        },
+        mathbox: {
+            warmup: 1
+        }
+    });
+
+</script>
+
+</html>
