@@ -223,7 +223,7 @@ margin-right: auto; width:80%">
             // return [(R-r*cos(x*b))*((1-a)*y+sin(a*y)),(R-r*cos(b*x))*-cos(a*y),(1-b)*x + r*sin(b*x)]
 
             return [
-                (R - r * cos(x * b)) * ((1 - a) * y + sin(a * y)), (1 - b) * x + r * sin(b * x), (R - r * cos(b * x)) * -cos(a * y) + 1
+                (R - r * ((1-a)+a*cos(x * b))) * ((1 - a) * y + sin(a * y)), (1 - b) * x + r * sin(b * x), (R - r * cos(b * x)) * -cos(a * y) + 1
             ]
 
         }
