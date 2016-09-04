@@ -1,9 +1,112 @@
 <html>
 test
-    
-<script src="lib/mathbox/build/mathbox-bundle.js"></script>
-<link rel="stylesheet" href="lib/mathbox/build/mathbox.css">
-<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+<table class="panel" style="margin-left: auto;
+margin-right: auto; width:80%">
+    <tr>
+        <th class="labels" style="color:#0fbfcf">
+            <label class="sliderlabel">Glue Red Edge</label>
+        </th>
+        <th>
+            <input id="slidera" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.0" data-slider-tooltip='hide' />
+        </th>
+
+    </tr>
+    <tr>
+        <th class="labels" style="color:#0fbfcf">
+            <label class="sliderlabel">Glue Yellow Edge</label>
+        </th>
+        <th>
+            <input id="sliderb" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.0" data-slider-tooltip='hide' />
+        </th>
+
+    </tr>
+
+    <tr>
+        <th class="labels" style="color:#0fbfcf">
+            <label class="sliderlabel">Knot Traveller</label>
+        </th>
+        <th>
+            <input id="knottravellertoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="travtogfun(this);" data-onstyle="primary">
+        </th>
+    </tr>
+    <tr>
+        <th class="labels" style="color:#0fbfcf">
+            <label class="sliderlabel">Knot Curve</label>
+        </th>
+        <th>
+            <input id="knottoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="togfun(this);" data-onstyle="primary">
+        </th>
+    </tr>
+</table>
+
+
+<script>
+    //Slider Script
+    $('#slidera').slider({
+        formatter: function(value) {
+            return 'Current value: ' + value;
+        }
+    });
+
+    $('#sliderb').slider({
+        formatter: function(value) {
+            return 'Current value: ' + value;
+        }
+    });
+
+    $('#slider').on('slide', slidefunction)
+
+
+
+    function slidefunction() {
+
+        var sliderval = Number($('#slider').val());
+
+        mathbox.select('surface').set('opacity', sliderval);
+        console.log(typeof sliderval)
+    }
+
+    //Button SCript
+
+    $('#knottravellertoggle').bootstrapSwitch({
+        size: 'small',
+        offColor: 'danger',
+    });
+
+    function travtogfun(button) {
+        var butprop = $('#knottravellertoggle').prop('checked');
+        var butval = $('#knottravellertoggle').val();
+        if (butprop == true) {
+            $('#knottravellertoggle').val(1.0);
+            console.log('true!')
+            mathbox.select('#knottraveller')[0].set('opacity', 1.0)
+        } else {
+            $('#knottravellertoggle').val();
+            mathbox.select('#knottraveller')[0].set('opacity', 0.0)
+        }
+
+    }
+
+    $('#knottoggle').bootstrapSwitch({
+        size: 'small',
+        offColor: 'danger',
+    });
+
+    function togfun(button) {
+        var butprop = $('#knottoggle').prop('checked');
+        var butval = $('#knottoggle').val();
+        if (butprop == true) {
+            $('#knottoggle').val(1.0);
+            mathbox.select('#knotcurve')[0].set('opacity', 1.0)
+        } else {
+            $('#knottoggle').val();
+            mathbox.select('#knotcurve')[0].set('opacity', 0.0)
+        }
+
+    }
+
+</script>
 
 <script>
     var mathbox = mathBox({
