@@ -67,6 +67,7 @@ margin-right: auto; width:80%">
                 <input id="sliderb" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.0" data-slider-tooltip='hide' />
             </th>
 
+
         </tr>
         <!--Knot Curve Toggle-->
         <tr>
@@ -96,6 +97,14 @@ margin-right: auto; width:80%">
                 <input id="redtoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="redtogfun(this);" data-onstyle="primary">
             </th>
         </tr>
+
+        <!--            Time Slider-->
+        <th class="labels" style="color:#0fbfcf">
+            <label class="sliderlabel">Time</label>
+        </th>
+        <th>
+            <input id="slidertime" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="6.28" data-slider-step="0.01" data-slider-value="0.0" data-slider-tooltip='hide' />
+        </th>
     </table>
 
 
@@ -108,6 +117,12 @@ margin-right: auto; width:80%">
         });
 
         $('#sliderb').slider({
+            formatter: function(value) {
+                return 'Current value: ' + value;
+            }
+        });
+
+        $('#slidertime').slider({
             formatter: function(value) {
                 return 'Current value: ' + value;
             }
@@ -126,7 +141,7 @@ margin-right: auto; width:80%">
         //        }
 
         //Button SCript
-//BlueToggle
+        //BlueToggle
         $('#bluetoggle').bootstrapSwitch({
             size: 'small',
             offColor: 'danger',
@@ -144,7 +159,7 @@ margin-right: auto; width:80%">
             }
 
         }
-//RedToggle
+        //RedToggle
         $('#redtoggle').bootstrapSwitch({
             size: 'small',
             offColor: 'danger',
@@ -163,7 +178,7 @@ margin-right: auto; width:80%">
 
         }
 
-//KnotToggle
+        //KnotToggle
         $('#knottoggle').bootstrapSwitch({
             size: 'small',
             offColor: 'danger',
@@ -252,9 +267,7 @@ margin-right: auto; width:80%">
             // return [(R-r*cos(x*b))*((1-a)*y+sin(a*y)),(R-r*cos(b*x))*-cos(a*y),(1-b)*x + r*sin(b*x)]
 
             return [
-                (R - r * ((1 - a) + a * cos(x * b))) * ((1 - a) * y + sin(a * y)), 
-                (1 - b) * x + r * sin(b * x), 
-                (R - r * cos(b * x)) * -cos(a * y) + 1
+                (R - r * ((1 - a) + a * cos(x * b))) * ((1 - a) * y + sin(a * y)), (1 - b) * x + r * sin(b * x), (R - r * cos(b * x)) * -cos(a * y) + 1
             ]
 
         }
@@ -428,19 +441,39 @@ margin-right: auto; width:80%">
 
         function modpi(x) {
             //Function for Modular Arithmetic on [-pi,pi]
-            return (x + 2 * pi) % (2 * pi) - pi
+            return ((x + 2 * pi) % (2 * pi) - pi)
         }
 
+        function fakemodpi(x) {
+            var tpi=2*pi;
+            var X = x;
+            while (Math.abs(X) > pi) {
+                if (X < -pi) {
+                    X = X + 2 * pi
+                } else if (X >= -pi + tpi) {
+                    X = X - tpi
+                }
+            }
+            return X
+        }
 
+        function truemodpi(x) {
+            return (x + pi) % (2 * pi) - pi
+        }
+        console.log(fakemodpi(0))
+        console.log(fakemodpi(pi + 0.1))
+
+        //((2*amplitude)/pi)*math.asin(sin((x+t/q)*pi/period))+2*pi*n/p-(1/p)*t
         //First Piecewise Curve
         function piecewise(x, n) {
             //Triangle Wave Function to match knot + rungs!
             x = x % (2 * pi);
+            var t = Number($('#slidertime').val());
             var period = (pi) / q;
             var amplitude = pi / (2 * p);
-            var wave = ((2 * amplitude) / pi) * math.asin(sin(x * pi / period)) + 2 * pi * n / p
+            var wave = ((2 * amplitude) / pi) * math.asin(sin((x + t / q) * pi / period)) + 2 * pi * n / p - (t / p)
 
-            return modpi(wave - pi)
+            return fakemodpi(wave - pi/p)
         }
 
 
@@ -448,8 +481,8 @@ margin-right: auto; width:80%">
             range: [0, 4 * pi],
             expr: function(emit, x, i, t) {
                 //(0,-pi,0) shift to match new domains
-                emit(...torus(modpi(x) + eps, piecewise(x, 0)));
-                emit(...torus(modpi(x) + eps, piecewise(x, 1)));
+                emit(...torus(fakemodpi(x) + eps, piecewise(x, 0)));
+                emit(...torus(fakemodpi(x) + eps, piecewise(x, 1)));
             },
             width: 400,
             channels: 3,
@@ -497,7 +530,60 @@ margin-right: auto; width:80%">
             zBias: 15
         });
 
+        function SurfaceCut(x) {
+            if (x <= 0) {
+                x = NaN;
+            } else if (x >= 2 * pi) {
+                x = NaN;
+            }
+            return x
+        }
 
+
+
+        ////First Piecewise Curve
+        //    function piecewise(x,t,n){
+        //     
+        //      x= x%(2*pi);
+        //      var period = (pi)/q;
+        //      var amplitude = pi/(2*p);
+        //      var wave = ((2*amplitude)/pi)*math.asin(sin((x+t/q)*pi/period))+2*pi*n/p-(1/p)*t
+        //
+        //
+        //      return SurfaceCut(wave)
+        //    }
+        //
+        //
+        //    view.area({
+        //
+        //      expr: function(emit,x,y,i,j,t){
+        //
+        //          var tau = (-0.25*t)%2*pi;
+        //
+        //          var xdom = SurfaceCut(x);
+        //
+        //
+        //          emit(xdom, piecewise(x,tau,-1),-y);
+        //          emit(xdom, piecewise(x,tau,0),-y);
+        //          emit(xdom, piecewise(x,tau,1),-y);
+        //          emit(xdom, piecewise(x,tau,2),-y);
+        //         },
+        //         rangeX:[0,3*pi],
+        //         rangeY:[0,pi/4],
+        //         width:164,
+        //         height:164,
+        //         channels:3,
+        //         items:4
+        //
+        //    });
+        //    view.surface({
+        //      color:'#0074D9',
+        //      proximity:10000000000,
+        //      shaded:true,
+        //      crossed:true,
+        //
+        //
+        //    });
 
         mathbox.set('focus', 2);
 
