@@ -74,7 +74,7 @@ margin-right: auto; width:80%">
                 <label class="sliderlabel">Knot Traveller</label>
             </th>
             <th>
-                <input id="knottravellertoggle" type="checkbox"  data-toggle="toggle" value="1.0" onchange="travtogfun(this);" data-onstyle="primary">
+                <input id="knottravellertoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="travtogfun(this);" data-onstyle="primary">
             </th>
         </tr>
         <tr>
@@ -134,8 +134,8 @@ margin-right: auto; width:80%">
             }
 
         }
-        
-         $('#knottoggle').bootstrapSwitch({
+
+        $('#knottoggle').bootstrapSwitch({
             size: 'small',
             offColor: 'danger',
         });
@@ -243,7 +243,8 @@ margin-right: auto; width:80%">
 
         view.surface({
             shaded: false,
-            color: '#0fbfcf'
+            color: '#0FBFCF',
+            opacity: 0.1
 
         });
 
@@ -273,41 +274,41 @@ margin-right: auto; width:80%">
             zBias: 10
         })
 
-        //Edges of Torus
-        view.interval({
-            id: 'redline',
-            width: 64,
-            expr: function(emit, x, i, time) {
-                emit(...torus(x, -pi));
-                emit(...torus(x, pi));
-            },
-            items: 2,
-            channels: 3,
-        })
-
-        view.line({
-            points: mathbox.select('#redline')[1],
-            color: '#FF4136',
-            zBias: 12
-        })
-
-
-        view.interval({
-            id: 'yellowline',
-            width: 64,
-            expr: function(emit, y, i, time) {
-                emit(...torus(-pi, y));
-                emit(...torus(pi, y));
-            },
-            items: 2,
-            channels: 3,
-        })
-
-        view.line({
-            points: mathbox.select('#yellowline')[1],
-            color: '#FFDC00',
-            zBias: 13
-        })
+        //        //Edges of Torus
+        //        view.interval({
+        //            id: 'redline',
+        //            width: 64,
+        //            expr: function(emit, x, i, time) {
+        //                emit(...torus(x, -pi));
+        //                emit(...torus(x, pi));
+        //            },
+        //            items: 2,
+        //            channels: 3,
+        //        })
+        //
+        //        view.line({
+        //            points: mathbox.select('#redline')[1],
+        //            color: '#FF4136',
+        //            zBias: 12
+        //        })
+        //
+        //
+        //        view.interval({
+        //            id: 'yellowline',
+        //            width: 64,
+        //            expr: function(emit, y, i, time) {
+        //                emit(...torus(-pi, y));
+        //                emit(...torus(pi, y));
+        //            },
+        //            items: 2,
+        //            channels: 3,
+        //        })
+        //
+        //        view.line({
+        //            points: mathbox.select('#yellowline')[1],
+        //            color: '#FFDC00',
+        //            zBias: 13
+        //        })
 
         // Torus Knot Parameters
         var p = 2;
@@ -342,7 +343,7 @@ margin-right: auto; width:80%">
             id: 'knotcurve',
             color: 'green',
             opacity: 0,
-            proximity: 2,
+            proximity: 10,
             blending: 'no',
             zBias: 14
         })
@@ -371,12 +372,65 @@ margin-right: auto; width:80%">
         });
 
         view.surface({
-            id:'knottraveller',
+            id: 'knottraveller',
             shaded: false,
             color: 'green',
             opacity: 0,
 
         });
+
+
+
+        //Piecewise Stuff
+        //        //First Piecewise Curve
+        //        function piecewise(x, n) {
+        //            //Triangle Wave Function to match knot + rungs!
+        //            x = x % (2 * pi);
+        //            var period = (pi) / q;
+        //            var amplitude = pi / (2 * p);
+        //            var wave = ((2 * amplitude) / pi) * math.asin(sin(x * pi / period)) + 2 * pi * n / p
+        //
+        //            return mod2pi(wave)
+        //        }
+        //        
+
+
+        function modpi(x) {
+            //Function for Modular Arithmetic on [-pi,pi]
+            return (x + 2*pi) % (2 * pi) - pi
+        }
+
+
+        //First Piecewise Curve
+        function piecewise(x, n) {
+            //Triangle Wave Function to match knot + rungs!
+            x = x % (2 * pi);
+            var period = (pi) / q;
+            var amplitude = pi / (2 * p);
+            var wave = ((2 * amplitude) / pi) * math.asin(sin(x * pi / period)) + 2 * pi * n / p
+
+            return modpi(wave - pi)
+        }
+
+
+        view.interval({
+            range: [0, 4 * pi],
+            expr: function(emit, x, i, t) {
+                //(0,-pi,0) shift to match new domains
+                emit(piecewise(x, 0) , modpi(x), 0);
+                emit(piecewise(x, 1), modpi(x), 0);
+            },
+            width: 400,
+            channels: 3,
+            items: 2
+
+        });
+        view.line({
+            color: 'blue',
+            proximity: 10
+        });
+
+
 
         mathbox.set('focus', 2);
 
