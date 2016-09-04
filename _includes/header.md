@@ -10,5 +10,6 @@ layout: nil
 
 {% include /lib/math.min.js %}
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
+{% include /lib/bootstrap-3.3.7-dist/css/bootstrap.min.css %}
+{% include /lib/bootstrap-3.3.7-dist/css/bootstrap-theme.min.cs %}
+{% include /lib/bootstrap-3.3.7-dist/js/bootstrap.min.js %}
