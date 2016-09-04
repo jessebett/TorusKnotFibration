@@ -16,6 +16,3 @@ layout: nil
 
 {% include  /lib/slider/bootstrap-slider.min.css %}
 {% include /lib/slider/bootstrap-slider.min.js %}
-
-{% include TorusKnotFibration/lib/switch/css/bootstrap3/bootstrap-switch.min.css %}
-{% include TorusKnotFibration/lib/switch/js/bootstrap-switch.min.js %}
