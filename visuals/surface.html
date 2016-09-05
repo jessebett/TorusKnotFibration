@@ -289,7 +289,7 @@ margin-right: auto; width:80%">
         view.surface({
             shaded: false,
             color: '#0FBFCF',
-            opacity: 0.1
+            opacity: 0.0,
 
         });
 
@@ -315,8 +315,9 @@ margin-right: auto; width:80%">
 
         view.line({
             points: mathbox.select('#sparsesample')[1],
-            color: 'white',
-            zBias: 10
+            color: '#0FBFCF',
+            zBias: 1,
+            opacity:0.1
         })
 
         //                //Edges of Torus
@@ -356,8 +357,8 @@ margin-right: auto; width:80%">
         //                })
 
         // Torus Knot Parameters
-        var p = 2;
-        var q = 3;
+        var p = 3;
+        var q = 2;
         var m = p / q;
         var m2 = q / p;
         var eps = 0.01;
@@ -444,6 +445,18 @@ margin-right: auto; width:80%">
             return ((x + 2 * pi) % (2 * pi) - pi)
         }
 
+        
+                function surfacecut(x){
+            var X=x
+            var thresh = 0.02;
+            
+            if(Math.abs(pi)-X<thresh){
+                 X=NaN
+            }
+
+            return X
+        }
+        
         function fakemodpi(x) {
             var tpi = 2 * pi;
             var X = x;
@@ -459,19 +472,10 @@ margin-right: auto; width:80%">
                 }
             }
 
-            return X
+            return surfacecut(X)
         }
         
-        function surfacecut(x){
-            var X=x
-            var thresh = 0.02;
-            
-            if(Math.abs(pi)-X<thresh){
-                 X=NaN
-            }
 
-            return X
-        }
 
         function truemodpi(x) {
             return (x + pi) % (2 * pi) - pi
@@ -499,10 +503,11 @@ margin-right: auto; width:80%">
                 //(0,-pi,0) shift to match new domains
                 emit(...torus(fakemodpi(x)+eps , surfacecut(piecewise(x, 0))));
                 emit(...torus(fakemodpi(x) + eps, surfacecut(piecewise(x, 1))));
+                emit(...torus(fakemodpi(x) + eps, surfacecut(piecewise(x, 2))));
             },
             width: 1000,
             channels: 3,
-            items: 2
+            items: 3
 
         });
         view.line({
@@ -534,11 +539,10 @@ margin-right: auto; width:80%">
             expr: function(emit, x, i, t) {
                 emit(...torus(surfacecut(piecewise2(x, 0) - eps), -fakemodpi(x)));
                 emit(...torus(surfacecut(piecewise2(x, 1) - eps), -fakemodpi(x)));
-                emit(...torus(surfacecut(piecewise2(x, 2) - eps), -fakemodpi(x)));
             },
-            width: 400,
+            width: 600,
             channels: 3,
-            items: 3
+            items: 2
 
         });
         view.line({
@@ -560,49 +564,51 @@ margin-right: auto; width:80%">
 
 
 
-        ////First Piecewise Curve
-        //    function piecewise(x,t,n){
-        //     
-        //      x= x%(2*pi);
-        //      var period = (pi)/q;
-        //      var amplitude = pi/(2*p);
-        //      var wave = ((2*amplitude)/pi)*math.asin(sin((x+t/q)*pi/period))+2*pi*n/p-(1/p)*t
-        //
-        //
-        //      return SurfaceCut(wave)
-        //    }
-        //
-        //
-        //    view.area({
-        //
-        //      expr: function(emit,x,y,i,j,t){
-        //
-        //          var tau = (-0.25*t)%2*pi;
-        //
-        //          var xdom = SurfaceCut(x);
-        //
-        //
-        //          emit(xdom, piecewise(x,tau,-1),-y);
-        //          emit(xdom, piecewise(x,tau,0),-y);
-        //          emit(xdom, piecewise(x,tau,1),-y);
-        //          emit(xdom, piecewise(x,tau,2),-y);
-        //         },
-        //         rangeX:[0,3*pi],
-        //         rangeY:[0,pi/4],
-        //         width:164,
-        //         height:164,
-        //         channels:3,
-        //         items:4
-        //
-        //    });
-        //    view.surface({
-        //      color:'#0074D9',
-        //      proximity:10000000000,
-        //      shaded:true,
-        //      crossed:true,
-        //
-        //
-        //    });
+//        //First Piecewise Curve
+//            function piecewise(x,t,n){
+//             
+//              x= x%(2*pi);
+//              var period = (pi)/q;
+//              var amplitude = pi/(2*p);
+//              var wave = ((2*amplitude)/pi)*math.asin(sin((x+t/q)*pi/period))+2*pi*n/p-(1/p)*t
+//        
+//        
+//              return fakemodpi(wave)
+//            }
+//        
+//        
+//            view.area({
+//        
+//              expr: function(emit,x,y,i,j,t){
+//        
+//                  var tau =  Number($('#slidertime').val());
+//        
+//                  var xdom = SurfaceCut(x);
+//        
+//        
+//                  emit(xdom, piecewise(x,tau,-1),-y);
+//                  emit(xdom, piecewise(x,tau,0),-y);
+//                  emit(xdom, piecewise(x,tau,1),-y);
+//                  emit(xdom, piecewise(x,tau,2),-y);
+//                 },
+//                 rangeX:[0,3*pi],
+//                 rangeY:[0,pi/4],
+//                 width:164,
+//                 height:164,
+//                 channels:3,
+//                 items:4,
+//
+//        
+//            });
+//            view.surface({
+//              color:'#0074D9',
+//              proximity:10000000000,
+//              shaded:true,
+//              crossed:true,
+//                                zBias:1,
+//        
+//        
+//            });
 
         mathbox.set('focus', 2);
 
