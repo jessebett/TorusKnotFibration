@@ -15,6 +15,6 @@ This preliminary visualization demonstrates how a square  can be glued along its
 <!--\\[ (x,y) \in [-\pi,\pi] \times [-\pi,\pi] \\]-->
 
 <hr>
-<iframe src="/visuals/toruswithtraveller.html" width="100%" height="600px" seamless frameBorder="0" scrolling="no"></iframe>
+<iframe src="{{site.baseurl}}/visuals/toruswithtraveller.html" width="100%" height="600px" seamless frameBorder="0" scrolling="no"></iframe>
 <hr>
 
