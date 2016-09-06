@@ -1,7 +1,9 @@
 ---
 layout: post
 title: Example content
+id: 2
 ---
+
 
 
 <div class="message">
