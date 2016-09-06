@@ -13,17 +13,17 @@ url:              http://jessebett.com/
 
 author:
   name:           'Kyle Schmidt'
-  url:            https://twitter.com/kyle_schmidt
+  #url:            https://twitter.com/kyle_schmidt
 
 paginate:         5
 
 # Custom vars
 version:          1.0.0
 
-github:
-  repo:           https://github.com/k-schmidt
-linkedin:         https://www.linkedin.com/in/kylealanschmidt
-twitter:          https://twitter.com/Kyle_Schmidt
+#github:
+  #repo:           https://github.com/k-schmidt
+#linkedin:         https://www.linkedin.com/in/kylealanschmidt
+#twitter:          https://twitter.com/Kyle_Schmidt
 
 gems:
   - jekyll-paginate
