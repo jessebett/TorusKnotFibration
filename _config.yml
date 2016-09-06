@@ -1,29 +1,20 @@
-# Dependencies
-# markdown:         redcarpet
-# pygments:         true
-
-# Permalinks
-permalink:        pretty
+permalink:           pretty
 
 # Setup
-title:            'Kyle Schmidt'
-tagline:          'Software Craftsman'
-description:      'Musings about Python, Emacs, JavaScript (React/Redux), and Databases as well as a few health & fitness posts.'
-url:              http://jessebett.com/
+title:               Feyza Yavuz
+tagline:             ''
+description:         Aloha. <img src="https://cdn4.iconfinder.com/data/icons/ibrandify-basic-essentials-icon-set/512/pen_stroke_sketch_doodle_lineart_206-128.png" />
+url:                 http://jessebett.com/TorusKnotFibration
+baseurl:             ''
 
+# About/contact
 author:
-  name:           'Kyle Schmidt'
-  #url:            https://twitter.com/kyle_schmidt
-
-paginate:         5
+  name:              Feyza
+  url:               https://twitter.com/feyzayavuzz
+  email:             feyzaayavuz@gmail.com
 
 # Custom vars
-version:          1.0.0
-
-#github:
-  #repo:           https://github.com/k-schmidt
-#linkedin:         https://www.linkedin.com/in/kylealanschmidt
-#twitter:          https://twitter.com/Kyle_Schmidt
-
-gems:
-  - jekyll-paginate
+version:             1.0.0
+gems: [jekyll-paginate]
+paginate: 5
+paginate_path: "page:num"
