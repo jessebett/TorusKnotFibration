@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>MathBox - Empty</title>
+    <script src="node_modules/mathbox/build/mathbox-bundle.js"></script>
+    <script src="math.min.js"></script>
+    <link rel="stylesheet" href="node_modules/mathbox/build/mathbox.css">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    
+    
+    
+    <link href="slider/bootstrap-slider.min.css" rel="stylesheet">
+    <script src="slider/bootstrap-slider.min.js"></script>
+
+</head>
+<body>
+
+<div>
+<input id="slidera" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.0" data-slider-tooltip = 'hide'/>
+</div>
+<div>
+<input id="sliderb" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.0" data-slider-tooltip = 'hide'/>
+</div>
+    
+    <script>
+    // With JQuery
+$('#slidera').slider({
+  formatter: function(value) {
+    return 'Current value: ' + value;
+  }
+  });
+
+$('#sliderb').slider({
+  formatter: function(value) {
+    return 'Current value: ' + value;
+  }
+});
+        
+$('#slider').on('slide',slidefunction)
+
+
+
+function slidefunction(){
+    
+    var sliderval=Number($('#slider').val());
+    
+  mathbox.select('surface').set('opacity',sliderval);
+    console.log(typeof sliderval)
+}
+    </script>
+
+
+  <script>
+    var mathbox = mathBox({
+      plugins: ['core', 'controls', 'cursor', 'mathbox'],
+      controls: {
+        // Orbit controls, i.e. Euler angles, with gimbal lock
+        klass: THREE.OrbitControls,
+
+        // Trackball controls, i.e. Free quaternion rotation
+        //klass: THREE.TrackballControls,
+      },
+    });
+    if (mathbox.fallback) throw "WebGL not supported"
+
+    var three = mathbox.three;
+    three.renderer.setClearColor(new THREE.Color(0xFFFFFF), 1.0);
+
+    var time = three.Time.clock;
+
+    // Place camera
+    var camera =
+      mathbox
+      .camera({
+        proxy: true,
+        position: [0,0,3],
+      });
+
+
+
+    // 2D cartesian
+      var view =
+      mathbox
+      .cartesian({
+        range: [[-math.pi, math.pi], [-math.pi, math.pi],[-math.pi,math.pi]],
+        scale: [1, 1, 1],
+      });
+
+    //       // Axes + grid
+    // view
+    //   .axis({
+    //     axis: 1,
+    //     width: 3,
+    //     color: 'red'
+    //   })
+    //   .axis({
+    //     axis: 2,
+    //     width: 3,
+    //     color: 'blue'
+    //   })
+    //   .axis({
+    //     axis: 3,
+    //     width: 3,
+    //     color: 'blue'
+    //   })
+    //   .grid({
+    //     width: 2,  
+    //     divideX: 20,
+    //     divideY: 10,        
+    //   });
+
+    // // Make axes black
+    // mathbox.select('axis').set('color', 'black');
+
+    var alpha = 2;
+
+    //Quality of Life
+    var pi = math.pi;
+    var sin = math.sin;
+    var cos = math.cos;
+
+    function torus(x,y){
+      R=2;
+      r=1;
+
+      var a = Number($('#slidera').val())
+      var b = Number($('#sliderb').val())
+
+      // return [(R-r*cos(x*b))*((1-a)*y+sin(a*y)),(R-r*cos(b*x))*-cos(a*y),(1-b)*x + r*sin(b*x)]
+
+      return [(R-r*cos(x*b))*((1-a)*y+sin(a*y)),(1-b)*x + r*sin(b*x),(R-r*cos(b*x))*-cos(a*y)+1]
+
+    }
+
+view.area({
+      id:'densearea',
+      width: 100,
+      height: 100,
+      // axes: [1, 3],
+      expr: function (emit, x, y, i, j, time) {
+        emit(...torus(x,y));
+
+      },
+      items: 1,
+      channels: 3,
+    });
+
+    view.surface({
+      shaded: true,
+      color: '#49a7e9',
+
+    });
+
+view.area({
+      id:'sparsearea',
+      width: 40,
+      height: 10,
+      // axes: [1, 3],
+      expr: function (emit, x, y, i, j, time) {
+        emit(...torus(x,y));
+        emit(...torus(y,x));
+      },
+      items: 2,
+      channels: 3,
+    });
+
+view.resample({
+  id:'sparsesample',
+  source:mathbox.select('#densearea')[1],
+  width:40,
+  height:10
+})
+
+view.line({
+  points:mathbox.select('#sparsesample')[1],
+  color:'white',
+  zBias: 10
+})
+
+// view.interval({
+//   width:64,
+//   expr: function (emit, x, y, i, j, time) {
+//         emit(...torus(x,y));},
+//   items:1,
+//   channels:2,
+// });
+
+// view.line({
+// color:'red'
+// })
+
+
+    //       // Draw ticks and labels
+    // var scale =
+    //   view.scale({
+    //     divide: 10,
+    //   });
+    
+    // var ticks =
+    //   view.ticks({
+    //     width: 5,
+    //     size: 15,
+    //     color: 'black',
+    //   });
+    
+    // var format =
+    //   view.format({
+    //     digits: 2,
+    //     weight: 'bold',
+    //   });
+
+
+
+    mathbox.set('focus', 1.5);
+
+
+
+    
+  </script>
+
+
+
+</body>
+</html>

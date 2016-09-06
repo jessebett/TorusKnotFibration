@@ -1,20 +1,24 @@
+# Permalinks
+#
+# Use of `relative_permalinks` ensures post links from the index work properly.
 permalink:           pretty
+#relative_permalinks: true
 
 # Setup
-title:               Feyza Yavuz
-tagline:             ''
-description:         Aloha. <img src="https://cdn4.iconfinder.com/data/icons/ibrandify-basic-essentials-icon-set/512/pen_stroke_sketch_doodle_lineart_206-128.png" />
-url:                 http://jessebett.com/TorusKnotFibration
+title:               Lanyon
+tagline:             'A Jekyll theme'
+description:         'A reserved <a href="http://jekyllrb.com" target="_blank">Jekyll</a> theme that places the utmost gravity on content with a hidden drawer. Made by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.'
+url:                 http://lanyon.getpoole.com
 baseurl:             ''
+paginate:            1
 
 # About/contact
 author:
-  name:              Feyza
-  url:               https://twitter.com/feyzayavuzz
-  email:             feyzaayavuz@gmail.com
+  name:              Mark Otto
+  url:               https://twitter.com/mdo
+  email:             markdotto@gmail.com
 
 # Custom vars
 version:             1.0.0
-gems: [jekyll-paginate]
-paginate: 5
-paginate_path: "page:num"
+
+gems: ["jekyll-paginate"]

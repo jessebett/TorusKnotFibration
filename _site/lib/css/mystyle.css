@@ -1,0 +1,45 @@
+div.cent {
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+
+html,body{
+    font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; 
+}
+
+
+label.sliderlabel{
+font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; 
+    font-size: 18px;
+    font-weight: normal;
+        margin-right: 20px;
+}
+.slider-handle {
+	    background: #0fbfcf;
+}
+
+table.panel{
+    margin-top: 30px;
+}
+th.labels{
+    height: 20px;
+    text-align: right;
+
+
+}
+.controls{
+    float: left;
+
+    width: 80%;
+}
+
+
+input.toggle{
+    size:'small'
+}
+
+mark{
+    background-color: #f8f8f8
+}
