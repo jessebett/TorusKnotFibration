@@ -11,8 +11,8 @@ title:               Torus Knot Fibration Visualization
 tagline:             'by Jesse Bettencourt'
 description:         'A Summer Project for my Masters in Mathematics at the Unviersity of Toronto under the supervision of Dr. Dror Bar-Natan'
 url:                 'http://jessebett.github.io/'
-#baseurl:             '/TorusKnotFibration'
-baseurl:              ''
+baseurl:             '/TorusKnotFibration'
+#baseurl:              ''
 paginate:            1
 
 # About/contact
