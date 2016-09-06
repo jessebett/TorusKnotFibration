@@ -50,8 +50,8 @@
 
     <table class="panel" style="margin-left: auto;
 margin-right: auto; width:80%">
-                <tr>
-            <th class="labels" style="color:#0fbfcf">
+        <tr>
+            <th class="labels">
                 <label class="sliderlabel">Torus Mesh</label>
             </th>
             <th>
@@ -59,8 +59,10 @@ margin-right: auto; width:80%">
             </th>
         </tr>
         <tr>
-            <th class="labels" style="color:#0fbfcf">
-                <label class="sliderlabel"><mark style="color:#AAAAAA">Glue Latitudinal Edge</mark></label>
+            <th class="labels">
+                <label class="sliderlabel">
+                    Glue Latitudinal Edge
+                </label>
             </th>
             <th>
                 <input id="slidera" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.0" data-slider-tooltip='hide' />
@@ -68,8 +70,10 @@ margin-right: auto; width:80%">
 
         </tr>
         <tr>
-            <th class="labels" style="color:#0fbfcf">
-                <label class="sliderlabel"><mark style="color:#AAAAAA">Glue Longitudinal Edge</mark></label>
+            <th class="labels">
+                <label class="sliderlabel">
+                    Glue Longitudinal Edge
+                </label>
             </th>
             <th>
                 <input id="sliderb" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.0" data-slider-tooltip='hide' />
@@ -80,7 +84,9 @@ margin-right: auto; width:80%">
         <!--Knot Curve Toggle-->
         <tr>
             <th class="labels" style="color:#0fbfcf">
-                <label class="sliderlabel"><mark  style="color:#2ECC40">Knot Curve</mark></label>
+                <label class="sliderlabel">
+                    <mark style="color:#2ECC40">Knot Curve</mark>
+                </label>
             </th>
             <th>
                 <input id="knottoggle" type="checkbox" checked data-toggle="toggle" value="1.0" onchange="togfun(this);" data-onstyle="primary">
@@ -89,7 +95,9 @@ margin-right: auto; width:80%">
         <!--Blue Piecewise Toggle-->
         <tr>
             <th class="labels" style="color:#0fbfcf">
-                <label class="sliderlabel"><mark  style="color:#49a7e9">Inside Surface</mark></label>
+                <label class="sliderlabel">
+                    <mark style="color:#49a7e9">Inside Surface</mark>
+                </label>
             </th>
             <th>
                 <input id="bluetoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="bluetogfun(this);" data-onstyle="primary">
@@ -99,16 +107,30 @@ margin-right: auto; width:80%">
         <!--Red Piecewise Toggle-->
         <tr>
             <th class="labels" style="color:#0fbfcf">
-                <label class="sliderlabel"><mark style="color:#fab125">Outside Surface</mark></label>
+                <label class="sliderlabel">
+                    <mark style="color:#fab125">Outside Surface</mark>
+                </label>
             </th>
             <th>
                 <input id="redtoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="redtogfun(this);" data-onstyle="primary">
             </th>
         </tr>
-
+        <!--Time Piecewise Toggle-->
+        <tr>
+            <th class="labels">
+                <label class="sliderlabel">
+                    Animate
+                </label>
+            </th>
+            <th>
+                <input id="timetoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="timetogfun(this);" data-onstyle="primary">
+            </th>
+        </tr>
         <!--            Time Slider-->
-        <th class="labels" style="color:#0fbfcf">
-            <label class="sliderlabel"><mark style="color:#AAAAAA">Time</mark></label>
+        <th class="labels">
+            <label class="sliderlabel">
+                Time
+            </label>
         </th>
         <th>
             <input id="slidertime" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="6.28" data-slider-step="0.01" data-slider-value="3.14" data-slider-tooltip='hide' />
@@ -149,7 +171,7 @@ margin-right: auto; width:80%">
         //        }
 
         //Button SCript
-                //MeshToggle
+        //MeshToggle
         $('#meshtoggle').bootstrapSwitch({
             size: 'small',
             offColor: 'danger',
@@ -167,7 +189,7 @@ margin-right: auto; width:80%">
             }
 
         }
-        
+
         //BlueToggle
         $('#bluetoggle').bootstrapSwitch({
             size: 'small',
@@ -180,9 +202,11 @@ margin-right: auto; width:80%">
             if (butprop == true) {
                 $('#bluetoggle').val(1.0);
                 mathbox.select('#bluesurface')[0].set('visible', true)
+                mathbox.select('#bluemesh')[0].set('visible', true)
             } else {
                 $('#bluetoggle').val();
                 mathbox.select('#bluesurface')[0].set('visible', false)
+                mathbox.select('#bluemesh')[0].set('visible', false)
             }
 
         }
@@ -198,13 +222,32 @@ margin-right: auto; width:80%">
             if (butprop == true) {
                 $('#redtoggle').val(1.0);
                 mathbox.select('#redsurface')[0].set('visible', true)
+                mathbox.select('#redmesh')[0].set('visible', true)
             } else {
                 $('#redtoggle').val();
                 mathbox.select('#redsurface')[0].set('visible', false)
+                mathbox.select('#redmesh')[0].set('visible', false)
             }
 
         }
+        //timeToggle
+        $('#timetoggle').bootstrapSwitch({
+            size: 'small',
+            offColor: 'danger',
+        });
 
+        function timetogfun(button) {
+            var butprop = $('#timetoggle').prop('checked');
+            var butval = $('#timetoggle').val();
+            if (butprop == true) {
+                $('#timetoggle').val(1.0);
+                $('#slidertime').slider("disable")
+            } else {
+                $('#timetoggle').val();
+                $('#slidertime').slider("enable")
+            }
+
+        }
         //KnotToggle
         $('#knottoggle').bootstrapSwitch({
             size: 'small',
@@ -341,12 +384,12 @@ margin-right: auto; width:80%">
         })
 
         view.line({
-            id:'torusmesh',
+            id: 'torusmesh',
             points: mathbox.select('#sparsesample')[0],
-            color: '#0FBFCF',
+            color: '#6a9fb5',
             zBias: 1,
             opacity: 0.1,
-            visible:true,
+            visible: true,
         })
 
         //                //Edges of Torus
@@ -586,15 +629,12 @@ margin-right: auto; width:80%">
             var thresh = 0.15;
             if (x <= -pi - thresh) {
                 x = -NaN;
-            } 
+            } else if (x >= pi + thresh) {
+                x = NaN;
+            }
 
-            
-         else if (x >= pi + thresh) {
-            x = NaN;
-        }
-        
 
-        return x
+            return x
         }
 
 
@@ -624,7 +664,7 @@ margin-right: auto; width:80%">
             x = x % (2 * pi);
             var period = (pi) / q;
             var amplitude = pi / (2 * p);
-            var wave = math.abs(4 / pi * (pi / 4 - y)) ** 4 * ((2 * amplitude) / pi) * math.asin(sin((x + t / q) * pi / period)) + 2 * pi * n / p - (1 / p) * t
+            var wave = Math.pow(math.abs(4 / pi * (pi / 4 - y)), 4) * ((2 * amplitude) / pi) * math.asin(sin((x + t / q) * pi / period)) + 2 * pi * n / p - (1 / p) * t
 
 
             return SurfaceCut(wave - pi / p)
@@ -635,7 +675,12 @@ margin-right: auto; width:80%">
 
             expr: function(emit, x, y, i, j, t) {
 
-                var tau = Number($('#slidertime').val());
+                if ($('#timetoggle').prop('checked') == true) {
+                    var tau = t % (2 * pi);
+                } else {
+                    var tau = Number($('#slidertime').val());
+                }
+
 
                 var xdom = SurfaceCut(x);
 
@@ -661,62 +706,73 @@ margin-right: auto; width:80%">
 
         });
         view.surface({
-            id:'bluesurface',
+            id: 'bluesurface',
             color: '#49a7e9',
             proximity: 0.001,
             shaded: false,
             crossed: false,
             zBias: 9,
-            visible:false,
+            visible: false,
 
 
         });
-        
-        
-//                    var wave = ((2 * amplitude) / pi) * math.asin(sin((x - t / p) * pi / period)) - 2 * pi * n / q
-//                //    var wave = ((2 * amplitude) / pi) * math.asin(sin((x+ t / q) * pi / period)) + 2 * pi * n / p - (t / p)
-//
-//            return fakemodpi(-(wave - pi / q + (1 / q) * t))
-        
-        
-    //Second Piecewise Surface
-        
-    function piecewise2(x,y,t,n){
-      x= x%(2*pi);
-      var period = (pi)/p;
-      var amplitude = pi/(2*q);
-      var wave = math.abs(4 / pi * (pi / 4 - y)) ** 4 *((2*amplitude)/pi)*math.asin(sin((x+t/p-pi/p)*pi/period))-2*pi*n/q
+        view.line({
+            id: 'bluemesh',
+            color: '#001f3f',
+            zBias: 10,
+            opacity: 0.2,
+            visible: false,
+        })
 
-      return SurfaceCut(-(wave -pi/q+(1/q)*t))
-    }
-        
-        
+
+        //                    var wave = ((2 * amplitude) / pi) * math.asin(sin((x - t / p) * pi / period)) - 2 * pi * n / q
+        //                //    var wave = ((2 * amplitude) / pi) * math.asin(sin((x+ t / q) * pi / period)) + 2 * pi * n / p - (t / p)
+        //
+        //            return fakemodpi(-(wave - pi / q + (1 / q) * t))
+
+
+        //Second Piecewise Surface
+
+        function piecewise2(x, y, t, n) {
+            x = x % (2 * pi);
+            var period = (pi) / p;
+            var amplitude = pi / (2 * q);
+            var wave = Math.pow(math.abs(4 / pi * (pi / 4 - y)), 4) * ((2 * amplitude) / pi) * math.asin(sin((x + t / p - pi / p) * pi / period)) - 2 * pi * n / q
+
+            return SurfaceCut(-(wave - pi / q + (1 / q) * t))
+        }
+
+
 
         var edgethresh = 0.5;
         view.area({
 
             expr: function(emit, x, y, i, j, t) {
 
-                var tau = Number($('#slidertime').val());
+                if ($('#timetoggle').prop('checked') == true) {
+                    var tau = t % (2 * pi);
+                } else {
+                    var tau = Number($('#slidertime').val());
+                }
 
                 var xdom = SurfaceCut(x);
 
 
-//                emit(...threetorus(xdom, piecewise2(x, y, tau, -1), y));
-                                emit(...threetorus(piecewise2(x, y, tau, -1),xdom, -y));
-                emit(...threetorus(piecewise2(x, y, tau, 0),xdom, -y));
-                                emit(...threetorus(piecewise2(x, y, tau, 1),xdom, -y));
-//                                emit(...threetorus(piecewise2(x, y, tau, ),xdom, -y));
-                
-//                emit(...threetorus(xdom, piecewise2(x, y, tau, 1), y));
-//                emit(...threetorus(xdom, piecewise2(x, y, tau, 2), y));
-//                emit(...threetorus(xdom, piecewise2(x, y, tau, 3), y));
-//                //                emit(xdom, piecewise(x, tau, 0), -y);
+                //                emit(...threetorus(xdom, piecewise2(x, y, tau, -1), y));
+                emit(...threetorus(piecewise2(x, y, tau, -1), xdom, -y));
+                emit(...threetorus(piecewise2(x, y, tau, 0), xdom, -y));
+                emit(...threetorus(piecewise2(x, y, tau, 1), xdom, -y));
+                //                                emit(...threetorus(piecewise2(x, y, tau, ),xdom, -y));
+
+                //                emit(...threetorus(xdom, piecewise2(x, y, tau, 1), y));
+                //                emit(...threetorus(xdom, piecewise2(x, y, tau, 2), y));
+                //                emit(...threetorus(xdom, piecewise2(x, y, tau, 3), y));
+                //                //                emit(xdom, piecewise(x, tau, 0), -y);
                 //                emit(xdom, piecewise(x, tau, 1), -y);
                 //                emit(xdom, piecewise(x, tau, 2), -y);
             },
             rangeX: [-pi - edgethresh, pi + edgethresh],
-            rangeY: [0,pi/4+0.4],
+            rangeY: [0, pi / 4 + 0.4],
             width: 80,
             height: 20,
             channels: 3,
@@ -727,29 +783,36 @@ margin-right: auto; width:80%">
 
         });
         view.surface({
-            id:'redsurface',
+            id: 'redsurface',
             color: '#fab125',
             proximity: 0.001,
             shaded: false,
             crossed: false,
             zBias: 10,
-            visible:false,
+            visible: false,
 
 
         });
-        
-        
-        
-        
-        
-        
+
+        view.line({
+            id: 'redmesh',
+            color: '#FF4136',
+            zBias: 10,
+            opacity: 0.4,
+            visible: false,
+        })
+
+
+
+
+
 
         mathbox.set('focus', 2);
 
     </script>
-    
-    
-    
+
+
+
 
 
 

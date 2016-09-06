@@ -50,6 +50,7 @@
 
     <table class="panel" style="margin-left: auto;
 margin-right: auto; width:80%">
+        <!--
         <tr>
             <th class="labels" style="color:#0fbfcf">
                 <label class="sliderlabel">Torus Mesh</label>
@@ -78,6 +79,7 @@ margin-right: auto; width:80%">
             <th>
                 <input id="sliderb" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.0" data-slider-tooltip='hide' />
             </th>
+-->
 
 
         </tr>
@@ -116,14 +118,26 @@ margin-right: auto; width:80%">
             </th>
         </tr>
 
+        <!--Time Animate Toggle-->
+        <tr>
+            <th class="labels">
+                <label class="sliderlabel">
+                    Animate
+                </label>
+            </th>
+            <th>
+                <input id="timetoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="timetogfun(this);" data-onstyle="primary">
+            </th>
+        </tr>
+
         <!--            Time Slider-->
-        <th class="labels" style="color:#0fbfcf">
+        <th class="labels">
             <label class="sliderlabel">
-                <mark style="color:#AAAAAA">Time</mark>
+                Time
             </label>
         </th>
         <th>
-            <input id="slidertime" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="6.28" data-slider-step="0.01" data-slider-value="3.14" data-slider-tooltip='hide' />
+            <input id="slidertime" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="6.28" data-slider-step="0.01" data-slider-value="0" data-slider-tooltip='hide' />
         </th>
     </table>
 
@@ -161,24 +175,24 @@ margin-right: auto; width:80%">
         //        }
 
         //Button SCript
-        //MeshToggle
-        $('#meshtoggle').bootstrapSwitch({
-            size: 'small',
-            offColor: 'danger',
-        });
+        //        //MeshToggle
+        //        $('#meshtoggle').bootstrapSwitch({
+        //            size: 'small',
+        //            offColor: 'danger',
+        //        });
 
-        function meshtogfun(button) {
-            var butprop = $('#meshtoggle').prop('checked');
-            var butval = $('#meshtoggle').val();
-            if (butprop == true) {
-                $('#meshtoggle').val(1.0);
-                mathbox.select('#torusmesh')[0].set('visible', true)
-            } else {
-                $('#meshtoggle').val();
-                mathbox.select('#torusmesh')[0].set('visible', false)
-            }
-
-        }
+        //        function meshtogfun(button) {
+        //            var butprop = $('#meshtoggle').prop('checked');
+        //            var butval = $('#meshtoggle').val();
+        //            if (butprop == true) {
+        //                $('#meshtoggle').val(1.0);
+        //                mathbox.select('#torusmesh')[0].set('visible', true)
+        //            } else {
+        //                $('#meshtoggle').val();
+        //                mathbox.select('#torusmesh')[0].set('visible', false)
+        //            }
+        //
+        //        }
 
         //BlueToggle
         $('#bluetoggle').bootstrapSwitch({
@@ -220,6 +234,24 @@ margin-right: auto; width:80%">
             }
 
         }
+        //timeToggle
+        $('#timetoggle').bootstrapSwitch({
+            size: 'small',
+            offColor: 'danger',
+        });
+
+        function timetogfun(button) {
+            var butprop = $('#timetoggle').prop('checked');
+            var butval = $('#timetoggle').val();
+            if (butprop == true) {
+                $('#timetoggle').val(1.0);
+                $('#slidertime').slider("disable")
+            } else {
+                $('#timetoggle').val();
+                $('#slidertime').slider("enable")
+            }
+
+        }
 
         //KnotToggle
         $('#knottoggle').bootstrapSwitch({
@@ -239,12 +271,13 @@ margin-right: auto; width:80%">
             }
 
         }
+
     </script>
 
 
     <script>
         var mathbox = mathBox({
-            plugins: ['core', 'controls', 'cursor', 'mathbox'],
+            plugins: ['core', 'controls', 'cursor'],
             controls: {
                 // Orbit controls, i.e. Euler angles, with gimbal lock
                 klass: THREE.OrbitControls,
@@ -391,7 +424,7 @@ margin-right: auto; width:80%">
             x = fakemodpi(x);
             var period = (pi) / q;
             var amplitude = pi / (2 * p);
-            var wave = math.abs(4 / (pi) * y) ** 4 * ((2 * amplitude) / pi) * math.asin(sin((x + t / q) * pi / period)) + 2 * pi * n / p - (1 / p) * t
+            var wave = Math.pow(math.abs(4 / (pi) * y), 4) * ((2 * amplitude) / pi) * math.asin(sin((x + t / q) * pi / period)) + 2 * pi * n / p - (1 / p) * t
 
 
             return wave
@@ -421,7 +454,11 @@ margin-right: auto; width:80%">
 
             expr: function(emit, x, y, i, j, t) {
 
-                var tau = Number($('#slidertime').val());
+                if ($('#timetoggle').prop('checked') == true) {
+                    var tau = t % (2 * pi);
+                } else {
+                    var tau = Number($('#slidertime').val());
+                }
 
                 // var xdom = SurfaceCut(x);
                 var xdom = SurfaceCut2(x);
@@ -434,16 +471,16 @@ margin-right: auto; width:80%">
             },
             rangeX: [0, 3 * pi],
             rangeY: [0, pi / 4],
-            width: 200,
-            height: 200,
+            width: 80,
+            height: 20,
             channels: 3,
             items: 2
 
         });
-        
+
         view.surface({
             id: 'outsidesurface',
-            color: 'red',
+            color: '#fab125',
             proximity: 10000000000,
             shaded: false,
             crossed: false,
@@ -454,16 +491,16 @@ margin-right: auto; width:80%">
         view.resample({
             id: 'outsidesample',
             source: mathbox.select('#outsidearea')[0],
-            width: 60,
-            height: 30,
+            width: 80,
+            height: 20,
         })
 
         view.surface({
             id: 'outsidemesh',
             points: mathbox.select('#outsidesample')[0],
-            color: '#fab125',
+            color: '#FF4136',
             zBias: 10,
-            opacity: 0.5,
+            opacity: 0.2,
             visible: false,
             lineX: true,
             lineY: true,
@@ -478,15 +515,19 @@ margin-right: auto; width:80%">
             x = x % (2 * pi);
             var period = (pi) / p;
             var amplitude = pi / (2 * q);
-            var wave = math.abs(4 / pi * y) ** 4 * ((2 * amplitude) / pi) * math.asin(sin((x - t) * pi / period)) - 2 * pi * n / q
+            var wave = Math.pow(math.abs(4 / pi * y), 4) * ((2 * amplitude) / pi) * math.asin(sin((x - t) * pi / period)) - 2 * pi * n / q
 
             return -(wave - pi / q + (1 / q) * t)
         }
         view.area({
-id:'insidearea',
+            id: 'insidearea',
             expr: function(emit, x, y, i, j, t) {
 
-                var tau = Number($('#slidertime').val());
+                if ($('#timetoggle').prop('checked') == true) {
+                    var tau = t % (2 * pi);
+                } else {
+                    var tau = Number($('#slidertime').val());
+                }
 
                 // var xdom = SurfaceCut(x);
                 var xdom = -(x - (1 / p) * tau) - pi / p;
@@ -512,14 +553,14 @@ id:'insidearea',
 
         });
         view.surface({
-            id:'insidesurface',
-            color: '#0FBFCF',
+            id: 'insidesurface',
+            color: '#49a7e9',
             proximity: 10000000000,
             shaded: false,
             visible: false
         });
-        
-                view.resample({
+
+        view.resample({
             id: 'insidesample',
             source: mathbox.select('#insidearea')[0],
             width: 64,
@@ -529,9 +570,9 @@ id:'insidearea',
         view.surface({
             id: 'insidemesh',
             points: mathbox.select('#insidesample')[0],
-            color: '#0074D9',
-            zBias: 10,
-            opacity: 0.5,
+            color: '#001f3f',
+            zBias: 11,
+            opacity: 0.1,
             visible: false,
             lineX: true,
             lineY: true,
@@ -540,20 +581,20 @@ id:'insidearea',
 
 
 
-        
+
         // Knot Curve
         function knot(x) {
             return (m2 * x) % (2 * pi);
         }
 
         view.interval({
-            range: [0, 2 * p * pi+1],
+            range: [0, 2 * p * pi + 1],
             expr: function(emit, x, i, t) {
                 emit(...SterProj(...ReIm(...ZW(π / 4, x % (2 * pi), knot(x)))));
             },
             width: 80,
             channels: 4,
-            live:false
+            live: false
         });
         view.line({
             id: 'knotcurve',
@@ -567,6 +608,7 @@ id:'insidearea',
 
 
         mathbox.set('focus', 2);
+
     </script>
 
 

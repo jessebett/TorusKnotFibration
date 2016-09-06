@@ -4,7 +4,7 @@
  <title>Torus Knot Fibration Visualization</title>
  <link href="http://jessebett.github.io//atom.xml" rel="self"/>
  <link href="http://jessebett.github.io//"/>
- <updated>2016-09-06T14:42:13-04:00</updated>
+ <updated>2016-09-06T15:58:47-04:00</updated>
  <id>http://jessebett.github.io/</id>
  <author>
    <name>Mark Otto</name>
@@ -60,19 +60,19 @@ This preliminary visualization demonstrates how a square  can be glued along its
  </entry>
  
  <entry>
-   <title>What's Jekyll?</title>
-   <link href="http://jessebett.github.io//0000/01/04/whats-jekyll/"/>
+   <title>Fibration Surface</title>
+   <link href="http://jessebett.github.io//surface"/>
    <updated>0000-01-04T00:00:00-05:00</updated>
    <id>http://jessebett.github.io/</id>
-   <content type="html">&lt;p&gt;&lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt; is a static site generator, an open-source tool for creating simple yet powerful websites of all shapes and sizes. From &lt;a href=&quot;https://github.com/mojombo/jekyll/blob/master/README.markdown&quot;&gt;the project’s readme&lt;/a&gt;:&lt;/p&gt;
+   <content type="html">&lt;p&gt;As naming suggests, the boundary curves we previously defined are actually boundaries to surfaces.&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;Jekyll is a simple, blog aware, static site generator. It takes a template directory […] and spits out a complete, static website suitable for serving with Apache or your favorite web server. This is also the engine behind GitHub Pages, which you can use to host your project’s page or blog right here from GitHub.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;The&lt;/p&gt;
 
-&lt;p&gt;It’s an immensely useful tool and one we encourage you to use here with Lanyon.&lt;/p&gt;
+&lt;hr /&gt;
 
-&lt;p&gt;Find out more by &lt;a href=&quot;https://github.com/mojombo/jekyll&quot;&gt;visiting the project on GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;iframe src=&quot;/visuals/surface.html&quot; width=&quot;100%&quot; height=&quot;700px&quot; seamless=&quot;&quot; frameborder=&quot;0&quot; scrolling=&quot;no&quot;&gt;&lt;/iframe&gt;
+&lt;hr /&gt;
+
 </content>
  </entry>
  
