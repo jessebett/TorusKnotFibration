@@ -50,9 +50,17 @@
 
     <table class="panel" style="margin-left: auto;
 margin-right: auto; width:80%">
+                <tr>
+            <th class="labels" style="color:#0fbfcf">
+                <label class="sliderlabel">Torus Mesh</label>
+            </th>
+            <th>
+                <input id="meshtoggle" type="checkbox" checked data-toggle="toggle" value="1.0" onchange="meshtogfun(this);" data-onstyle="primary">
+            </th>
+        </tr>
         <tr>
             <th class="labels" style="color:#0fbfcf">
-                <label class="sliderlabel">Glue Latitudinal Edge</label>
+                <label class="sliderlabel"><mark style="color:#AAAAAA">Glue Latitudinal Edge</mark></label>
             </th>
             <th>
                 <input id="slidera" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.0" data-slider-tooltip='hide' />
@@ -61,7 +69,7 @@ margin-right: auto; width:80%">
         </tr>
         <tr>
             <th class="labels" style="color:#0fbfcf">
-                <label class="sliderlabel">Glue Longitudinal Edge</label>
+                <label class="sliderlabel"><mark style="color:#AAAAAA">Glue Longitudinal Edge</mark></label>
             </th>
             <th>
                 <input id="sliderb" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.0" data-slider-tooltip='hide' />
@@ -72,7 +80,7 @@ margin-right: auto; width:80%">
         <!--Knot Curve Toggle-->
         <tr>
             <th class="labels" style="color:#0fbfcf">
-                <label class="sliderlabel">Knot Curve</label>
+                <label class="sliderlabel"><mark  style="color:#2ECC40">Knot Curve</mark></label>
             </th>
             <th>
                 <input id="knottoggle" type="checkbox" checked data-toggle="toggle" value="1.0" onchange="togfun(this);" data-onstyle="primary">
@@ -81,7 +89,7 @@ margin-right: auto; width:80%">
         <!--Blue Piecewise Toggle-->
         <tr>
             <th class="labels" style="color:#0fbfcf">
-                <label class="sliderlabel">Blue Surface</label>
+                <label class="sliderlabel"><mark  style="color:#49a7e9">Inside Surface</mark></label>
             </th>
             <th>
                 <input id="bluetoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="bluetogfun(this);" data-onstyle="primary">
@@ -91,7 +99,7 @@ margin-right: auto; width:80%">
         <!--Red Piecewise Toggle-->
         <tr>
             <th class="labels" style="color:#0fbfcf">
-                <label class="sliderlabel">Orange Surface</label>
+                <label class="sliderlabel"><mark style="color:#fab125">Outside Surface</mark></label>
             </th>
             <th>
                 <input id="redtoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="redtogfun(this);" data-onstyle="primary">
@@ -100,10 +108,10 @@ margin-right: auto; width:80%">
 
         <!--            Time Slider-->
         <th class="labels" style="color:#0fbfcf">
-            <label class="sliderlabel">Time</label>
+            <label class="sliderlabel"><mark style="color:#AAAAAA">Time</mark></label>
         </th>
         <th>
-            <input id="slidertime" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="6.28" data-slider-step="0.01" data-slider-value="0.0" data-slider-tooltip='hide' />
+            <input id="slidertime" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="6.28" data-slider-step="0.01" data-slider-value="3.14" data-slider-tooltip='hide' />
         </th>
     </table>
 
@@ -141,6 +149,25 @@ margin-right: auto; width:80%">
         //        }
 
         //Button SCript
+                //MeshToggle
+        $('#meshtoggle').bootstrapSwitch({
+            size: 'small',
+            offColor: 'danger',
+        });
+
+        function meshtogfun(button) {
+            var butprop = $('#meshtoggle').prop('checked');
+            var butval = $('#meshtoggle').val();
+            if (butprop == true) {
+                $('#meshtoggle').val(1.0);
+                mathbox.select('#torusmesh')[0].set('visible', true)
+            } else {
+                $('#meshtoggle').val();
+                mathbox.select('#torusmesh')[0].set('visible', false)
+            }
+
+        }
+        
         //BlueToggle
         $('#bluetoggle').bootstrapSwitch({
             size: 'small',
@@ -308,16 +335,18 @@ margin-right: auto; width:80%">
 
         view.resample({
             id: 'sparsesample',
-            source: mathbox.select('#densearea')[1],
+            source: mathbox.select('#sparsearea')[0],
             width: 64,
             height: 10
         })
 
         view.line({
-            points: mathbox.select('#sparsesample')[1],
+            id:'torusmesh',
+            points: mathbox.select('#sparsesample')[0],
             color: '#0FBFCF',
             zBias: 1,
-            opacity: 0.0
+            opacity: 0.1,
+            visible:true,
         })
 
         //                //Edges of Torus
@@ -387,7 +416,7 @@ margin-right: auto; width:80%">
         });
         view.line({
             id: 'knotcurve',
-            color: 'green',
+            color: '#2ECC40',
             visible: true,
             proximity: 1,
             blending: 'no',
@@ -601,7 +630,7 @@ margin-right: auto; width:80%">
             return SurfaceCut(wave - pi / p)
         }
 
-        var edgethresh = 0.95;
+        var edgethresh = 0.5;
         view.area({
 
             expr: function(emit, x, y, i, j, t) {
@@ -622,8 +651,8 @@ margin-right: auto; width:80%">
             },
             rangeX: [-pi - edgethresh, pi + edgethresh],
             rangeY: [0, pi / 4],
-            width: 60,
-            height: 60,
+            width: 80,
+            height: 20,
             channels: 3,
             items: 5,
             centeredX: false,
@@ -633,11 +662,12 @@ margin-right: auto; width:80%">
         });
         view.surface({
             id:'bluesurface',
-            color: '#0074D9',
+            color: '#49a7e9',
             proximity: 0.001,
             shaded: false,
             crossed: false,
-            zBias: 1,
+            zBias: 9,
+            visible:false,
 
 
         });
@@ -662,7 +692,7 @@ margin-right: auto; width:80%">
         
         
 
-        var edgethresh = 0.95;
+        var edgethresh = 0.5;
         view.area({
 
             expr: function(emit, x, y, i, j, t) {
@@ -673,7 +703,11 @@ margin-right: auto; width:80%">
 
 
 //                emit(...threetorus(xdom, piecewise2(x, y, tau, -1), y));
+                                emit(...threetorus(piecewise2(x, y, tau, -1),xdom, -y));
                 emit(...threetorus(piecewise2(x, y, tau, 0),xdom, -y));
+                                emit(...threetorus(piecewise2(x, y, tau, 1),xdom, -y));
+//                                emit(...threetorus(piecewise2(x, y, tau, ),xdom, -y));
+                
 //                emit(...threetorus(xdom, piecewise2(x, y, tau, 1), y));
 //                emit(...threetorus(xdom, piecewise2(x, y, tau, 2), y));
 //                emit(...threetorus(xdom, piecewise2(x, y, tau, 3), y));
@@ -682,11 +716,11 @@ margin-right: auto; width:80%">
                 //                emit(xdom, piecewise(x, tau, 2), -y);
             },
             rangeX: [-pi - edgethresh, pi + edgethresh],
-            rangeY: [0,pi/4],
-            width: 60,
-            height: 60,
+            rangeY: [0,pi/4+0.4],
+            width: 80,
+            height: 20,
             channels: 3,
-            items: 1,
+            items: 3,
             centeredX: false,
             centeredY: false
 
@@ -699,15 +733,23 @@ margin-right: auto; width:80%">
             shaded: false,
             crossed: false,
             zBias: 10,
+            visible:false,
 
 
         });
+        
+        
+        
+        
         
         
 
         mathbox.set('focus', 2);
 
     </script>
+    
+    
+    
 
 
 

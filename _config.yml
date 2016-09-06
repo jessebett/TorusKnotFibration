@@ -1,38 +1,22 @@
----
+# Permalinks
+#
+# Use of `relative_permalinks` ensures post links from the index work properly.
+permalink:           pretty
+relative_permalinks: true
 
-port: 4000
-host: 0.0.0.0
-safe: false
+# Setup
+title:               Lanyon
+tagline:             'A Jekyll theme'
+description:         'A reserved <a href="http://jekyllrb.com" target="_blank">Jekyll</a> theme that places the utmost gravity on content with a hidden drawer. Made by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.'
+url:                 http://lanyon.getpoole.com
+baseurl:             ''
+paginate:            5
 
+# About/contact
+author:
+  name:              Mark Otto
+  url:               https://twitter.com/mdo
+  email:             markdotto@gmail.com
 
-### site serving configuration ###
-exclude: [CNAME, README.md, .gitignore]
-permalink: /:title ## disables post output
-timezone: null
-lsi: false
-markdown: kramdown
-
-
-### content configuration ###
-title:       "Visualizing a Torus Knot Fibration"
-keywords:    "Torus, Knot, Fibration, Mathematica, Visualizing"
-description: "Summer Project for my Master's in Mathematics at University of Toronto Supervised by Dror Bar-Natan"
-source_link: "https://github.com/jessebett/TorusKnotFibration"
-favicon:     "img/favicon.ico"
-touch_icon:  "img/apple-touch-icon.png"
-google_analytics_key:  ## put YOUR key here to enable tracking! (blank to disable)
-
-
-### template colors, used site-wide via css ###
-colors:
-  black:     '#111111'
-  white:     '#f8f8f8'
-  blue:      '#49a7e9'
-  green:     '#9bcf2f'
-  purple:    '#c869bf'
-  orange:    '#fab125'
-  turquoise: '#0fbfcf'
-
-kramdown:
-  auto_ids:  false
-
+# Custom vars
+version:             1.0.0

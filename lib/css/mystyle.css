@@ -39,3 +39,7 @@ th.labels{
 input.toggle{
     size:'small'
 }
+
+mark{
+    background-color: #f8f8f8
+}
