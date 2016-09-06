@@ -4,7 +4,7 @@
  <title>Torus Knot Fibration Visualization</title>
  <link href="http://jessebett.github.io//atom.xml" rel="self"/>
  <link href="http://jessebett.github.io//"/>
- <updated>2016-09-06T14:29:24-04:00</updated>
+ <updated>2016-09-06T14:37:13-04:00</updated>
  <id>http://jessebett.github.io/</id>
  <author>
    <name>Mark Otto</name>
@@ -36,7 +36,20 @@ This preliminary visualization demonstrates how a square  can be glued along its
    <link href="http://jessebett.github.io//trefoil-boundaries"/>
    <updated>0000-01-05T00:00:00-05:00</updated>
    <id>http://jessebett.github.io/</id>
-   <content type="html">&lt;p&gt;We are looking for two families of curves, &lt;mark style=&quot;color:#0074D9&quot;&gt;blue&lt;/mark&gt; and &lt;mark style=&quot;color:#FF851B&quot;&gt;orange&lt;/mark&gt;, so that where they meet&lt;/p&gt;
+   <content type="html">&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;We are looking for two families of curves: &lt;mark style=&quot;color:#0074D9&quot;&gt;blue&lt;/mark&gt; and &lt;mark style=&quot;color:#FF851B&quot;&gt;orange&lt;/mark&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We call where &lt;mark style=&quot;color:#0074D9&quot;&gt;blue&lt;/mark&gt; and &lt;mark style=&quot;color:#FF851B&quot;&gt;orange&lt;/mark&gt; curves coincide a &lt;em&gt;rung&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Any part of the curves that is not a rung is called a &lt;em&gt;fibration boundary&lt;/em&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;We find our curves so that the fibration boundary is exactly the trefoil knot.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;hr /&gt;
 
