@@ -131,14 +131,16 @@ margin-right: auto; width:80%">
         </tr>
 
         <!--            Time Slider-->
-        <th class="labels">
-            <label class="sliderlabel">
-                Time
-            </label>
-        </th>
-        <th>
-            <input id="slidertime" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="6.28" data-slider-step="0.01" data-slider-value="0" data-slider-tooltip='hide' />
-        </th>
+        <tr>
+            <th class="labels">
+                <label class="sliderlabel">
+                    Time
+                </label>
+            </th>
+            <th>
+                <input id="slidertime" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="6.28" data-slider-step="0.01" data-slider-value="0" data-slider-tooltip='hide' />
+            </th>
+        </tr>
     </table>
 
 
@@ -471,7 +473,7 @@ margin-right: auto; width:80%">
             },
             rangeX: [0, 3 * pi],
             rangeY: [0, pi / 4],
-            width: 80,
+            width: 100,
             height: 20,
             channels: 3,
             items: 2
@@ -485,7 +487,9 @@ margin-right: auto; width:80%">
             shaded: false,
             crossed: false,
             lineX: false,
-            visible: false
+            visible: false,
+            zBias:10
+            
         });
 
         view.resample({
@@ -546,7 +550,7 @@ margin-right: auto; width:80%">
             },
             rangeX: [0, 3 * pi],
             rangeY: [0, pi / 4],
-            width: 40,
+            width: 80,
             height: 20,
             channels: 3,
             items: 3
@@ -557,7 +561,8 @@ margin-right: auto; width:80%">
             color: '#49a7e9',
             proximity: 10000000000,
             shaded: false,
-            visible: false
+            visible: false,
+            zBias:10
         });
 
         view.resample({
@@ -600,7 +605,9 @@ margin-right: auto; width:80%">
             id: 'knotcurve',
             color: '#2ECC40',
             proximity: 10,
-            blending: 'no'
+            blending: 'no',
+            zBias: 20
+            
         })
 
 

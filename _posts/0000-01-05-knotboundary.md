@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Curves with Trefoil Boundaries
+title: Curves with Trefoil Boundary
 order: 1
 permalink: trefoil-boundaries
 ---

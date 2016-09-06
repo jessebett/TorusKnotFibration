@@ -107,7 +107,17 @@ margin-right: auto; width:80%">
                 <input id="rungtoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="rungtogfun(this);" data-onstyle="primary">
             </th>
         </tr>
-
+        <!--Time Animate Toggle-->
+        <tr>
+            <th class="labels">
+                <label class="sliderlabel">
+                    Animate
+                </label>
+            </th>
+            <th>
+                <input id="timetoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="timetogfun(this);" data-onstyle="primary">
+            </th>
+        </tr>
         <!--            Time Slider-->
         <th class="labels">
             <label class="sliderlabel">Time</label>
@@ -203,6 +213,25 @@ margin-right: auto; width:80%">
             } else {
                 $('#rungtoggle').val();
                 mathbox.select('#rungs')[0].set('visible', false)
+            }
+
+        }
+
+        //timeToggle
+        $('#timetoggle').bootstrapSwitch({
+            size: 'small',
+            offColor: 'danger',
+        });
+
+        function timetogfun(button) {
+            var butprop = $('#timetoggle').prop('checked');
+            var butval = $('#timetoggle').val();
+            if (butprop == true) {
+                $('#timetoggle').val(1.0);
+                $('#slidertime').slider("disable")
+            } else {
+                $('#timetoggle').val();
+                $('#slidertime').slider("enable")
             }
 
         }
@@ -510,13 +539,21 @@ margin-right: auto; width:80%">
 
         //((2*amplitude)/pi)*math.asin(sin((x+t/q)*pi/period))+2*pi*n/p-(1/p)*t
         //First Piecewise Curve
-        function piecewise(x, n) {
+        function piecewise(x, n, t) {
             //Triangle Wave Function to match knot + rungs!
             x = x % (2 * pi);
-            var t = Number($('#slidertime').val());
+
+
+            if ($('#timetoggle').prop('checked') == true) {
+                var tau = t % (2 * pi);
+            } else {
+                var tau = Number($('#slidertime').val());
+            }
+
+
             var period = (pi) / q;
             var amplitude = pi / (2 * p);
-            var wave = ((2 * amplitude) / pi) * math.asin(sin((x + t / q) * pi / period)) + 2 * pi * n / p - (t / p)
+            var wave = ((2 * amplitude) / pi) * math.asin(sin((x + tau / q) * pi / period)) + 2 * pi * n / p - (tau / p)
 
             return fakemodpi(wave - pi / p)
         }
@@ -526,8 +563,8 @@ margin-right: auto; width:80%">
             range: [0, 4 * pi],
             expr: function(emit, x, i, t) {
                 //(0,-pi,0) shift to match new domains
-                emit(...torus(fakemodpi(x) + eps, surfacecut(piecewise(x, 0))));
-                emit(...torus(fakemodpi(x) + eps, surfacecut(piecewise(x, 1))));
+                emit(...torus(fakemodpi(x) + eps, surfacecut(piecewise(x, 0, t))));
+                emit(...torus(fakemodpi(x) + eps, surfacecut(piecewise(x, 1, t))));
             },
             width: 1000,
             channels: 3,
@@ -546,24 +583,30 @@ margin-right: auto; width:80%">
 
 
         //Second Piecewise Curve
-        function piecewise2(x, n) {
+        function piecewise2(x, n, t) {
             x = x % (2 * pi);
-            var t = Number($('#slidertime').val());
+
+            if ($('#timetoggle').prop('checked') == true) {
+                var tau = t % (2 * pi);
+            } else {
+                var tau = Number($('#slidertime').val());
+            }
+
             var period = (pi) / p;
             var amplitude = pi / (2 * q);
-            var wave = ((2 * amplitude) / pi) * math.asin(sin((x - t / p) * pi / period)) - 2 * pi * n / q
+            var wave = ((2 * amplitude) / pi) * math.asin(sin((x - tau / p) * pi / period)) - 2 * pi * n / q
                 //    var wave = ((2 * amplitude) / pi) * math.asin(sin((x+ t / q) * pi / period)) + 2 * pi * n / p - (t / p)
 
-            return fakemodpi(-(wave - pi / q + (1 / q) * t))
+            return fakemodpi(-(wave - pi / q + (1 / q) * tau))
         }
 
 
         view.interval({
 
             expr: function(emit, x, i, t) {
-                emit(...torus(surfacecut(piecewise2(x, 0) - eps), -fakemodpi(x)));
-                emit(...torus(surfacecut(piecewise2(x, 1) - eps), -fakemodpi(x)));
-                emit(...torus(surfacecut(piecewise2(x, 2) - eps), -fakemodpi(x)));
+                emit(...torus(surfacecut(piecewise2(x, 0, t) - eps), -fakemodpi(x)));
+                emit(...torus(surfacecut(piecewise2(x, 1, t) - eps), -fakemodpi(x)));
+                emit(...torus(surfacecut(piecewise2(x, 2, t) - eps), -fakemodpi(x)));
             },
             width: 400,
             channels: 3,
@@ -590,22 +633,26 @@ margin-right: auto; width:80%">
 
 
         //Rungs
-
-        function onlyrungs(x) {
-            var t = Number($('#slidertime').val());
-            if ((x > pi / (2 * q) - (t / q)) && (x < 2 * pi / (2 * q) + pi / (2 * q) - (t / q))) {
+        //This is bad and I should feel bad
+        function onlyrungs(x,t) {
+            if ($('#timetoggle').prop('checked') == true) {
+                var tau = t % (2 * pi);
+            } else {
+                var tau = Number($('#slidertime').val());
+            }
+            if ((x > pi / (2 * q) - (tau / q)) && (x < 2 * pi / (2 * q) + pi / (2 * q) - (tau / q))) {
                 x = x
-            } else if ((x > pi / (2 * q) - (t / q) + 2 * pi / q) && (x < 2 * pi / (2 * q) + pi / (2 * q) - (t / q) + 2 * pi / q)) {
-                x = x
-
-
-            } else if ((x > pi / (2 * q) - (t / q) + 4 * pi / q) && (x < 2 * pi / (2 * q) + pi / (2 * q) - (t / q) + 4 * pi / q)) {
-                x = x
-
-            } else if ((x > pi / (2 * q) - (t / q) - 2 * pi / q) && (x < 2 * pi / (2 * q) + pi / (2 * q) - (t / q) - 2 * pi / q)) {
+            } else if ((x > pi / (2 * q) - (tau / q) + 2 * pi / q) && (x < 2 * pi / (2 * q) + pi / (2 * q) - (tau / q) + 2 * pi / q)) {
                 x = x
 
-            } else if ((x > pi / (2 * q) - (t / q) - 4 * pi / q) && (x < 2 * pi / (2 * q) + pi / (2 * q) - (t / q) - 4 * pi / q)) {
+
+            } else if ((x > pi / (2 * q) - (tau / q) + 4 * pi / q) && (x < 2 * pi / (2 * q) + pi / (2 * q) - (tau / q) + 4 * pi / q)) {
+                x = x
+
+            } else if ((x > pi / (2 * q) - (tau / q) - 2 * pi / q) && (x < 2 * pi / (2 * q) + pi / (2 * q) - (tau / q) - 2 * pi / q)) {
+                x = x
+
+            } else if ((x > pi / (2 * q) - (tau / q) - 4 * pi / q) && (x < 2 * pi / (2 * q) + pi / (2 * q) - (tau / q) - 4 * pi / q)) {
                 x = x
             } else {
                 x = NaN
@@ -613,13 +660,17 @@ margin-right: auto; width:80%">
             return x
         }
 
-        function rungs(x, n) {
+        function rungs(x, n,t) {
             //Triangle Wave Function to match knot + rungs!
             x = x % (2 * pi);
-            var t = Number($('#slidertime').val());
+            if ($('#timetoggle').prop('checked') == true) {
+                var tau = t % (2 * pi);
+            } else {
+                var tau = Number($('#slidertime').val());
+            }
             var period = (pi) / q;
             var amplitude = pi / (2 * p);
-            var wave = ((2 * amplitude) / pi) * math.asin(sin((x + t / q) * pi / period)) + 2 * pi * n / p - (t / p)
+            var wave = ((2 * amplitude) / pi) * math.asin(sin((x + tau / q) * pi / period)) + 2 * pi * n / p - (tau / p)
 
 
             return fakemodpi(wave - pi / p)
@@ -630,10 +681,10 @@ margin-right: auto; width:80%">
             range: [0, 4 * pi],
             expr: function(emit, x, i, t) {
                 //(0,-pi,0) shift to match new domains
-                emit(...torus(onlyrungs(fakemodpi(x) + eps), surfacecut(rungs(x, 0))));
-                emit(...torus(onlyrungs(fakemodpi(x) + eps), surfacecut(rungs(x, 1))));
-                emit(...torus(onlyrungs(fakemodpi(x) -eps), surfacecut(rungs(x, 0))));
-                emit(...torus(onlyrungs(fakemodpi(x) - eps), surfacecut(rungs(x, 1))));
+                emit(...torus(onlyrungs(fakemodpi(x) + eps,t), surfacecut(rungs(x, 0,t))));
+                emit(...torus(onlyrungs(fakemodpi(x) + eps,t), surfacecut(rungs(x, 1,t))));
+                emit(...torus(onlyrungs(fakemodpi(x) - eps,t), surfacecut(rungs(x, 0,t))));
+                emit(...torus(onlyrungs(fakemodpi(x) - eps,t), surfacecut(rungs(x, 1,t))));
             },
 
             width: 1000,

@@ -115,7 +115,7 @@ margin-right: auto; width:80%">
                 <input id="redtoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="redtogfun(this);" data-onstyle="primary">
             </th>
         </tr>
-        <!--Time Piecewise Toggle-->
+        <!--Time Animate Toggle-->
         <tr>
             <th class="labels">
                 <label class="sliderlabel">
@@ -454,7 +454,7 @@ margin-right: auto; width:80%">
                 //-(pi,pi,0) needed for new bounds
                 emit(...torus(x % (2 * pi) - pi, knot(x) - pi));
             },
-            width: 400,
+            width: 200,
             channels: 3,
         });
         view.line({
