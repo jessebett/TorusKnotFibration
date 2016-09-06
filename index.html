@@ -1,36 +1,42 @@
 ---
 layout: default
+title: Home
 ---
 
 <div class="posts">
-  {% for post in paginator.posts %}
+{% assign items = paginator.posts | sort: 'ID' %}
+  {% for post in items %}
+    <hr>
   <div class="post">
     <h1 class="post-title">
-      <a href="{{ post.url }}">
-        {{ post.title }}
+      <a href="{{ site.baseurl }}{{ post.url }}">
+        {{ post.title }}{{post.ID}}
       </a>
     </h1>
 
-    <span class="post-date">{{ post.date | date_to_string }}</span>
+<!--    <span class="post-date">{{ post.date | date_to_string }}</span>-->
 
     {{ post.content }}
   </div>
   {% endfor %}
 </div>
 
+
+
 <div class="pagination">
   {% if paginator.next_page %}
-    <a class="pagination-item older" href="/page{{paginator.next_page}}">Older</a>
+    <a class="pagination-item older" href="{{ site.baseurl }}/page{{paginator.next_page}}">Previous</a>
   {% else %}
-    <span class="pagination-item older">Older</span>
+    <span class="pagination-item older">Previous</span>
   {% endif %}
   {% if paginator.previous_page %}
     {% if paginator.page == 2 %}
-      <a class="pagination-item newer" href="/">Newer</a>
+      <a class="pagination-item newer" href="{{ site.baseurl }}/">Next</a>
     {% else %}
-      <a class="pagination-item newer" href="/page{{paginator.previous_page}}">Newer</a>
+      <a class="pagination-item newer" href="{{ site.baseurl }}/page{{paginator.previous_page}}">Next</a>
     {% endif %}
   {% else %}
-    <span class="pagination-item newer">Newer</span>
+    <span class="pagination-item newer">Next</span>
   {% endif %}
 </div>
+
