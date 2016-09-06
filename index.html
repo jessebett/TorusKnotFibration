@@ -4,7 +4,7 @@ title: Home
 ---
 
 <div class="posts">
-{% assign items = paginator.posts | sort: 'ID' %}
+{% assign items = paginator.posts | sort:"order" %}
   {% for post in items %}
     <hr>
   <div class="post">
@@ -23,20 +23,21 @@ title: Home
 
 
 
+
+
 <div class="pagination">
-  {% if paginator.next_page %}
-    <a class="pagination-item older" href="{{ site.baseurl }}/page{{paginator.next_page}}">Previous</a>
-  {% else %}
-    <span class="pagination-item older">Previous</span>
-  {% endif %}
   {% if paginator.previous_page %}
     {% if paginator.page == 2 %}
-      <a class="pagination-item newer" href="{{ site.baseurl }}/">Next</a>
+      <a class="pagination-item newer" href="{{ site.baseurl }}/">Previous</a>
     {% else %}
-      <a class="pagination-item newer" href="{{ site.baseurl }}/page{{paginator.previous_page}}">Next</a>
+      <a class="pagination-item newer" href="{{ site.baseurl }}/page{{paginator.previous_page}}">Previous</a>
     {% endif %}
   {% else %}
-    <span class="pagination-item newer">Next</span>
+    <span class="pagination-item newer">Previous</span>
+  {% endif %}
+     {% if paginator.next_page %}
+    <a class="pagination-item older" href="{{ site.baseurl }}/page{{paginator.next_page}}">Next</a>
+  {% else %}
+    <span class="pagination-item older">Next</span>
   {% endif %}
 </div>
-

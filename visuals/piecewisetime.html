@@ -51,7 +51,7 @@
     <table class="panel" style="margin-left: auto;
 margin-right: auto; width:80%">
         <tr>
-            <th class="labels" style="color:#0fbfcf">
+            <th class="labels">
                 <label class="sliderlabel">Glue Latitudinal Edge</label>
             </th>
             <th>
@@ -60,7 +60,7 @@ margin-right: auto; width:80%">
 
         </tr>
         <tr>
-            <th class="labels" style="color:#0fbfcf">
+            <th class="labels">
                 <label class="sliderlabel">Glue Longitudinal Edge</label>
             </th>
             <th>
@@ -71,7 +71,7 @@ margin-right: auto; width:80%">
         </tr>
         <!--Knot Curve Toggle-->
         <tr>
-            <th class="labels" style="color:#0fbfcf">
+            <th class="labels" style="color:green">
                 <label class="sliderlabel">Knot Curve</label>
             </th>
             <th>
@@ -80,7 +80,7 @@ margin-right: auto; width:80%">
         </tr>
         <!--Blue Piecewise Toggle-->
         <tr>
-            <th class="labels" style="color:#0fbfcf">
+            <th class="labels" style="color:#0074D9">
                 <label class="sliderlabel">Blue Boundary</label>
             </th>
             <th>
@@ -90,7 +90,7 @@ margin-right: auto; width:80%">
 
         <!--Red Piecewise Toggle-->
         <tr>
-            <th class="labels" style="color:#0fbfcf">
+            <th class="labels" style="color:#FF851B">
                 <label class="sliderlabel">Orange Boundary</label>
             </th>
             <th>
@@ -98,12 +98,22 @@ margin-right: auto; width:80%">
             </th>
         </tr>
 
+        <!--Rung Piecewise Toggle-->
+        <tr>
+            <th class="labels">
+                <label class="sliderlabel">Hide Rungs</label>
+            </th>
+            <th>
+                <input id="rungtoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="rungtogfun(this);" data-onstyle="primary">
+            </th>
+        </tr>
+
         <!--            Time Slider-->
-        <th class="labels" style="color:#0fbfcf">
+        <th class="labels">
             <label class="sliderlabel">Time</label>
         </th>
         <th>
-            <input id="slidertime" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="6.28" data-slider-step="0.01" data-slider-value="4.7" data-slider-tooltip='hide' />
+            <input id="slidertime" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="6.28" data-slider-step="0.01" data-slider-value="3.14" data-slider-tooltip='hide' />
         </th>
     </table>
 
@@ -174,6 +184,25 @@ margin-right: auto; width:80%">
             } else {
                 $('#redtoggle').val();
                 mathbox.select('#redboundary')[0].set('visible', false)
+            }
+
+        }
+
+        //RungToggle
+        $('#rungtoggle').bootstrapSwitch({
+            size: 'small',
+            offColor: 'danger',
+        });
+
+        function rungtogfun(button) {
+            var butprop = $('#rungtoggle').prop('checked');
+            var butval = $('#rungtoggle').val();
+            if (butprop == true) {
+                $('#rungtoggle').val(1.0);
+                mathbox.select('#rungs')[0].set('visible', true)
+            } else {
+                $('#rungtoggle').val();
+                mathbox.select('#rungs')[0].set('visible', false)
             }
 
         }
@@ -288,8 +317,8 @@ margin-right: auto; width:80%">
 
         view.surface({
             shaded: false,
-            color: '#0FBFCF',
-            opacity: 0.1
+            color: '#6a9fb5',
+            opacity: 0.2
 
         });
 
@@ -461,13 +490,13 @@ margin-right: auto; width:80%">
 
             return X
         }
-        
-        function surfacecut(x){
-            var X=x
+
+        function surfacecut(x) {
+            var X = x
             var thresh = 0.02;
-            
-            if(Math.abs(pi)-X<thresh){
-                 X=NaN
+
+            if (Math.abs(pi) - X < thresh) {
+                X = NaN
             }
 
             return X
@@ -497,7 +526,7 @@ margin-right: auto; width:80%">
             range: [0, 4 * pi],
             expr: function(emit, x, i, t) {
                 //(0,-pi,0) shift to match new domains
-                emit(...torus(fakemodpi(x)+eps , surfacecut(piecewise(x, 0))));
+                emit(...torus(fakemodpi(x) + eps, surfacecut(piecewise(x, 0))));
                 emit(...torus(fakemodpi(x) + eps, surfacecut(piecewise(x, 1))));
             },
             width: 1000,
@@ -557,6 +586,72 @@ margin-right: auto; width:80%">
             }
             return x
         }
+
+
+
+        //Rungs
+
+        function onlyrungs(x) {
+            var t = Number($('#slidertime').val());
+            if ((x > pi / (2 * q) - (t / q)) && (x < 2 * pi / (2 * q) + pi / (2 * q) - (t / q))) {
+                x = x
+            } else if ((x > pi / (2 * q) - (t / q) + 2 * pi / q) && (x < 2 * pi / (2 * q) + pi / (2 * q) - (t / q) + 2 * pi / q)) {
+                x = x
+
+
+            } else if ((x > pi / (2 * q) - (t / q) + 4 * pi / q) && (x < 2 * pi / (2 * q) + pi / (2 * q) - (t / q) + 4 * pi / q)) {
+                x = x
+
+            } else if ((x > pi / (2 * q) - (t / q) - 2 * pi / q) && (x < 2 * pi / (2 * q) + pi / (2 * q) - (t / q) - 2 * pi / q)) {
+                x = x
+
+            } else if ((x > pi / (2 * q) - (t / q) - 4 * pi / q) && (x < 2 * pi / (2 * q) + pi / (2 * q) - (t / q) - 4 * pi / q)) {
+                x = x
+            } else {
+                x = NaN
+            }
+            return x
+        }
+
+        function rungs(x, n) {
+            //Triangle Wave Function to match knot + rungs!
+            x = x % (2 * pi);
+            var t = Number($('#slidertime').val());
+            var period = (pi) / q;
+            var amplitude = pi / (2 * p);
+            var wave = ((2 * amplitude) / pi) * math.asin(sin((x + t / q) * pi / period)) + 2 * pi * n / p - (t / p)
+
+
+            return fakemodpi(wave - pi / p)
+        }
+
+
+        view.interval({
+            range: [0, 4 * pi],
+            expr: function(emit, x, i, t) {
+                //(0,-pi,0) shift to match new domains
+                emit(...torus(onlyrungs(fakemodpi(x) + eps), surfacecut(rungs(x, 0))));
+                emit(...torus(onlyrungs(fakemodpi(x) + eps), surfacecut(rungs(x, 1))));
+                emit(...torus(onlyrungs(fakemodpi(x) -eps), surfacecut(rungs(x, 0))));
+                emit(...torus(onlyrungs(fakemodpi(x) - eps), surfacecut(rungs(x, 1))));
+            },
+
+            width: 1000,
+            channels: 3,
+
+            items: 4
+
+        });
+        view.line({
+            id: 'rungs',
+            color: '#D6E6EB',
+            visible: false,
+            zBias: 20,
+            proximity: 1,
+
+
+        });
+
 
 
 

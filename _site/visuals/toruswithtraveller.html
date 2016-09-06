@@ -51,8 +51,8 @@
     <table class="panel" style="margin-left: auto;
 margin-right: auto; width:80%">
         <tr>
-            <th class="labels" style="color:#0fbfcf">
-                <label class="sliderlabel">Glue Red Edge</label>
+            <th class="labels" style="color:#FF4136">
+                <label class="sliderlabel">Glue Latitudinal Edge</label>
             </th>
             <th>
                 <input id="slidera" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.0" data-slider-tooltip='hide' />
@@ -60,31 +60,31 @@ margin-right: auto; width:80%">
 
         </tr>
         <tr>
-            <th class="labels" style="color:#0fbfcf">
-                <label class="sliderlabel">Glue Yellow Edge</label>
+            <th class="labels" style="color:#FFDC00">
+                <label class="sliderlabel">Glue Longitudinal Edge</label>
             </th>
             <th>
                 <input id="sliderb" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.0" data-slider-tooltip='hide' />
             </th>
 
         </tr>
-
         <tr>
-            <th class="labels" style="color:#0fbfcf">
-                <label class="sliderlabel">Knot Traveller</label>
-            </th>
-            <th>
-                <input id="knottravellertoggle" type="checkbox"  data-toggle="toggle" value="1.0" onchange="travtogfun(this);" data-onstyle="primary">
-            </th>
-        </tr>
-        <tr>
-            <th class="labels" style="color:#0fbfcf">
-                <label class="sliderlabel">Knot Curve</label>
+            <th class="labels" style="color:green">
+                <label class="sliderlabel">Trefoil</label>
             </th>
             <th>
                 <input id="knottoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="togfun(this);" data-onstyle="primary">
             </th>
         </tr>
+        <tr>
+            <th class="labels" style="color:green">
+                <label class="sliderlabel">Trefoil Traveller</label>
+            </th>
+            <th>
+                <input id="knottravellertoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="travtogfun(this);" data-onstyle="primary">
+            </th>
+        </tr>
+
     </table>
 
 
@@ -134,8 +134,8 @@ margin-right: auto; width:80%">
             }
 
         }
-        
-         $('#knottoggle').bootstrapSwitch({
+
+        $('#knottoggle').bootstrapSwitch({
             size: 'small',
             offColor: 'danger',
         });
@@ -152,7 +152,6 @@ margin-right: auto; width:80%">
             }
 
         }
-
     </script>
 
 
@@ -223,7 +222,7 @@ margin-right: auto; width:80%">
             // return [(R-r*cos(x*b))*((1-a)*y+sin(a*y)),(R-r*cos(b*x))*-cos(a*y),(1-b)*x + r*sin(b*x)]
 
             return [
-                (R - r * ((1-a)+a*cos(x * b))) * ((1 - a) * y + sin(a * y)), (1 - b) * x + r * sin(b * x), (R - r * cos(b * x)) * -cos(a * y) + 1
+                (R - r * ((1 - a) + a * cos(x * b))) * ((1 - a) * y + sin(a * y)), (1 - b) * x + r * sin(b * x), (R - r * cos(b * x)) * -cos(a * y) + 1
             ]
 
         }
@@ -243,7 +242,7 @@ margin-right: auto; width:80%">
 
         view.surface({
             shaded: false,
-            color: '#0fbfcf'
+            color: '#6a9fb5'
 
         });
 
@@ -371,7 +370,7 @@ margin-right: auto; width:80%">
         });
 
         view.surface({
-            id:'knottraveller',
+            id: 'knottraveller',
             shaded: false,
             color: 'green',
             opacity: 0,
@@ -379,7 +378,6 @@ margin-right: auto; width:80%">
         });
 
         mathbox.set('focus', 2);
-
     </script>
 
 

@@ -2,14 +2,17 @@
 #
 # Use of `relative_permalinks` ensures post links from the index work properly.
 permalink:           pretty
+markdown: kramdown
+
 #relative_permalinks: true
 
 # Setup
-title:               Lanyon
-tagline:             'A Jekyll theme'
-description:         'A reserved <a href="http://jekyllrb.com" target="_blank">Jekyll</a> theme that places the utmost gravity on content with a hidden drawer. Made by <a href="https://twitter.com/mdo" target="_blank">@mdo</a>.'
+title:               Torus Knot Fibration Visualization
+tagline:             'by Jesse Bettencourt'
+description:         'A Summer Project for my Masters in Mathematics at the Unviersity of Toronto under the supervision of Dr. Dror Bar-Natan'
 url:                 'http://jessebett.github.io/'
-baseurl:             '/TorusKnotFibration'
+#baseurl:             '/TorusKnotFibration'
+baseurl:              ''
 paginate:            1
 
 # About/contact

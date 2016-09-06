@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Example content
-ID: 3
+title: Example Content
+order: 4
 ---
 
 
