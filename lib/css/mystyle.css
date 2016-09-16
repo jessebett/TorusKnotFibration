@@ -31,7 +31,8 @@ font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .labels {
-    color:#6a9fb5
+    color:#6a9fb5;
+        text-align: right;
 }
 
 table.panel{
