@@ -1,4 +1,5 @@
 /*
+background      f8f8f8
 nicered         FF4136
 niceyellow      FFDC00
 niceorange      FF851B
@@ -21,7 +22,7 @@ html,body{
 
 label.sliderlabel{
 font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; 
-    font-size: 18px;
+    font-size: 15px;
     font-weight: normal;
         margin-right: 20px;
 }
@@ -38,7 +39,8 @@ table.panel{
 }
 th.labels{
     height: 20px;
-    text-align: right;
+    min-width: 200px;
+    text-align: left;
 
 
 }

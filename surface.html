@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+
+    <title>Torus Knot Fibration Visualization</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    <!--    <script src="assets/js/modernizr.js"></script>-->
+
+    <!-- mathbox -->
+    <script src="../lib/mathbox/build/mathbox-bundle.js"></script>
+    <link rel="stylesheet" href="../lib/mathbox/build/mathbox.css">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+
+    <!--math-->
+    <script src="../lib/math.min.js"></script>
+
+    <!--jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+
+    <!--bootstrap-->
+    <link rel="stylesheet" src="../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" src="../lib/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+    <script src="../lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <!--
+    bootstrap toggle
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+-->
+
+    <link href="../lib/switch/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet">
+    <script src="../lib/switch/js/bootstrap-switch.min.js"></script>
+
+
+
+    <!--bootstrap slider-->
+    <link href="../lib/slider/bootstrap-slider.min.css" rel="stylesheet">
+    <script src="../lib/slider/bootstrap-slider.min.js"></script>
+
+    <!-- my css -->
+    <link href="../lib/css/mystyle.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Torus Knot Fibraion Visualization</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-right">
+                <ul class="nav navbar-nav">
+                    <li><a href="torusknot.html">TORUS &amp; KNOT</a></li>
+                    <li><a href="boundary.html">BOUNDARY</a></li>
+                    <li class="active"><a href="surface.html">SURFACE</a></li>
+                    <li><a href="stereo.html">STEREO</a></li>
+
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+
+    <!-- *****************************************************************************************************************
+	 BLUE WRAP
+	 ***************************************************************************************************************** -->
+    <div id="blue">
+        <div class="container">
+            <div class="row">
+                <h3>Fibration Surface</h3>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /blue -->
+
+
+    <!-- *****************************************************************************************************************
+	 AGENCY ABOUT
+	 ***************************************************************************************************************** -->
+
+
+    <div class="container-fluid mtb">
+        <div class="row">
+            <div id="torusvis" class="torusvis col-lg-7">
+                <script type="text/javascript" language="javascript">
+                    console.log($('.torusvis'));
+                    $('.torusvis').css('height', 0.8 * $(window).height() + 'px');
+
+                </script>
+                <script>
+                    var mathbox = mathBox({
+                        plugins: ['core', 'controls', 'cursor'],
+                        controls: {
+                            // Orbit controls, i.e. Euler angles, with gimbal lock
+                            klass: THREE.OrbitControls,
+                            parameters: {
+                                noZoom: true
+                            },
+
+                            // Trackball controls, i.e. Free quaternion rotation
+                            //klass: THREE.TrackballControls,
+                        },
+                        element: document.getElementById("torusvis"),
+                        mathbox: {
+                            warmup: 1
+                        }
+                    });
+                    if (mathbox.fallback) throw "WebGL not supported"
+
+                    var three = mathbox.three;
+                    three.renderer.setClearColor(new THREE.Color('#f8f8f8'), 1.0);
+
+                    var time = three.Time.clock;
+
+                    // Place camera
+                    var camera =
+                        mathbox
+                        .camera({
+                            proxy: true,
+                            position: [0, 0, 3],
+                            lookAt: [0, 0, 0]
+
+                        });
+
+
+
+                    // 2D cartesian
+                    var view =
+                        mathbox
+                        .cartesian({
+                            id:'cartesian',
+                            position: [0, 0, 0.33],
+                            range: [
+                                [-math.pi, math.pi],
+                                [-math.pi, math.pi],
+                                [-math.pi, math.pi]
+                            ],
+                            scale: [1, 1, 1],
+                        });
+
+
+                    var alpha = 2;
+
+                    //Quality of Life
+                    var pi = math.pi;
+                    var sin = math.sin;
+                    var cos = math.cos;
+
+                    function torus(x, y) {
+                        R = 2;
+                        r = pi / 4;
+
+                        var a = Number($('#slidera').val())
+                        var b = Number($('#sliderb').val())
+
+                        // return [(R-r*cos(x*b))*((1-a)*y+sin(a*y)),(R-r*cos(b*x))*-cos(a*y),(1-b)*x + r*sin(b*x)]
+
+                        return [
+                            (R - r * ((1 - a) + a * cos(x * b))) * ((1 - a) * y + sin(a * y)), (1 - b) * x + r * sin(b * x), (R - r * cos(b * x)) * -cos(a * y)
+                        ]
+
+                    }
+
+
+                    view.area({
+                        id: 'densearea',
+                        width: 100,
+                        height: 100,
+                        // axes: [1, 3],
+                        expr: function(emit, x, y, i, j, time) {
+                            emit(...torus(x, y));
+
+                        },
+                        items: 1,
+                        channels: 3,
+                    });
+
+                    view.surface({
+                        shaded: false,
+                        color: '#0FBFCF',
+                        opacity: 0.0,
+
+                    });
+
+                    view.area({
+                        id: 'sparsearea',
+                        width: 64,
+                        height: 10,
+                        // axes: [1, 3],
+                        expr: function(emit, x, y, i, j, time) {
+                            emit(...torus(x, y));
+                            emit(...torus(y, x));
+                        },
+                        items: 2,
+                        channels: 3,
+                    });
+
+                    view.resample({
+                        id: 'sparsesample',
+                        source: mathbox.select('#sparsearea')[0],
+                        width: 64,
+                        height: 10
+                    })
+
+                    view.line({
+                        id: 'torusmesh',
+                        points: mathbox.select('#sparsesample')[0],
+                        color: '#6a9fb5',
+                        zBias: 1,
+                        opacity: 0.1,
+                        visible: true,
+                    })
+
+                    //                //Edges of Torus
+                    //                view.interval({
+                    //                    id: 'redline',
+                    //                    width: 64,
+                    //                    expr: function(emit, x, i, time) {
+                    //                        emit(...torus(x, -pi));
+                    //                        emit(...torus(x, pi));
+                    //                    },
+                    //                    items: 2,
+                    //                    channels: 3,
+                    //                })
+                    //        
+                    //                view.line({
+                    //                    points: mathbox.select('#redline')[1],
+                    //                    color: '#FF4136',
+                    //                    zBias: 12
+                    //                })
+                    //        
+                    //        
+                    //                view.interval({
+                    //                    id: 'yellowline',
+                    //                    width: 64,
+                    //                    expr: function(emit, y, i, time) {
+                    //                        emit(...torus(-pi, y));
+                    //                        emit(...torus(pi, y));
+                    //                    },
+                    //                    items: 2,
+                    //                    channels: 3,
+                    //                })
+                    //        
+                    //                view.line({
+                    //                    points: mathbox.select('#yellowline')[1],
+                    //                    color: '#FFDC00',
+                    //                    zBias: 13
+                    //                })
+
+                    // Torus Knot Parameters
+                    var p = 3;
+                    var q = 2;
+                    var m = p / q;
+                    var m2 = q / p;
+                    var eps = 0.01;
+
+
+                    function mod2pi(x) {
+                        return (x % (2 * pi) + 2 * pi) % (2 * pi)
+                    }
+
+
+
+
+                    // Knot Curve
+                    function knot(x) {
+                        return (m2 * x) % (2 * pi);
+                    }
+
+                    view.interval({
+                        range: [0, 2 * p * pi],
+                        expr: function(emit, x, i, t) {
+                            //-(pi,pi,0) needed for new bounds
+                            emit(...torus(x % (2 * pi) - pi, knot(x) - pi));
+                        },
+                        width: 200,
+                        channels: 3,
+                    });
+                    view.line({
+                        id: 'knotcurve',
+                        color: '#2ECC40',
+                        visible: true,
+                        proximity: 1,
+                        blending: 'no',
+                        zBias: 14
+                    })
+
+
+
+                    //        // Knot Traveller
+                    //
+                    //        function sphere(r, th, ph, x, y, z) {
+                    //            return [r * cos(th) * sin(ph) + x, r * sin(th) * sin(ph) + y, r * cos(ph) + z]
+                    //        }
+                    //        view.area({
+                    //            id: 'spherearea',
+                    //            width: 100,
+                    //            height: 100,
+                    //            // axes: [1, 3],
+                    //            expr: function(emit, x, y, i, j, time) {
+                    //                var t = time
+                    //                var [X, Y, Z] = torus(t % (2 * pi) - pi, knot(t) - pi);
+                    //                emit(...sphere(0.1, x, y, X, Y, Z));
+                    //
+                    //            },
+                    //            items: 1,
+                    //            channels: 3,
+                    //
+                    //        });
+                    //
+                    //        view.surface({
+                    //            id: 'knottraveller',
+                    //            shaded: false,
+                    //            color: 'green'
+                    //
+                    //        });
+
+
+
+                    //Piecewise Stuff
+                    //        //First Piecewise Curve
+                    //        function piecewise(x, n) {
+                    //            //Triangle Wave Function to match knot + rungs!
+                    //            x = x % (2 * pi);
+                    //            var period = (pi) / q;
+                    //            var amplitude = pi / (2 * p);
+                    //            var wave = ((2 * amplitude) / pi) * math.asin(sin(x * pi / period)) + 2 * pi * n / p
+                    //
+                    //            return mod2pi(wave)
+                    //        }
+                    //        
+
+
+                    function modpi(x) {
+                        //Function for Modular Arithmetic on [-pi,pi]
+                        return ((x + 2 * pi) % (2 * pi) - pi)
+                    }
+
+
+                    function linecut(x) {
+                        var X = x
+                        var thresh = 0.02;
+
+                        if (Math.abs(pi) - X < thresh) {
+                            X = NaN
+                        }
+
+                        return X
+                    }
+
+                    function fakemodpi(x) {
+                        var tpi = 2 * pi;
+                        var X = x;
+
+                        //To stop edge errors:
+
+
+                        while (Math.abs(X) > pi) {
+                            if (X <= -pi) {
+                                X = X + 2 * pi
+                            } else if (X >= -pi + tpi) {
+                                X = X - tpi
+                            }
+                        }
+
+                        return linecut(X)
+                    }
+
+
+
+                    function truemodpi(x) {
+                        return (x + pi) % (2 * pi) - pi
+                    }
+                    console.log(fakemodpi(0))
+                    console.log(fakemodpi(pi + 0.1))
+
+                    //((2*amplitude)/pi)*math.asin(sin((x+t/q)*pi/period))+2*pi*n/p-(1/p)*t
+                    //First Piecewise Curve
+                    function piecewise(x, n) {
+                        //Triangle Wave Function to match knot + rungs!
+                        x = x % (2 * pi);
+                        var t = Number($('#slidertime').val());
+                        var period = (pi) / q;
+                        var amplitude = pi / (2 * p);
+                        var wave = ((2 * amplitude) / pi) * math.asin(sin((x + t / q) * pi / period)) + 2 * pi * n / p - (t / p)
+
+                        return fakemodpi(wave - pi / p)
+                    }
+
+
+                    view.interval({
+                        range: [0, 4 * pi],
+                        expr: function(emit, x, i, t) {
+                            //(0,-pi,0) shift to match new domains
+                            emit(...torus(fakemodpi(x) + eps, linecut(piecewise(x, 0))));
+                            emit(...torus(fakemodpi(x) + eps, linecut(piecewise(x, 1))));
+                            emit(...torus(fakemodpi(x) + eps, linecut(piecewise(x, 2))));
+                        },
+                        width: 1000,
+                        channels: 3,
+                        items: 3
+
+                    });
+                    view.line({
+                        id: 'blueboundary',
+                        color: '#49a7e9',
+                        visible: false,
+                        zBias: 15,
+                        proximity: 0.5
+                    });
+
+
+
+
+                    //Second Piecewise Curve
+                    function piecewise2(x, n) {
+                        x = x % (2 * pi);
+                        var t = Number($('#slidertime').val());
+                        var period = (pi) / p;
+                        var amplitude = pi / (2 * q);
+                        var wave = ((2 * amplitude) / pi) * math.asin(sin((x - t / p) * pi / period)) - 2 * pi * n / q
+                            //    var wave = ((2 * amplitude) / pi) * math.asin(sin((x+ t / q) * pi / period)) + 2 * pi * n / p - (t / p)
+
+                        return fakemodpi(-(wave - pi / q + (1 / q) * t))
+                    }
+
+
+                    view.interval({
+
+                        expr: function(emit, x, i, t) {
+                            emit(...torus(linecut(piecewise2(x, 0) - eps), -fakemodpi(x)));
+                            emit(...torus(linecut(piecewise2(x, 1) - eps), -fakemodpi(x)));
+                        },
+                        width: 600,
+                        channels: 3,
+                        items: 2
+
+                    });
+                    view.line({
+                        id: 'redboundary',
+                        color: '#fab125',
+                        proximity: 1,
+                        visible: false,
+                        zBias: 15
+                    });
+
+                    function SurfaceCut(x) {
+                        var thresh = 0.15;
+                        if (x <= -pi - thresh) {
+                            x = -NaN;
+                        } else if (x >= pi + thresh) {
+                            x = NaN;
+                        }
+
+
+                        return x
+                    }
+
+
+                    function threetorus(x, y, z) {
+                        R = 2;
+                        r = pi / 4;
+
+
+                        var a = Number($('#slidera').val())
+                        var b = Number($('#sliderb').val())
+
+                        //            //             return [
+                        //              (R - r * ((1 - a) + a * cos(x * b))) * ((1 - a) * y + sin(a * y)),
+                        //(1 - b) * x + r * sin(b * x), (R - r * cos(b * x)) * -cos(a * y) + 1
+                        //            ]
+
+                        return [
+                            (R - (r - a * z) * ((1 - a) + a * cos(x * b))) * ((1 - a) * y + sin(a * y)), (1 - b) * x + (r - z) * sin(b * x), (R - (r - z) * cos(b * x)) * -cos(a * y)
+
+                        ]
+
+                    }
+
+                    //First Piecewise Surface
+                    function piecewise(x, y, t, n) {
+
+                        x = x % (2 * pi);
+                        var period = (pi) / q;
+                        var amplitude = pi / (2 * p);
+                        var wave = Math.pow(math.abs(4 / pi * (pi / 4 - y)), 4) * ((2 * amplitude) / pi) * math.asin(sin((x + t / q) * pi / period)) + 2 * pi * n / p - (1 / p) * t
+
+
+                        return SurfaceCut(wave - pi / p)
+                    }
+
+                    var edgethresh = 0.5;
+                    view.area({
+
+                        expr: function(emit, x, y, i, j, t) {
+
+                            if ($('#timetoggle').prop('checked') == true) {
+                                var tau = t % (2 * pi);
+                            } else {
+                                var tau = Number($('#slidertime').val());
+                            }
+
+
+                            var xdom = SurfaceCut(x);
+
+
+                            emit(...threetorus(xdom, piecewise(x, y, tau, -1), y));
+                            emit(...threetorus(xdom, piecewise(x, y, tau, 0), y));
+                            emit(...threetorus(xdom, piecewise(x, y, tau, 1), y));
+                            emit(...threetorus(xdom, piecewise(x, y, tau, 2), y));
+                            emit(...threetorus(xdom, piecewise(x, y, tau, 3), y));
+                            //                emit(xdom, piecewise(x, tau, 0), -y);
+                            //                emit(xdom, piecewise(x, tau, 1), -y);
+                            //                emit(xdom, piecewise(x, tau, 2), -y);
+                        },
+                        rangeX: [-pi - edgethresh, pi + edgethresh],
+                        rangeY: [0, pi / 4],
+                        width: 80,
+                        height: 20,
+                        channels: 3,
+                        items: 5,
+                        centeredX: false,
+                        centeredY: false
+
+
+                    });
+                    view.surface({
+                        id: 'bluesurface',
+                        color: '#49a7e9',
+                        proximity: 0.001,
+                        shaded: false,
+                        crossed: false,
+                        zBias: 9,
+                        visible: false,
+
+
+                    });
+                    view.line({
+                        id: 'bluemesh',
+                        color: '#001f3f',
+                        zBias: 10,
+                        opacity: 0.2,
+                        visible: false,
+                    })
+
+
+                    //                    var wave = ((2 * amplitude) / pi) * math.asin(sin((x - t / p) * pi / period)) - 2 * pi * n / q
+                    //                //    var wave = ((2 * amplitude) / pi) * math.asin(sin((x+ t / q) * pi / period)) + 2 * pi * n / p - (t / p)
+                    //
+                    //            return fakemodpi(-(wave - pi / q + (1 / q) * t))
+
+
+                    //Second Piecewise Surface
+
+                    function piecewise2(x, y, t, n) {
+                        x = x % (2 * pi);
+                        var period = (pi) / p;
+                        var amplitude = pi / (2 * q);
+                        var wave = Math.pow(math.abs(4 / pi * (pi / 4 - y)), 4) * ((2 * amplitude) / pi) * math.asin(sin((x + t / p - pi / p) * pi / period)) - 2 * pi * n / q
+
+                        return SurfaceCut(-(wave - pi / q + (1 / q) * t))
+                    }
+
+
+
+                    var edgethresh = 0.5;
+                    view.area({
+
+                        expr: function(emit, x, y, i, j, t) {
+
+                            if ($('#timetoggle').prop('checked') == true) {
+                                var tau = t % (2 * pi);
+                            } else {
+                                var tau = Number($('#slidertime').val());
+                            }
+
+                            var xdom = SurfaceCut(x);
+
+
+                            //                emit(...threetorus(xdom, piecewise2(x, y, tau, -1), y));
+                            emit(...threetorus(piecewise2(x, y, tau, -1), xdom, -y));
+                            emit(...threetorus(piecewise2(x, y, tau, 0), xdom, -y));
+                            emit(...threetorus(piecewise2(x, y, tau, 1), xdom, -y));
+                            //                                emit(...threetorus(piecewise2(x, y, tau, ),xdom, -y));
+
+                            //                emit(...threetorus(xdom, piecewise2(x, y, tau, 1), y));
+                            //                emit(...threetorus(xdom, piecewise2(x, y, tau, 2), y));
+                            //                emit(...threetorus(xdom, piecewise2(x, y, tau, 3), y));
+                            //                //                emit(xdom, piecewise(x, tau, 0), -y);
+                            //                emit(xdom, piecewise(x, tau, 1), -y);
+                            //                emit(xdom, piecewise(x, tau, 2), -y);
+                        },
+                        rangeX: [-pi - edgethresh, pi + edgethresh],
+                        rangeY: [0, pi / 4 + 0.4],
+                        width: 80,
+                        height: 20,
+                        channels: 3,
+                        items: 3,
+                        centeredX: false,
+                        centeredY: false
+
+
+                    });
+                    view.surface({
+                        id: 'redsurface',
+                        color: '#fab125',
+                        proximity: 0.001,
+                        shaded: false,
+                        crossed: false,
+                        zBias: 10,
+                        visible: false,
+
+
+                    });
+
+                    view.line({
+                        id: 'redmesh',
+                        color: '#FF4136',
+                        zBias: 10,
+                        opacity: 0.4,
+                        visible: false,
+                    })
+
+
+
+
+
+
+                    mathbox.set('focus', 2);
+
+                </script>
+            </div>
+
+
+
+
+            <div class="col-lg-4">
+
+                <table class="panel" style="margin-left: auto;
+margin-right: auto; width:80%">
+                    <tr>
+                        <th class="labels">
+                            <label class="sliderlabel">Torus Mesh</label>
+                        </th>
+                        <th>
+                            <input id="meshtoggle" type="checkbox" checked data-toggle="toggle" value="1.0" onchange="meshtogfun(this);" data-onstyle="primary">
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="labels">
+                            <label class="sliderlabel">
+                                Glue Latitudinal Edge
+                            </label>
+                        </th>
+                        <th>
+                            <input id="slidera" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.0" data-slider-tooltip='hide' />
+                        </th>
+
+                    </tr>
+                    <tr>
+                        <th class="labels">
+                            <label class="sliderlabel">
+                                Glue Longitudinal Edge
+                            </label>
+                        </th>
+                        <th>
+                            <input id="sliderb" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.0" data-slider-tooltip='hide' />
+                        </th>
+
+
+                    </tr>
+                    <!--Knot Curve Toggle-->
+                    <tr>
+                        <th class="labels" style="color:#0fbfcf">
+                            <label class="sliderlabel">
+                                <mark style="color:#2ECC40">Knot Curve</mark>
+                            </label>
+                        </th>
+                        <th>
+                            <input id="knottoggle" type="checkbox" checked data-toggle="toggle" value="1.0" onchange="togfun(this);" data-onstyle="primary">
+                        </th>
+                    </tr>
+                    <!--Blue Piecewise Toggle-->
+                    <tr>
+                        <th class="labels" style="color:#0fbfcf">
+                            <label class="sliderlabel">
+                                <mark style="color:#49a7e9">Inside Surface</mark>
+                            </label>
+                        </th>
+                        <th>
+                            <input id="bluetoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="bluetogfun(this);" data-onstyle="primary">
+                        </th>
+                    </tr>
+
+                    <!--Red Piecewise Toggle-->
+                    <tr>
+                        <th class="labels" style="color:#0fbfcf">
+                            <label class="sliderlabel">
+                                <mark style="color:#fab125">Outside Surface</mark>
+                            </label>
+                        </th>
+                        <th>
+                            <input id="redtoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="redtogfun(this);" data-onstyle="primary">
+                        </th>
+                    </tr>
+                    <!--Time Animate Toggle-->
+                    <tr>
+                        <th class="labels">
+                            <label class="sliderlabel">
+                                Animate
+                            </label>
+                        </th>
+                        <th>
+                            <input id="timetoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="timetogfun(this);" data-onstyle="primary">
+                        </th>
+                    </tr>
+                    <!--            Time Slider-->
+                    <th class="labels">
+                        <label class="sliderlabel">
+                            Time
+                        </label>
+                    </th>
+                    <th>
+                        <input id="slidertime" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="6.28" data-slider-step="0.01" data-slider-value="3.14" data-slider-tooltip='hide' />
+                    </th>
+                </table>
+
+
+                <script>
+                    //Slider Script
+                    $('#slidera').slider({
+                        formatter: function(value) {
+                            return 'Current value: ' + value;
+                        }
+                    });
+
+                    $('#sliderb').slider({
+                        formatter: function(value) {
+                            return 'Current value: ' + value;
+                        }
+                    });
+
+                    $('#slidertime').slider({
+                        formatter: function(value) {
+                            return 'Current value: ' + value;
+                        }
+                    });
+                    $('#slidera').on('slide', positionchanger)
+
+                    function positionchanger() {
+                        var Z = Number($('#slidera').val());
+                        //            console.log(Z)
+                        mathbox.select('#cartesian')[0].set('position', [0, 0, 0.33 -0.33 * Z])
+                            //        console.log(mathbox.select('#cartesian')[0].get('position'))
+                    }
+
+
+                    //        function slidefunction() {
+                    //
+                    //            var sliderval = Number($('#slider').val());
+                    //
+                    //            mathbox.select('surface').set('opacity', sliderval);
+                    //            console.log(typeof sliderval)
+                    //        }
+
+                    //Button SCript
+                    //MeshToggle
+                    $('#meshtoggle').bootstrapSwitch({
+                        size: 'small',
+                        offColor: 'danger',
+                    });
+
+                    function meshtogfun(button) {
+                        var butprop = $('#meshtoggle').prop('checked');
+                        var butval = $('#meshtoggle').val();
+                        if (butprop == true) {
+                            $('#meshtoggle').val(1.0);
+                            mathbox.select('#torusmesh')[0].set('visible', true)
+                        } else {
+                            $('#meshtoggle').val();
+                            mathbox.select('#torusmesh')[0].set('visible', false)
+                        }
+
+                    }
+
+                    //BlueToggle
+                    $('#bluetoggle').bootstrapSwitch({
+                        size: 'small',
+                        offColor: 'danger',
+                    });
+
+                    function bluetogfun(button) {
+                        var butprop = $('#bluetoggle').prop('checked');
+                        var butval = $('#bluetoggle').val();
+                        if (butprop == true) {
+                            $('#bluetoggle').val(1.0);
+                            mathbox.select('#bluesurface')[0].set('visible', true)
+                            mathbox.select('#bluemesh')[0].set('visible', true)
+                        } else {
+                            $('#bluetoggle').val();
+                            mathbox.select('#bluesurface')[0].set('visible', false)
+                            mathbox.select('#bluemesh')[0].set('visible', false)
+                        }
+
+                    }
+                    //RedToggle
+                    $('#redtoggle').bootstrapSwitch({
+                        size: 'small',
+                        offColor: 'danger',
+                    });
+
+                    function redtogfun(button) {
+                        var butprop = $('#redtoggle').prop('checked');
+                        var butval = $('#redtoggle').val();
+                        if (butprop == true) {
+                            $('#redtoggle').val(1.0);
+                            mathbox.select('#redsurface')[0].set('visible', true)
+                            mathbox.select('#redmesh')[0].set('visible', true)
+                        } else {
+                            $('#redtoggle').val();
+                            mathbox.select('#redsurface')[0].set('visible', false)
+                            mathbox.select('#redmesh')[0].set('visible', false)
+                        }
+
+                    }
+                    //timeToggle
+                    $('#timetoggle').bootstrapSwitch({
+                        size: 'small',
+                        offColor: 'danger',
+                    });
+
+                    function timetogfun(button) {
+                        var butprop = $('#timetoggle').prop('checked');
+                        var butval = $('#timetoggle').val();
+                        if (butprop == true) {
+                            $('#timetoggle').val(1.0);
+                            $('#slidertime').slider("disable")
+                        } else {
+                            $('#timetoggle').val();
+                            $('#slidertime').slider("enable")
+                        }
+
+                    }
+                    //KnotToggle
+                    $('#knottoggle').bootstrapSwitch({
+                        size: 'small',
+                        offColor: 'danger',
+                    });
+
+                    function togfun(button) {
+                        var butprop = $('#knottoggle').prop('checked');
+                        var butval = $('#knottoggle').val();
+                        if (butprop == true) {
+                            $('#knottoggle').val(1.0);
+                            mathbox.select('#knotcurve')[0].set('visible', true)
+                        } else {
+                            $('#knottoggle').val();
+                            mathbox.select('#knotcurve')[0].set('visible', false)
+                        }
+
+                    }
+
+                </script>
+                <ul>
+                    <li>
+                        <p>We are looking for two families of curves:
+                            <mark style="color:#0074D9">blue</mark> and
+                            <mark style="color:#FF851B">orange</mark>.</p>
+                    </li>
+                    <li>
+                        <p>We call where
+                            <mark style="color:#0074D9">blue</mark> and
+                            <mark style="color:#FF851B">orange</mark> curves coincide a <em>rung</em>.</p>
+                    </li>
+                    <li>
+                        <p>Any part of the curves that is not a rung is called a <em>fibration boundary</em>.</p>
+                    </li>
+                    <li>
+                        <p>We find our curves so that the fibration boundary is exactly the trefoil knot.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <! --/row -->
+    </div>
+    <! --/container -->
+
+
+
+    <!-- *****************************************************************************************************************
+	 FOOTER
+	 ***************************************************************************************************************** -->
+    <div id="footerwrap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h4>About Project</h4>
+                    <div class="hline-w"></div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                </div>
+                <div class="col-lg-4">
+                    <h4>Project Repository</h4>
+                    <div class="hline-w"></div>
+                    <p>
+                        <a href="#"><i class="fa fa-dribbble"></i></a>
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa fa-tumblr"></i></a>
+                    </p>
+                </div>
+                <div class="col-lg-4">
+                    <h4>About Me</h4>
+                    <div class="hline-w"></div>
+                    <p>
+                        Some Ave, 987,
+                        <br/> 23890, New York,
+                        <br/> United States.
+                        <br/>
+                    </p>
+                </div>
+
+            </div>
+            <! --/row -->
+        </div>
+        <! --/container -->
+    </div>
+    <! --/footerwrap -->
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!--    <script src="assets/js/bootstrap.min.js"></script>-->
+    <script src="assets/js/retina-1.1.0.js"></script>
+    <script src="assets/js/jquery.hoverdir.js"></script>
+    <script src="assets/js/jquery.hoverex.min.js"></script>
+    <script src="assets/js/jquery.prettyPhoto.js"></script>
+    <script src="assets/js/jquery.isotope.min.js"></script>
+    <script src="assets/js/custom.js"></script>
+
+
+</body>
+
+</html>

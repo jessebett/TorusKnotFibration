@@ -1,12 +1,5 @@
 /*	################################################################
-
-	Author: Carlos Alvarez
-	URL: http://alvarez.is
-
-	Project Name: SOLID - Bootstrap 3 Theme
-	Version: 1.0
-	URL: http://alvarez.is
-	
+This Site is based on the SOLID theme by Carlos Alvarez at http://alvarez.is
 ################################################################# */ 
 @import url(http://fonts.googleapis.com/css?family=Raleway:400,700,900);
 @import url(http://fonts.googleapis.com/css?family=Lato:400,900);
@@ -22,7 +15,7 @@
 	} 
 
 body { 
-	background: #ffffff; 
+	background: #f8f8f8; 
 	margin: 0; 
 	height: 100%; 
 	color: #384452;
@@ -86,8 +79,8 @@ a:focus {
 	BOOTSTRAP MODIFICATIONS & TWEAKS
 ################################################################# */
 .navbar {
-	min-height: 70px;
-	padding-top: 10px;
+	min-height: 40px;
+	padding-top: 5px;
 	margin-bottom: 0px;
 }
 
@@ -180,7 +173,7 @@ a:focus {
 }
 
 .mtb {
-	margin-top: 80px;
+	margin-top: 20px;
 	margin-bottom: 80px;
 }
 
@@ -364,10 +357,10 @@ a:focus {
 
 #blue {
 	background: #00b3fe;
-	margin-top: 60px;
-	margin-bottom: 60px;
+	margin-top: 20px;
+	margin-bottom: 0px;
 	padding-top: 25px;
-	padding-bottom: 25px;
+	padding-bottom: 0px;
 }
 
 #blue h3 {
@@ -458,3 +451,8 @@ csmall2 {
 	padding-right: 15px;
 	font-size: 18px;
 }
+tr {
+    align-content: center
+}
+
+
