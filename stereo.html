@@ -73,6 +73,7 @@
             </div>
             <div class="navbar-collapse collapse navbar-right">
                 <ul class="nav navbar-nav">
+                    <li><a href="index.html">HOME</a></li>
                     <li><a href="torusknot.html">TORUS &amp; KNOT</a></li>
                     <li><a href="boundary.html">BOUNDARY</a></li>
                     <li><a href="surface.html">SURFACE</a></li>
@@ -162,7 +163,7 @@
                         //                scale: [1, 1, 1],
                         //            });
                         .cartesian({
-                            position: [0, 0, -0.33],
+                            position: [0, 0, 0],
                             range: [
                                 [-math.pi, math.pi],
                                 [-math.pi, math.pi],
@@ -309,8 +310,8 @@
                         },
                         rangeX: [0, 3 * pi],
                         rangeY: [0, pi / 4],
-                        width: 100,
-                        height: 20,
+                        width: 123,
+                        height: 30,
                         channels: 3,
                         items: 2
 
@@ -379,9 +380,9 @@
                             // var xdom = SurfaceCut(x);
                             var xdom = -(x - (1 / p) * tau) - pi / p;
 
-                            emit(...SterProj(...ReIm(...ZW(-y + pi / 4 + pi / 4, piecewise2(x, y, tau, 0) - eps, xdom))));
-                            emit(...SterProj(...ReIm(...ZW(-y + pi / 4 + pi / 4, piecewise2(x, y, tau, 1) - eps, xdom))));
-                            emit(...SterProj(...ReIm(...ZW(-y + pi / 4 + pi / 4, piecewise2(x, y, tau, 2) - eps, xdom))));
+                            emit(...SterProj(...ReIm(...ZW(-y + pi / 4 + pi / 4, piecewise2(x, y, tau, 0), xdom))));
+                            emit(...SterProj(...ReIm(...ZW(-y + pi / 4 + pi / 4, piecewise2(x, y, tau, 1) , xdom))));
+                            emit(...SterProj(...ReIm(...ZW(-y + pi / 4 + pi / 4, piecewise2(x, y, tau, 2) , xdom))));
 
 
                             // emit(...ReIm(...ZW(y,xdom,piecewise(x,y,tau,-1))));
@@ -393,10 +394,11 @@
                         },
                         rangeX: [0, 3 * pi],
                         rangeY: [0, pi / 4],
-                        width: 80,
+                        width: 200,
                         height: 20,
                         channels: 3,
-                        items: 3
+                        items: 3,
+
 
                     });
                     view.surface({
@@ -442,13 +444,14 @@
                     function knot(x) {
                         return (m2 * x) % (2 * pi);
                     }
-
+                    
                     view.interval({
-                        range: [0, 2 * p * pi + 1],
+                        range: [0, 2 * p * pi +0.5],
                         expr: function(emit, x, i, t) {
+                            
                             emit(...SterProj(...ReIm(...ZW(π / 4, x % (2 * pi), knot(x)))));
                         },
-                        width: 80,
+                        width: 100,
                         channels: 4,
                         live: false
                     });
@@ -720,6 +723,13 @@ margin-right: auto; width:80%">
                         <p>We find our curves so that the fibration boundary is exactly the trefoil knot.</p>
                     </li>
                 </ul>
+            
+                            <nav aria-label="...">
+                    <ul class="pager">
+                        <li><a href="surface.html">Previous</a></li>
+<!--                        <li><a href="boundary.html">Next</a></li>-->
+                    </ul>
+                </nav>
             </div>
         </div>
         <! --/row -->

@@ -456,3 +456,23 @@ tr {
 }
 
 
+
+.info {
+    margin-left: 50px
+}
+
+p.blurb {
+    font-size: 16px;
+}
+
+knot {
+    color: #2ECC40;
+}
+
+fibres {
+    color:#384452
+}
+
+fibres {
+    color:#00B3F3;
+}
