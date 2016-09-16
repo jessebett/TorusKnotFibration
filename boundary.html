@@ -305,7 +305,7 @@
                     });
                     view.line({
                         id: 'knotcurve',
-                        color: 'green',
+                        color: '#2ECC40',
                         visible: true,
                         proximity: 1,
                         blending: 'no',
@@ -643,7 +643,7 @@ margin-right: auto; width:80%">
                     </tr>
                     <!--Knot Curve Toggle-->
                     <tr>
-                        <th class="labels" style="color:green">
+                        <th class="labels" style="color:#2ECC40">
                             <label class="sliderlabel">Knot Curve</label>
                         </th>
                         <th>
@@ -653,7 +653,7 @@ margin-right: auto; width:80%">
                     <!--Blue Piecewise Toggle-->
                     <tr>
                         <th class="labels" style="color:#0074D9">
-                            <label class="sliderlabel">Blue Boundary</label>
+                            <label class="sliderlabel">Inside Boundary</label>
                         </th>
                         <th>
                             <input id="bluetoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="bluetogfun(this);" data-onstyle="primary">
@@ -663,7 +663,7 @@ margin-right: auto; width:80%">
                     <!--Red Piecewise Toggle-->
                     <tr>
                         <th class="labels" style="color:#FF851B">
-                            <label class="sliderlabel">Orange Boundary</label>
+                            <label class="sliderlabel">Outside Boundary</label>
                         </th>
                         <th>
                             <input id="redtoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="redtogfun(this);" data-onstyle="primary">
@@ -841,24 +841,29 @@ margin-right: auto; width:80%">
 
                     }
                 </script>
-                <ul>
-                    <li>
-                        <p>We are looking for two families of curves:
-                            <mark style="color:#0074D9">blue</mark> and
-                            <mark style="color:#FF851B">orange</mark>.</p>
-                    </li>
-                    <li>
-                        <p>We call where
-                            <mark style="color:#0074D9">blue</mark> and
-                            <mark style="color:#FF851B">orange</mark> curves coincide a <em>rung</em>.</p>
-                    </li>
-                    <li>
-                        <p>Any part of the curves that is not a rung is called a <em>fibration boundary</em>.</p>
-                    </li>
-                    <li>
-                        <p>We find our curves so that the fibration boundary is exactly the trefoil knot.</p>
-                    </li>
-                </ul>
+                
+                <h3>Boundaries of Fibration Surfaces</h3>
+                <p class="blurb">
+                    A primary requiremnt for our fibration surface is that its boundary is exactly the <knot>torus knot</knot>. We will construct our family of fibres from this requirement by first considering the surface boundaries.
+                </p>
+                <p class="blurb">
+                    We construct our complete fibration surface by taking the union of subsurfaces, corresponding to the portion of the fibre  <mark style="color:#0074D9">inside</mark> and
+                            <mark style="color:#FF851B">outside</mark> of the torus.
+                    We consider the boundaries of these subsurfaces, which will be <mark style="color:#0074D9">blue</mark> and
+                            <mark style="color:#FF851B">orange</mark> curves embedded in our torus.
+                </p>
+                
+                <p class="blurb">
+                    Since our complete fibration is the union of the subsurfaces, wherever <mark style="color:#0074D9">inside</mark> and
+                            <mark style="color:#FF851B">outside</mark> boundary curves coincide is actually not a boundary to our complete fibration. Therefore, we can 'cancel' these portions of the boundary curves. We call these <torus>rungs</torus> for their similarity to ladders.
+                </p>
+                
+                <p class="blurb">
+                    If we consider the only the boundaries of the <mark style="color:#0074D9">inside</mark> and
+                            <mark style="color:#FF851B">outside</mark> surfaces without the <torus>rungs</torus>, we see that the final boundary is exactly the <knot>trefoil knot</knot>, as desired. This is true for all values of \(\theta \in S^1 \)
+                </p>
+                
+
                 <nav aria-label="...">
                     <ul class="pager">
                         <li><a href="torusknot.html">Previous</a></li>
