@@ -316,7 +316,7 @@
                     });
                     view.line({
                         id: 'knotcurve',
-                        color: 'green',
+                        color: '#2ECC40',
                         opacity: 0,
                         proximity: 2,
                         blending: 'no',
@@ -349,7 +349,7 @@
                     view.surface({
                         id: 'knottraveller',
                         shaded: false,
-                        color: 'green',
+                        color: '#2ECC40',
                         opacity: 0,
 
                     });
@@ -393,7 +393,7 @@ margin-right: auto; width:80%">
 
                     </tr>
                     <tr>
-                        <th class="labels" style="color:green">
+                        <th class="labels" style="color:#2ECC40">
                             <label class="sliderlabel">Trefoil</label>
                         </th>
                         <th>
@@ -401,7 +401,7 @@ margin-right: auto; width:80%">
                         </th>
                     </tr>
                     <tr>
-                        <th class="labels" style="color:green">
+                        <th class="labels" style="color:#2ECC40">
                             <label class="sliderlabel">Trefoil Traveller</label>
                         </th>
                         <th>
@@ -506,7 +506,16 @@ margin-right: auto; width:80%">
                     }
 
                 </script>
-                <p>This preliminary visualization demonstrates how a square can be glued along its edges to produce a torus. We also see a trefoil knot which lies on the torus surface. An object travelling along the torus knot demonstrates the identity of the edges.</p>
+                <p class="blurb">This preliminary visualization demonstrates how a <torus>square</torus> 
+                    $$[-\pi,\pi]\times[-\pi,\pi]$$can be glued along its oposite edges to produce a <torus>torus</torus>.</p>
+                <p class="blurb">
+                    Use the sliders in the parameters panel to manipulate the visualization. Gluing along either the <i style="color:#FF4136">latitudinal</i> or <i style="color:#FFDC00">longitudinal</i> will transform the square into a vertical or horizontal cylinder. Finally gluing the remaining circuluar edges of the cylinder produces a <torus>torus</torus>.
+                    <knot></knot>
+                </p>
+                <p class="blurb">
+                    Our 
+                </p>
+                
                 <nav aria-label="...">
                     <ul class="pager">
                         <li><a href="index.html">Previous</a></li>
