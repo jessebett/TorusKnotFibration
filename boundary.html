@@ -55,7 +55,7 @@
 
     <!-- my css -->
     <link href="./lib/css/mystyle.css" rel="stylesheet">
-        <!--    mathjax-->
+    <!--    mathjax-->
     <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
     </script>
 </head>
@@ -80,7 +80,7 @@
                     <li><a href="torusknot.html">TORUS &amp; KNOT</a></li>
                     <li class="active"><a href="boundary.html">BOUNDARY</a></li>
                     <li><a href="surface.html">SURFACE</a></li>
-                    <li><a href="stereo.html">STEREO</a></li>
+                    <li><a href="stereo.html">STEREOGRAPHIC</a></li>
 
                 </ul>
             </div>
@@ -435,7 +435,7 @@
                     view.line({
                         id: 'blueboundary',
                         color: '#49a7e9',
-                        visible: false,
+                        visible: true,
                         zBias: 15,
                         proximity: 0.5
                     });
@@ -478,7 +478,7 @@
                         id: 'redboundary',
                         color: '#fab125',
                         proximity: 1,
-                        visible: false,
+                        visible: true,
                         zBias: 15
                     });
 
@@ -656,7 +656,7 @@ margin-right: auto; width:80%">
                             <label class="sliderlabel">Inside Boundary</label>
                         </th>
                         <th>
-                            <input id="bluetoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="bluetogfun(this);" data-onstyle="primary">
+                            <input id="bluetoggle" type="checkbox" checked data-toggle="toggle" value="1.0" onchange="bluetogfun(this);" data-onstyle="primary">
                         </th>
                     </tr>
 
@@ -666,7 +666,7 @@ margin-right: auto; width:80%">
                             <label class="sliderlabel">Outside Boundary</label>
                         </th>
                         <th>
-                            <input id="redtoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="redtogfun(this);" data-onstyle="primary">
+                            <input id="redtoggle" type="checkbox"  checked data-toggle="toggle" value="1.0" onchange="redtogfun(this);" data-onstyle="primary">
                         </th>
                     </tr>
 
@@ -687,16 +687,18 @@ margin-right: auto; width:80%">
                             </label>
                         </th>
                         <th>
-                            <input id="timetoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="timetogfun(this);" data-onstyle="primary">
+                            <input id="timetoggle" type="checkbox" checked data-toggle="toggle" value="1.0" onchange="timetogfun(this);" data-onstyle="primary">
                         </th>
                     </tr>
-                    <!--            Time Slider-->
+<!--
+                                Time Slider
                     <th class="labels">
                         <label class="sliderlabel">\(\theta\)</label>
                     </th>
                     <th>
                         <input id="slidertime" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="6.28" data-slider-step="0.01" data-slider-value="3.14" data-slider-tooltip='hide' />
                     </th>
+-->
                 </table>
 
 
@@ -750,7 +752,8 @@ margin-right: auto; width:80%">
                     //BlueToggle
                     $('#bluetoggle').bootstrapSwitch({
                         size: 'small',
-                        offColor: 'danger',
+                        offColor: 'custom',
+                        onColor: 'custom'
                     });
 
                     function bluetogfun(button) {
@@ -768,7 +771,8 @@ margin-right: auto; width:80%">
                     //RedToggle
                     $('#redtoggle').bootstrapSwitch({
                         size: 'small',
-                        offColor: 'danger',
+                        offColor: 'custom',
+                        onColor: 'custom'
                     });
 
                     function redtogfun(button) {
@@ -787,7 +791,8 @@ margin-right: auto; width:80%">
                     //RungToggle
                     $('#rungtoggle').bootstrapSwitch({
                         size: 'small',
-                        offColor: 'danger',
+                        offColor: 'custom',
+                        onColor: 'custom'
                     });
 
                     function rungtogfun(button) {
@@ -806,7 +811,8 @@ margin-right: auto; width:80%">
                     //timeToggle
                     $('#timetoggle').bootstrapSwitch({
                         size: 'small',
-                        offColor: 'danger',
+                        offColor: 'custom',
+                        onColor: 'custom'
                     });
 
                     function timetogfun(button) {
@@ -825,7 +831,8 @@ margin-right: auto; width:80%">
                     //KnotToggle
                     $('#knottoggle').bootstrapSwitch({
                         size: 'small',
-                        offColor: 'danger',
+                        offColor: 'custom',
+                        onColor: 'custom'
                     });
 
                     function togfun(button) {
@@ -841,28 +848,35 @@ margin-right: auto; width:80%">
 
                     }
                 </script>
-                
+
                 <h3>Boundaries of Fibration Surfaces</h3>
                 <p class="blurb">
-                    A primary requiremnt for our fibration surface is that its boundary is exactly the <knot>torus knot</knot>. We will construct our family of fibres from this requirement by first considering the surface boundaries.
+                    A primary requiremnt for our fibration surface is that its boundary is exactly the
+                    <knot>torus knot</knot>. We will construct our family of fibres from this requirement by first considering the surface boundaries.
                 </p>
                 <p class="blurb">
-                    We construct our complete fibration surface by taking the union of subsurfaces, corresponding to the portion of the fibre  <mark style="color:#0074D9">inside</mark> and
-                            <mark style="color:#FF851B">outside</mark> of the torus.
-                    We consider the boundaries of these subsurfaces, which will be <mark style="color:#0074D9">blue</mark> and
-                            <mark style="color:#FF851B">orange</mark> curves embedded in our torus.
+                    We construct our complete fibration surface by taking the union of subsurfaces, corresponding to the portion of the fibre
+                    <mark style="color:#0074D9">inside</mark> and
+                    <mark style="color:#FF851B">outside</mark> of the torus. We consider the boundaries of these subsurfaces, which will be
+                    <mark style="color:#0074D9">blue</mark> and
+                    <mark style="color:#FF851B">orange</mark> curves embedded in our torus.
                 </p>
-                
+
                 <p class="blurb">
-                    Since our complete fibration is the union of the subsurfaces, wherever <mark style="color:#0074D9">inside</mark> and
-                            <mark style="color:#FF851B">outside</mark> boundary curves coincide is actually not a boundary to our complete fibration. Therefore, we can 'cancel' these portions of the boundary curves. We call these <torus>rungs</torus> for their similarity to ladders.
+                    Since our complete fibration is the union of the subsurfaces, wherever
+                    <mark style="color:#0074D9">inside</mark> and
+                    <mark style="color:#FF851B">outside</mark> boundary curves coincide is actually not a boundary to our complete fibration. Therefore, we can 'cancel' these portions of the boundary curves. We call these
+                    <torus>rungs</torus> for their similarity to ladders.
                 </p>
-                
+
                 <p class="blurb">
-                    If we consider the only the boundaries of the <mark style="color:#0074D9">inside</mark> and
-                            <mark style="color:#FF851B">outside</mark> surfaces without the <torus>rungs</torus>, we see that the final boundary is exactly the <knot>trefoil knot</knot>, as desired. This is true for all values of \(\theta \in S^1 \)
+                    If we consider the only the boundaries of the
+                    <mark style="color:#0074D9">inside</mark> and
+                    <mark style="color:#FF851B">outside</mark> surfaces without the
+                    <torus>rungs</torus>, we see that the final boundary is exactly the
+                    <knot>trefoil knot</knot>, as desired. This is true for all values of \(\theta \in S^1 \)
                 </p>
-                
+
 
                 <nav aria-label="...">
                     <ul class="pager">
@@ -878,7 +892,7 @@ margin-right: auto; width:80%">
 
 
 
-       <!-- *****************************************************************************************************************
+    <!-- *****************************************************************************************************************
 	 FOOTER
 	 ***************************************************************************************************************** -->
     <div id="footerwrap">

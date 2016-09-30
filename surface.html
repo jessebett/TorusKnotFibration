@@ -81,7 +81,7 @@
                     <li><a href="torusknot.html">TORUS &amp; KNOT</a></li>
                     <li><a href="boundary.html">BOUNDARY</a></li>
                     <li class="active"><a href="surface.html">SURFACE</a></li>
-                    <li><a href="stereo.html">STEREO</a></li>
+                    <li><a href="stereo.html">STEREOGRAPHIC</a></li>
 
                 </ul>
             </div>
@@ -561,7 +561,7 @@
                         shaded: false,
                         crossed: false,
                         zBias: 9,
-                        visible: false,
+                        visible: true,
 
 
                     });
@@ -570,7 +570,7 @@
                         color: '#001f3f',
                         zBias: 10,
                         opacity: 0.2,
-                        visible: false,
+                        visible: true,
                     })
 
 
@@ -638,7 +638,7 @@
                         shaded: false,
                         crossed: false,
                         zBias: 10,
-                        visible: false,
+                        visible: true,
 
 
                     });
@@ -648,7 +648,7 @@
                         color: '#FF4136',
                         zBias: 10,
                         opacity: 0.4,
-                        visible: false,
+                        visible: true,
                     })
 
 
@@ -683,7 +683,7 @@ margin-right: auto; width:80%">
                             </label>
                         </th>
                         <th>
-                            <input id="slidera" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="0.0" data-slider-tooltip='hide' />
+                            <input id="slidera" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="1" data-slider-step="0.01" data-slider-value="1.0" data-slider-tooltip='hide' />
                         </th>
 
                     </tr>
@@ -718,7 +718,7 @@ margin-right: auto; width:80%">
                             </label>
                         </th>
                         <th>
-                            <input id="bluetoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="bluetogfun(this);" data-onstyle="primary">
+                            <input id="bluetoggle" type="checkbox" checked data-toggle="toggle" value="1.0" onchange="bluetogfun(this);" data-onstyle="primary">
                         </th>
                     </tr>
 
@@ -730,7 +730,7 @@ margin-right: auto; width:80%">
                             </label>
                         </th>
                         <th>
-                            <input id="redtoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="redtogfun(this);" data-onstyle="primary">
+                            <input id="redtoggle" type="checkbox"  checked data-toggle="toggle" value="1.0" onchange="redtogfun(this);" data-onstyle="primary">
                         </th>
                     </tr>
                     <!--Time Animate Toggle-->
@@ -741,10 +741,11 @@ margin-right: auto; width:80%">
                             </label>
                         </th>
                         <th>
-                            <input id="timetoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="timetogfun(this);" data-onstyle="primary">
+                            <input id="timetoggle" type="checkbox" checked data-toggle="toggle" value="1.0" onchange="timetogfun(this);" data-onstyle="primary">
                         </th>
                     </tr>
-                    <!--            Time Slider-->
+<!--
+                                Time Slider
                     <th class="labels">
                         <label class="sliderlabel">
                             \(\theta\)
@@ -753,6 +754,7 @@ margin-right: auto; width:80%">
                     <th>
                         <input id="slidertime" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="6.28" data-slider-step="0.01" data-slider-value="3.14" data-slider-tooltip='hide' />
                     </th>
+-->
                 </table>
 
 
@@ -797,7 +799,7 @@ margin-right: auto; width:80%">
                     //MeshToggle
                     $('#meshtoggle').bootstrapSwitch({
                         size: 'small',
-                        offColor: 'danger',
+                        offColor: 'custom', onColor:'custom'
                     });
 
                     function meshtogfun(button) {
@@ -816,7 +818,7 @@ margin-right: auto; width:80%">
                     //BlueToggle
                     $('#bluetoggle').bootstrapSwitch({
                         size: 'small',
-                        offColor: 'danger',
+                        offColor: 'custom', onColor:'custom'
                     });
 
                     function bluetogfun(button) {
@@ -836,7 +838,7 @@ margin-right: auto; width:80%">
                     //RedToggle
                     $('#redtoggle').bootstrapSwitch({
                         size: 'small',
-                        offColor: 'danger',
+                        offColor: 'custom', onColor:'custom'
                     });
 
                     function redtogfun(button) {
@@ -856,7 +858,7 @@ margin-right: auto; width:80%">
                     //timeToggle
                     $('#timetoggle').bootstrapSwitch({
                         size: 'small',
-                        offColor: 'danger',
+                        offColor: 'custom', onColor:'custom'
                     });
 
                     function timetogfun(button) {
@@ -874,7 +876,7 @@ margin-right: auto; width:80%">
                     //KnotToggle
                     $('#knottoggle').bootstrapSwitch({
                         size: 'small',
-                        offColor: 'danger',
+                        offColor: 'custom', onColor:'custom'
                     });
 
                     function togfun(button) {

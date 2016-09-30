@@ -55,7 +55,7 @@
 
     <!-- my css -->
     <link href="./lib/css/mystyle.css" rel="stylesheet">
-        <!--    mathjax-->
+    <!--    mathjax-->
     <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
     </script>
 </head>
@@ -80,7 +80,7 @@
                     <li class="active"><a href="torusknot.html">TORUS &amp; KNOT</a></li>
                     <li><a href="boundary.html">BOUNDARY</a></li>
                     <li><a href="surface.html">SURFACE</a></li>
-                    <li><a href="stereo.html">STEREO</a></li>
+                    <li><a href="stereo.html">STEREOGRAPHIC</a></li>
 
                 </ul>
             </div>
@@ -114,7 +114,6 @@
                 <script type="text/javascript" language="javascript">
                     console.log($('.torusvis'));
                     $('.torusvis').css('height', 0.8 * $(window).height() + 'px');
-
                 </script>
                 <script>
                     var mathbox = mathBox({
@@ -246,7 +245,8 @@
                         id: 'torusgrid',
                         points: mathbox.select('#sparsesample')[1],
                         color: 'white',
-                        zBias: 10
+                        zBias: 10,
+                        opacity: 0.3
                     })
 
                     //Edges of Torus
@@ -281,7 +281,7 @@
 
                     view.line({
                         points: mathbox.select('#yellowline')[1],
-                        color: '#FFDC00',
+                        color: '#B10DC9',
                         zBias: 13
                     })
 
@@ -317,7 +317,7 @@
                     view.line({
                         id: 'knotcurve',
                         color: '#2ECC40',
-                        opacity: 0,
+                        opacity: 1.0,
                         proximity: 2,
                         blending: 'no',
                         zBias: 14
@@ -350,12 +350,12 @@
                         id: 'knottraveller',
                         shaded: false,
                         color: '#2ECC40',
-                        opacity: 0,
+                        opacity: 1.0,
+                        zBias:10
 
                     });
 
                     mathbox.set('focus', 2);
-
                 </script>
             </div>
 
@@ -384,7 +384,7 @@ margin-right: auto; width:80%">
 
                     </tr>
                     <tr>
-                        <th class="labels" style="color:#FFDC00">
+                        <th class="labels" style="color:#B10DC9">
                             <label class="sliderlabel">Glue Longitudinal Edge</label>
                         </th>
                         <th>
@@ -397,7 +397,7 @@ margin-right: auto; width:80%">
                             <label class="sliderlabel">Trefoil</label>
                         </th>
                         <th>
-                            <input id="knottoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="togfun(this);" data-onstyle="primary">
+                            <input id="knottoggle" type="checkbox" checked data-toggle="toggle" value="1.0" onchange="togfun(this);" data-onstyle="primary">
                         </th>
                     </tr>
                     <tr>
@@ -405,7 +405,7 @@ margin-right: auto; width:80%">
                             <label class="sliderlabel">Trefoil Traveller</label>
                         </th>
                         <th>
-                            <input id="knottravellertoggle" type="checkbox" data-toggle="toggle" value="1.0" onchange="travtogfun(this);" data-onstyle="primary">
+                            <input id="knottravellertoggle" type="checkbox" checked data-toggle="toggle" value="1.0" onchange="travtogfun(this);" data-onstyle="primary">
                         </th>
                     </tr>
 
@@ -447,7 +447,8 @@ margin-right: auto; width:80%">
 
                     $('#knottravellertoggle').bootstrapSwitch({
                         size: 'small',
-                        offColor: 'danger',
+                        offColor: 'custom',
+                        onColor: 'custom'
                     });
 
                     function travtogfun(button) {
@@ -466,7 +467,8 @@ margin-right: auto; width:80%">
 
                     $('#torussurfacetoggle').bootstrapSwitch({
                         size: 'small',
-                        offColor: 'danger',
+                        offColor: 'custom',
+                        onColor: 'custom'
                     });
 
                     function torustogfun(button) {
@@ -489,7 +491,8 @@ margin-right: auto; width:80%">
 
                     $('#knottoggle').bootstrapSwitch({
                         size: 'small',
-                        offColor: 'danger',
+                        offColor: 'custom',
+                        onColor: 'custom'
                     });
 
                     function togfun(button) {
@@ -504,20 +507,24 @@ margin-right: auto; width:80%">
                         }
 
                     }
-
                 </script>
                 <h3>Torus and Trefoil Knot</h3>
-                <p class="blurb">This preliminary visualization demonstrates how a <torus>square</torus> 
-<!--                    $$[-\pi,\pi]\times[-\pi,\pi]$$-->
-                    can be glued along its oposite edges to produce a <torus>torus</torus>.</p>
+                <p class="blurb">This preliminary visualization demonstrates how a
+                    <torus>square</torus>
+                    <!--                    $$[-\pi,\pi]\times[-\pi,\pi]$$-->
+                    can be glued along its oposite edges to produce a
+                    <torus>torus</torus>.</p>
                 <p class="blurb">
-                    Use the sliders in the parameters panel to manipulate the visualization. Gluing along either the <i style="color:#FF4136">latitudinal</i> or <i style="color:#FFDC00">longitudinal</i> will transform the square into a vertical or horizontal cylinder. Finally gluing the remaining circuluar edges of the cylinder produces a <torus>torus</torus>.
+                    Use the sliders in the parameters panel to manipulate the visualization. Gluing along either the <i style="color:#FF4136">latitudinal</i> or <i style="color:#B10DC9">longitudinal</i> will transform the square into a vertical or horizontal cylinder. Finally gluing the remaining circuluar edges of the cylinder produces a
+                    <torus>torus</torus>.
                     <knot></knot>
                 </p>
                 <p class="blurb">
-                    As defined previously, we consider a knot embedded in the 3-sphere, \(K \in S^3 \). A special kind of knots which are always fibred are called torus knots, which are embedded in the surface of a torus. In the following visualizations we consider the <knot>trefoil knot</knot> or the (2,3)-torus knot. Note the (2,3)-torus knot is named because it touches the <i style="color:#FF4136">latitudinal</i> edge 2 times and the <i style="color:#FFDC00">longitudinal </i> edge 3 times. Finally,  <knot>trefoil traveller</knot> demonstrates how the knot connects along the edges.
+                    As defined previously, we consider a knot embedded in the 3-sphere, \(K \in S^3 \). A special kind of knots which are always fibred are called torus knots, which are embedded in the surface of a torus. In the following visualizations we consider the
+                    <knot>trefoil knot</knot> or the (2,3)-torus knot. Note the (2,3)-torus knot is named because it touches the <i style="color:#FF4136">latitudinal</i> edge 2 times and the <i style="color:#B10DC9">longitudinal </i> edge 3 times. Finally,
+                    <knot>trefoil traveller</knot> demonstrates how the knot connects along the edges.
                 </p>
-                
+
                 <nav aria-label="...">
                     <ul class="pager">
                         <li><a href="index.html">Previous</a></li>
@@ -532,7 +539,7 @@ margin-right: auto; width:80%">
 
 
 
-       <!-- *****************************************************************************************************************
+    <!-- *****************************************************************************************************************
 	 FOOTER
 	 ***************************************************************************************************************** -->
     <div id="footerwrap">
