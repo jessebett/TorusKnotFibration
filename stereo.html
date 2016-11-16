@@ -73,7 +73,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Torus Knot Fibraion Visualization</a>
+                <a class="navbar-brand" href="index.html">Torus Knot Fibration Visualization</a>
             </div>
             <div class="navbar-collapse collapse navbar-right">
                 <ul class="nav navbar-nav">
@@ -222,6 +222,9 @@
                     var m = p / q;
                     var m2 = q / p;
                     var eps = 0.01;
+                    
+                    // Global Animation Time
+                    var tau_last= 0
 
 
                     function SurfaceCut(x) {
@@ -299,8 +302,10 @@
 
                             if ($('#timetoggle').prop('checked') == true) {
                                 var tau = t % (2 * pi);
+                                tau_last = tau
                             } else {
-                                var tau = Number($('#slidertime').val());
+//                                var tau = Number($('#slidertime').val());
+                                var tau = tau_last;
                             }
 
                             // var xdom = SurfaceCut(x);
@@ -378,7 +383,8 @@
                             if ($('#timetoggle').prop('checked') == true) {
                                 var tau = t % (2 * pi);
                             } else {
-                                var tau = Number($('#slidertime').val());
+//                                var tau = Number($('#slidertime').val());
+                                var tau = tau_last;
                             }
 
                             // var xdom = SurfaceCut(x);

@@ -72,7 +72,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">Torus Knot Fibraion Visualization</a>
+                <a class="navbar-brand" href="index.html">Torus Knot Fibration Visualization</a>
             </div>
             <div class="navbar-collapse collapse navbar-right">
                 <ul class="nav navbar-nav">
@@ -280,6 +280,9 @@
                     var m = p / q;
                     var m2 = q / p;
                     var eps = 0.01;
+                    
+                    // Global Animation Time
+                    var tau_last = 0;
 
 
                     function mod2pi(x) {
@@ -403,12 +406,17 @@
                     function piecewise(x, n, t) {
                         //Triangle Wave Function to match knot + rungs!
                         x = x % (2 * pi);
+                        
+                      
 
 
                         if ($('#timetoggle').prop('checked') == true) {
                             var tau = t % (2 * pi);
+                            tau_last = tau
                         } else {
-                            var tau = Number($('#slidertime').val());
+//                            var tau = Number($('#slidertime').val());
+                        
+                            var tau = tau_last
                         }
 
 
@@ -449,8 +457,10 @@
 
                         if ($('#timetoggle').prop('checked') == true) {
                             var tau = t % (2 * pi);
+                        
                         } else {
-                            var tau = Number($('#slidertime').val());
+//                            var tau = Number($('#slidertime').val());
+                            var tau = tau_last
                         }
 
                         var period = (pi) / p;
@@ -499,7 +509,7 @@
                         if ($('#timetoggle').prop('checked') == true) {
                             var tau = t % (2 * pi);
                         } else {
-                            var tau = Number($('#slidertime').val());
+                            var tau = tau_last
                         }
                         if ((x > pi / (2 * q) - (tau / q)) && (x < 2 * pi / (2 * q) + pi / (2 * q) - (tau / q))) {
                             x = x
@@ -527,7 +537,7 @@
                         if ($('#timetoggle').prop('checked') == true) {
                             var tau = t % (2 * pi);
                         } else {
-                            var tau = Number($('#slidertime').val());
+                            var tau = tau_last;
                         }
                         var period = (pi) / q;
                         var amplitude = pi / (2 * p);
