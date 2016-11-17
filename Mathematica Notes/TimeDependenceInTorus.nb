@@ -1,0 +1,515 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     17244,        507]
+NotebookOptionsPosition[     16752,        487]
+NotebookOutlinePosition[     17104,        503]
+CellTagsIndexPosition[     17061,        500]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"z", ",", "w"}], "}"}], "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Exp", "[", 
+       RowBox[{"I", " ", "\[Alpha]"}], "]"}], 
+      RowBox[{"Sin", "[", "\[Gamma]", "]"}]}], ",", 
+     RowBox[{
+      RowBox[{"Exp", "[", 
+       RowBox[{"I", " ", "\[Beta]"}], "]"}], 
+      RowBox[{"Cos", "[", "\[Gamma]", "]"}]}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SterProj", "[", 
+   RowBox[{"{", 
+    RowBox[{"z_", ",", "w_"}], "}"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"x", "=", 
+       RowBox[{"Re", "[", "z", "]"}]}], ",", 
+      RowBox[{"y", "=", 
+       RowBox[{"Im", "[", "z", "]"}]}], ",", 
+      RowBox[{"u", "=", 
+       RowBox[{"Re", "[", "w", "]"}]}], ",", 
+      RowBox[{"v", "=", 
+       RowBox[{"Im", "[", "w", "]"}]}]}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       FractionBox["x", 
+        RowBox[{"1", "-", "v"}]], ",", 
+       FractionBox["y", 
+        RowBox[{"1", "-", "v"}]], ",", 
+       FractionBox["u", 
+        RowBox[{"1", "-", "v"}]]}], "}"}], "//", "ComplexExpand"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Sigma]", "[", 
+    RowBox[{"{", 
+     RowBox[{"z_", ",", "w_"}], "}"}], "]"}], ":=", 
+   RowBox[{"{", 
+    RowBox[{"w", ",", "z"}], "}"}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ZW", "[", 
+   RowBox[{"\[Gamma]_", ",", "\[Alpha]_", ",", "\[Beta]_"}], "]"}], ":=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Exp", "[", 
+      RowBox[{"I", " ", "\[Alpha]"}], "]"}], 
+     RowBox[{"Sin", "[", "\[Gamma]", "]"}]}], ",", 
+    RowBox[{
+     RowBox[{"Exp", "[", 
+      RowBox[{"I", " ", "\[Beta]"}], "]"}], 
+     RowBox[{"Cos", "[", "\[Gamma]", "]"}]}]}], "}"}]}]}], "Input",
+ CellChangeTimes->{{3.679864379119829*^9, 3.6798643807038937`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"p", "=", "2"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"q", "=", "3"}], ";"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"m", "=", 
+     RowBox[{"p", "/", "q"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"m2", "=", 
+     RowBox[{"q", "/", "p"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"f2", "[", "x_", "]"}], ":=", "\[IndentingNewLine]", 
+    RowBox[{"Piecewise", "[", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"m", " ", 
+               RowBox[{"(", 
+                RowBox[{"x", "-", 
+                 RowBox[{"2", "\[Pi]", " ", 
+                  RowBox[{"k", "/", "p"}]}]}], ")"}]}], " ", "-", " ", 
+              RowBox[{"\[Pi]", "/", 
+               RowBox[{"(", 
+                RowBox[{"2", "q"}], ")"}]}]}], ",", 
+             RowBox[{
+              RowBox[{"2", "k", " ", 
+               RowBox[{"\[Pi]", "/", "p"}]}], "\[LessEqual]", "x", 
+              "\[LessEqual]", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"2", "k"}], "+", "1"}], ")"}], 
+               RowBox[{"\[Pi]", "/", "p"}]}]}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"-", "m"}], " ", 
+               RowBox[{"(", 
+                RowBox[{"x", "-", 
+                 RowBox[{"2", "\[Pi]", " ", 
+                  RowBox[{"k", "/", "p"}]}]}], ")"}]}], "+", 
+              RowBox[{"2", 
+               RowBox[{"\[Pi]", "/", "q"}]}], "-", " ", 
+              RowBox[{"\[Pi]", "/", 
+               RowBox[{"(", 
+                RowBox[{"2", "q"}], ")"}]}]}], ",", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"2", "k"}], "+", "1"}], ")"}], " ", 
+               RowBox[{"\[Pi]", "/", "p"}]}], "\[LessEqual]", "x", 
+              "\[LessEqual]", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"2", "k"}], "+", "2"}], ")"}], 
+               RowBox[{"\[Pi]", "/", "p"}]}]}]}], "}"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"k", ",", "0", ",", "p"}], "}"}]}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "2"}], "}"}]}], "]"}], "]"}]}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"g2", "[", "x_", "]"}], ":=", "\[IndentingNewLine]", 
+    RowBox[{"Piecewise", "[", 
+     RowBox[{"Flatten", "[", 
+      RowBox[{
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"m2", " ", 
+               RowBox[{"(", 
+                RowBox[{"x", "-", 
+                 RowBox[{"2", "\[Pi]", " ", 
+                  RowBox[{"k", "/", "q"}]}]}], ")"}]}], " ", "-", " ", 
+              RowBox[{"\[Pi]", "/", 
+               RowBox[{"(", 
+                RowBox[{"2", "p"}], ")"}]}]}], ",", 
+             RowBox[{
+              RowBox[{"2", "k", " ", 
+               RowBox[{"\[Pi]", "/", "q"}]}], "\[LessEqual]", "x", 
+              "\[LessEqual]", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"2", "k"}], "+", "1"}], ")"}], 
+               RowBox[{"\[Pi]", "/", "q"}]}]}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"-", "m2"}], 
+               RowBox[{"(", 
+                RowBox[{"x", "-", 
+                 RowBox[{"2", "\[Pi]", " ", 
+                  RowBox[{"k", "/", "q"}]}]}], ")"}]}], "+", 
+              RowBox[{"2", 
+               RowBox[{"\[Pi]", "/", "p"}]}], "-", " ", 
+              RowBox[{"\[Pi]", "/", 
+               RowBox[{"(", 
+                RowBox[{"2", "p"}], ")"}]}]}], ",", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"2", "k"}], "+", "1"}], ")"}], " ", 
+               RowBox[{"\[Pi]", "/", "q"}]}], "\[LessEqual]", "x", 
+              "\[LessEqual]", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"2", "k"}], "+", "2"}], ")"}], 
+               RowBox[{"\[Pi]", "/", "q"}]}]}]}], "}"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"k", ",", "0", ",", "q"}], "}"}]}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "2"}], "}"}]}], "]"}], "]"}]}], "\n", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"fi", "=", 
+      RowBox[{"FunctionInterpolation", "[", 
+       RowBox[{
+        RowBox[{"f2", "[", 
+         RowBox[{"Mod", "[", 
+          RowBox[{"x", ",", 
+           RowBox[{"2", "\[Pi]"}]}], "]"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"x", ",", 
+          RowBox[{
+           RowBox[{"-", "4"}], "\[Pi]"}], ",", 
+          RowBox[{"4", "\[Pi]"}]}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"gi", " ", "=", " ", 
+      RowBox[{"FunctionInterpolation", "[", 
+       RowBox[{
+        RowBox[{"g2", "[", 
+         RowBox[{"Mod", "[", 
+          RowBox[{"x", ",", 
+           RowBox[{"2", "\[Pi]"}]}], "]"}], "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"x", ",", 
+          RowBox[{
+           RowBox[{"-", "4"}], "\[Pi]"}], ",", 
+          RowBox[{"4", "\[Pi]"}]}], "}"}]}], "]"}]}], ";"}], "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"fi2", "=", 
+     RowBox[{"Interpolation", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"#", ",", 
+          RowBox[{"f2", "[", 
+           RowBox[{"Mod", "[", 
+            RowBox[{"#", ",", 
+             RowBox[{"2", "\[Pi]"}]}], "]"}], "]"}]}], "}"}], "&"}], "/@", 
+       RowBox[{"RandomReal", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"-", "4"}], "\[Pi]"}], ",", 
+           RowBox[{"4", "\[Pi]"}]}], "}"}], ",", "1000"}], "]"}]}], "]"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"gi2", "=", 
+     RowBox[{"Interpolation", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"#", ",", 
+          RowBox[{"g2", "[", 
+           RowBox[{"Mod", "[", 
+            RowBox[{"#", ",", 
+             RowBox[{"2", "\[Pi]"}]}], "]"}], "]"}]}], "}"}], "&"}], "/@", 
+       RowBox[{"RandomReal", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"-", "4"}], "\[Pi]"}], ",", 
+           RowBox[{"4", "\[Pi]"}]}], "}"}], ",", "1000"}], "]"}]}], "]"}]}], 
+    ";"}]}]}]], "Input",
+ CellChangeTimes->{
+  3.6798645476891623`*^9, {3.6798651452107973`*^9, 3.679865226588436*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.67986522039851*^9, 3.679865223445312*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"inside", "=", 
+   RowBox[{
+    RowBox[{
+     SuperscriptBox[
+      RowBox[{"Abs", "[", 
+       RowBox[{
+        RowBox[{"4", "/", "\[Pi]"}], " ", "\[Gamma]"}], "]"}], "4"], 
+     RowBox[{"gi2", "[", " ", 
+      RowBox[{"\[Beta]", "-", 
+       RowBox[{"t", "/", "q"}]}], "]"}]}], "-", 
+    RowBox[{
+     RowBox[{"q", "/", "p"}], 
+     RowBox[{"(", " ", 
+      RowBox[{"t", "/", "3"}], ")"}]}], "+", 
+    RowBox[{"2", "\[Pi]", " ", 
+     RowBox[{"n", "/", "p"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"outside", "=", 
+    RowBox[{
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{"Abs", "[", 
+        RowBox[{
+         RowBox[{"4", "/", "\[Pi]"}], " ", "\[Gamma]"}], "]"}], "4"], 
+      RowBox[{"fi2", "[", " ", 
+       RowBox[{"\[Beta]", "+", 
+        RowBox[{"t", "/", "p"}]}], "]"}]}], "+", 
+     RowBox[{
+      RowBox[{"p", "/", "q"}], 
+      RowBox[{"(", 
+       RowBox[{"t", "/", "2"}], ")"}]}], "+", 
+     RowBox[{"2", "\[Pi]", " ", 
+      RowBox[{"n", "/", "q"}]}]}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"insidewashers", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"SterProj", "@", 
+      RowBox[{"ZW", "[", 
+       RowBox[{"\[Gamma]", ",", " ", 
+        RowBox[{"\[Beta]", "-", 
+         RowBox[{"\[Pi]", "/", 
+          RowBox[{"(", 
+           RowBox[{"q", " ", "2"}], ")"}]}]}], ",", 
+        RowBox[{"inside", "/.", 
+         RowBox[{"t", "\[Rule]", 
+          RowBox[{"3", 
+           RowBox[{"\[Pi]", "/", "4"}]}]}]}]}], "]"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"n", ",", "0", ",", "2"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"insideplot", "=", 
+    RowBox[{"ParametricPlot3D", "[", 
+     RowBox[{"insidewashers", ",", 
+      RowBox[{"{", 
+       RowBox[{"\[Gamma]", ",", "0", ",", 
+        RowBox[{"\[Pi]", "/", "4"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\[Beta]", ",", "0", ",", " ", 
+        RowBox[{"2", "\[Pi]"}]}], "}"}], ",", 
+      RowBox[{"MeshStyle", "\[Rule]", "None"}], ",", 
+      RowBox[{"PlotStyle", "\[Rule]", "Blue"}], ",", 
+      RowBox[{"Exclusions", "\[Rule]", "None"}], ",", 
+      RowBox[{"PlotPoints", "\[Rule]", "40"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"outsidewashers", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"SterProj", "@", 
+      RowBox[{"\[Sigma]", "@", 
+       RowBox[{"ZW", "[", 
+        RowBox[{"\[Gamma]", ",", " ", 
+         RowBox[{"\[Beta]", "-", 
+          RowBox[{"\[Pi]", "/", 
+           RowBox[{"(", 
+            RowBox[{"p", " ", "2"}], ")"}]}]}], ",", 
+         RowBox[{"outside", "/.", 
+          RowBox[{"t", "\[Rule]", 
+           RowBox[{"3", 
+            RowBox[{"\[Pi]", "/", "4"}]}]}]}]}], "]"}]}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"n", ",", "0", ",", "4"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"outsideplot", "=", 
+   RowBox[{"ParametricPlot3D", "[", 
+    RowBox[{"outsidewashers", ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Gamma]", ",", "0", ",", 
+       RowBox[{"\[Pi]", "/", "4"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Beta]", ",", "0", ",", " ", 
+       RowBox[{"2", "\[Pi]"}]}], "}"}], ",", 
+     RowBox[{"MeshStyle", "\[Rule]", "None"}], ",", 
+     RowBox[{"PlotStyle", "\[Rule]", "Orange"}], ",", 
+     RowBox[{"Exclusions", "\[Rule]", "None"}], ",", 
+     RowBox[{"PlotPoints", "\[Rule]", "30"}]}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.67849693953468*^9, 3.67849694381474*^9}, {
+  3.67853678205884*^9, 3.678536790314468*^9}, {3.678536899464715*^9, 
+  3.678536919728252*^9}, {3.678550622415715*^9, 3.678550625151432*^9}, {
+  3.6785509280791197`*^9, 3.678550935871582*^9}, {3.6785510767904453`*^9, 
+  3.678551081037826*^9}, {3.679865423922196*^9, 3.679865426185137*^9}, {
+  3.679865594924892*^9, 3.679865647601838*^9}, {3.679865681515546*^9, 
+  3.6798656820911818`*^9}, {3.679870202856723*^9, 3.679870423541901*^9}, {
+  3.679870479600997*^9, 3.6798705028614264`*^9}, {3.679870570492804*^9, 
+  3.679870625753385*^9}, {3.6798709757378902`*^9, 3.6798709834302063`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"torus", " ", "=", " ", 
+   RowBox[{"ParametricPlot3D", "[", 
+    RowBox[{
+     RowBox[{"SterProj", "@", 
+      RowBox[{"ZW", "[", 
+       RowBox[{
+        RowBox[{"\[Pi]", "/", "4"}], ",", "\[Alpha]", ",", "\[Beta]"}], 
+       "]"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Alpha]", ",", "0", ",", 
+       RowBox[{"2", "\[Pi]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Beta]", ",", "0", ",", 
+       RowBox[{"2", "\[Pi]"}]}], "}"}], ",", 
+     RowBox[{"PlotStyle", "\[Rule]", 
+      RowBox[{"Opacity", "[", "0.2", "]"}]}], ",", 
+     RowBox[{"MeshStyle", "\[Rule]", "None"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "4"}], ",", "4"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "4"}], ",", "4"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "4"}], ",", "4"}], "}"}]}], "}"}]}], ",", 
+     RowBox[{"Axes", "\[Rule]", "False"}], ",", 
+     RowBox[{"Boxed", "\[Rule]", "False"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.678536861000496*^9, 3.678536876223658*^9}, {
+  3.679921829085127*^9, 3.679921840604537*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"knot", " ", "=", 
+   RowBox[{"ParametricPlot3D", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"RotationTransform", "[", 
+       RowBox[{
+        RowBox[{"\[Pi]", "/", "q"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", "0", ",", "1"}], "}"}]}], "]"}], "@", 
+      RowBox[{"SterProj", "@", 
+       RowBox[{"\[Sigma]", "@", 
+        RowBox[{"ZW", "[", 
+         RowBox[{
+          RowBox[{"\[Pi]", "/", "4"}], ",", "  ", "\[Theta]", ",", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"-", "p"}], "/", "q"}], " ", "\[Theta]"}]}], "]"}]}]}]}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Theta]", ",", "0", ",", 
+       RowBox[{"q", " ", "2", "\[Pi]"}]}], "}"}], ",", 
+     RowBox[{"PlotStyle", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"Thick", ",", "Green"}], "}"}]}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGAQAWIQvSzbZ7N2xmvHvk3HtoLoc3KHvHSANI+ylDeIPvZq
+aQyI/iF2LwlEF5n/zAPR69aeyQfR735GlYBocY/TYLpHf30ViJ62+EgNiF6Z
+7dQIovVqXkwB0aIF82eC6B2K61aAaB2+njUg2u576gYQbcbMcABEC/2+fgRE
+txqfOgmiH977cApEc900ugaiAyOX3wLReed23wPRJjbLnoHoOFFjBV2Q+zfw
+K4HontlC1iC6LYzBEUQ32O50A9HntCYGgehv+xOjQLRa7dVEEG1zTS4DrF/s
+VTWI/rIxJdsBSM95WFoIogv3KLWA6JKEH20gGgB3uJf2
+  "]],
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Show", "[", 
+    RowBox[{"torus", ",", "knot", ",", "insideplot", ",", "outsideplot"}], 
+    "]"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.678536808348731*^9, 3.678536856464594*^9}, 
+   3.6798702403968163`*^9, {3.67987031785868*^9, 3.6798703214556227`*^9}, 
+   3.679870434026855*^9}]
+},
+WindowSize->{808, 755},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
+FrontEndVersion->"11.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 28, \
+2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 1943, 63, 160, "Input"],
+Cell[2504, 85, 6995, 201, 453, "Input"],
+Cell[9502, 288, 91, 1, 32, "Input"],
+Cell[9596, 291, 4179, 112, 222, "Input"],
+Cell[13778, 405, 1238, 34, 75, "Input"],
+Cell[15019, 441, 1257, 33, 54, "Input"],
+Cell[16279, 476, 469, 9, 152, "Input"]
+}
+]
+*)
+

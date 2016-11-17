@@ -1,0 +1,254 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      9137,        246]
+NotebookOptionsPosition[      8763,        229]
+NotebookOutlinePosition[      9117,        245]
+CellTagsIndexPosition[      9074,        242]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"Mobius", "[", "z_", "]"}], ":=", 
+   RowBox[{"I", " ", 
+    FractionBox[
+     RowBox[{"1", "+", "z"}], 
+     RowBox[{"1", "-", "z"}]]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"ReIm", ":=", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Re", "[", "#", "]"}], ",", 
+     RowBox[{"Im", "[", "#", "]"}]}], "}"}], "&"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ComPolar", "[", 
+   RowBox[{"{", 
+    RowBox[{"z_", ",", "f_"}], "}"}], "]"}], ":=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"Re", "[", "z", "]"}], ",", 
+    RowBox[{"Im", "[", "z", "]"}], ",", "f"}], "}"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Torus", "[", 
+   RowBox[{"{", 
+    RowBox[{"a_", ",", "b_", ",", "\[Phi]_"}], "}"}], "]"}], ":=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"1", "+", "a"}], ")"}], 
+     RowBox[{"Sin", "[", "\[Phi]", "]"}]}], ",", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"1", "+", "a"}], ")"}], 
+     RowBox[{"Cos", "[", "\[Phi]", "]"}]}], ",", "b"}], 
+   "}"}]}], "\[IndentingNewLine]", 
+ RowBox[{"\[Tau]Arg", ":=", 
+  RowBox[{
+   RowBox[{"Mod", "[", 
+    RowBox[{
+     RowBox[{"Arg", "[", "#", "]"}], ",", 
+     RowBox[{"2", "\[Pi]"}]}], "]"}], "&"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Rot", "[", "\[CapitalOmega]_", "]"}], ":=", 
+  RowBox[{"RotationTransform", "[", 
+   RowBox[{"\[CapitalOmega]", ",", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0", ",", "1"}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Unwrap", "[", "z_", "]"}], ":=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Abs", "[", "z", "]"}], "-", "3"}], ",", 
+    RowBox[{"\[Tau]Arg", "[", "z", "]"}]}], "}"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ComPolar2", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"a_", ",", "b_"}], "}"}], ",", "f_"}], "}"}], "]"}], ":=", 
+   RowBox[{"{", 
+    RowBox[{"a", ",", "b", ",", "f"}], "}"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.677164192189971*^9, 3.677164196182025*^9}, {
+  3.677165924872744*^9, 3.67716594414321*^9}, {3.6771803513716097`*^9, 
+  3.677180361298752*^9}, {3.677180401354101*^9, 3.677180401689747*^9}, {
+  3.677180796378703*^9, 3.677180796682538*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ParametricPlot3D", "[", 
+  RowBox[{
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"r", " ", 
+        RowBox[{"Cos", "[", 
+         RowBox[{"\[Theta]", "-", 
+          RowBox[{"\[Pi]", "/", 
+           RowBox[{"(", 
+            RowBox[{"2", "p"}], ")"}]}]}], "]"}]}], ",", 
+       RowBox[{"r", " ", 
+        RowBox[{"Sin", "[", 
+         RowBox[{"\[Theta]", "-", 
+          RowBox[{"\[Pi]", "/", 
+           RowBox[{"(", 
+            RowBox[{"2", "p"}], ")"}]}]}], "]"}]}], ",", " ", 
+       RowBox[{
+        RowBox[{
+         SuperscriptBox[
+          RowBox[{"Abs", "[", 
+           RowBox[{"r", " ", 
+            RowBox[{"Exp", "[", 
+             RowBox[{"I", " ", "\[Theta]"}], "]"}]}], "]"}], "4"], 
+         RowBox[{"f2", "[", 
+          RowBox[{"\[Tau]Arg", "[", 
+           RowBox[{"r", " ", 
+            RowBox[{"Exp", "[", 
+             RowBox[{"I", " ", "\[Theta]"}], "]"}]}], "]"}], "]"}]}], "+", 
+        RowBox[{"2", "\[Pi]", " ", 
+         RowBox[{"n", "/", "q"}]}]}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"n", ",", "0", ",", "q"}], "}"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"r", ",", " ", "0", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\[Theta]", ",", "0", ",", 
+     RowBox[{"2", "\[Pi]"}]}], "}"}], ",", 
+   RowBox[{"Mesh", "\[Rule]", "None"}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+   RowBox[{"Exclusions", "\[Rule]", "True"}], ",", 
+   RowBox[{"PlotPoints", "\[Rule]", "20"}], ",", 
+   RowBox[{"PerformanceGoal", "\[Rule]", "\"\<Speed\>\""}]}], "]"}]], "Input",\
+
+ CellChangeTimes->{
+  3.677164395559784*^9, {3.677169119720922*^9, 3.677169135078977*^9}, 
+   3.677169191248101*^9, 3.677178290405283*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"outside", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"Torus", "@", 
+        RowBox[{
+         RowBox[{"Rot", "[", "0", "]"}], "@", 
+         RowBox[{"ComPolar2", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Unwrap", "@", 
+             RowBox[{"(", 
+              RowBox[{"r", " ", 
+               RowBox[{"Exp", "[", 
+                RowBox[{"I", 
+                 RowBox[{"(", 
+                  RowBox[{"\[Theta]", "-", 
+                   RowBox[{"\[Pi]", "/", 
+                    RowBox[{"(", 
+                    RowBox[{"2", "p"}], ")"}]}]}], ")"}]}], "]"}]}], ")"}]}], 
+            ",", " ", 
+            RowBox[{
+             RowBox[{
+              SuperscriptBox[
+               RowBox[{"Abs", "[", 
+                RowBox[{"r", " ", 
+                 RowBox[{"Exp", "[", 
+                  RowBox[{"I", " ", "\[Theta]"}], "]"}]}], "]"}], "4"], 
+              RowBox[{"f2", "[", 
+               RowBox[{"\[Tau]Arg", "[", 
+                RowBox[{"r", " ", 
+                 RowBox[{"Exp", "[", 
+                  RowBox[{"I", " ", "\[Theta]"}], "]"}]}], "]"}], "]"}]}], 
+             "+", 
+             RowBox[{"2", "\[Pi]", " ", 
+              RowBox[{"n", "/", "q"}]}]}]}], "}"}], "]"}]}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"n", ",", "0", ",", "1"}], "}"}]}], "]"}], "//", 
+     "ComplexExpand"}], "//", "Simplify"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.677165071726461*^9, 3.677165115869597*^9}, {
+   3.677165812158791*^9, 3.677165824701117*^9}, {3.677165987598896*^9, 
+   3.67716603728533*^9}, {3.677169004332862*^9, 3.6771690134001913`*^9}, 
+   3.677169224126358*^9, {3.677169346479088*^9, 3.677169371165422*^9}, {
+   3.6771694549178057`*^9, 3.677169475556484*^9}, {3.6771695305958767`*^9, 
+   3.67716953378817*^9}, {3.6771696336901007`*^9, 3.677169635743814*^9}, {
+   3.67716973565676*^9, 3.677169760175064*^9}, {3.677169792286721*^9, 
+   3.6771697947172813`*^9}, {3.67716986808119*^9, 3.677169870785386*^9}, {
+   3.677169912501169*^9, 3.677169916301836*^9}, 3.67717840271948*^9, {
+   3.6771803161098633`*^9, 3.677180318780168*^9}, {3.677180532386744*^9, 
+   3.6771805338463783`*^9}, {3.677180606977778*^9, 3.677180608567452*^9}, {
+   3.677240737012642*^9, 3.677240737244775*^9}, {3.677240769437633*^9, 
+   3.67724077023563*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"ParametricPlot3D", "[", 
+    RowBox[{"outside", ",", 
+     RowBox[{"{", 
+      RowBox[{"r", ",", " ", "0", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Theta]", ",", "0", ",", 
+       RowBox[{"2", "\[Pi]"}]}], "}"}], ",", 
+     RowBox[{"Mesh", "\[Rule]", "None"}], ",", 
+     RowBox[{"PlotPoints", "\[Rule]", " ", "30"}], ",", 
+     RowBox[{"PerformanceGoal", "\[Rule]", "\"\<Quality\>\""}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}], ",", "knot"}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.6771644370576763`*^9, 3.677164464368334*^9}, {
+   3.677164581646397*^9, 3.6771646589397917`*^9}, {3.677164705444903*^9, 
+   3.677164751335306*^9}, {3.6771650688703547`*^9, 3.67716508163725*^9}, {
+   3.67716511976931*^9, 3.6771651852692423`*^9}, {3.6771652258844643`*^9, 
+   3.6771652300523987`*^9}, {3.677165739844632*^9, 3.677165744203487*^9}, {
+   3.6771657751941347`*^9, 3.677165778580443*^9}, {3.677169250524219*^9, 
+   3.677169250692099*^9}, 3.677169395301536*^9, {3.677169550930068*^9, 
+   3.677169599008122*^9}, {3.677169669449842*^9, 3.677169673511674*^9}, {
+   3.677169707355502*^9, 3.677169708315234*^9}, {3.677169895382957*^9, 
+   3.677169895542185*^9}, {3.677169934789681*^9, 3.6771699393650723`*^9}, {
+   3.677175789358714*^9, 3.6771757929270277`*^9}, {3.677178331749543*^9, 
+   3.677178331916976*^9}, {3.677178380256061*^9, 3.677178427220325*^9}, {
+   3.677178584846095*^9, 3.677178626264819*^9}, {3.677180436571703*^9, 
+   3.677180437184931*^9}, {3.677180498897532*^9, 3.6771805013844347`*^9}, {
+   3.677180619225939*^9, 3.677180625654866*^9}, {3.677180710664342*^9, 
+   3.6771807137906713`*^9}, {3.677180899883519*^9, 3.677180909431692*^9}}]
+},
+WindowSize->{808, 755},
+WindowMargins->{{12, Automatic}, {Automatic, 24}},
+FrontEndVersion->"11.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 28, \
+2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 2274, 69, 197, "Input"],
+Cell[2835, 91, 1738, 48, 104, "Input"],
+Cell[4576, 141, 2368, 54, 144, "Input"],
+Cell[6947, 197, 1812, 30, 117, "Input"]
+}
+]
+*)
+

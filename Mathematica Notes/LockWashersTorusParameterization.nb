@@ -1,0 +1,405 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     13102,        397]
+NotebookOptionsPosition[     12453,        373]
+NotebookOutlinePosition[     12808,        389]
+CellTagsIndexPosition[     12765,        386]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"z", ",", "w"}], "}"}], "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Exp", "[", 
+       RowBox[{"I", " ", "\[Alpha]"}], "]"}], 
+      RowBox[{"Sin", "[", "\[Gamma]", "]"}]}], ",", 
+     RowBox[{
+      RowBox[{"Exp", "[", 
+       RowBox[{"I", " ", "\[Beta]"}], "]"}], 
+      RowBox[{"Cos", "[", "\[Gamma]", "]"}]}]}], "}"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.678473452385385*^9, 3.678473503097629*^9}, {
+  3.678473534816071*^9, 3.678473547924981*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"SterProj", "[", 
+   RowBox[{"{", 
+    RowBox[{"z_", ",", "w_"}], "}"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"x", "=", 
+       RowBox[{"Re", "[", "z", "]"}]}], ",", 
+      RowBox[{"y", "=", 
+       RowBox[{"Im", "[", "z", "]"}]}], ",", 
+      RowBox[{"u", "=", 
+       RowBox[{"Re", "[", "w", "]"}]}], ",", 
+      RowBox[{"v", "=", 
+       RowBox[{"Im", "[", "w", "]"}]}]}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       FractionBox["x", 
+        RowBox[{"1", "-", "v"}]], ",", 
+       FractionBox["y", 
+        RowBox[{"1", "-", "v"}]], ",", 
+       FractionBox["u", 
+        RowBox[{"1", "-", "v"}]]}], "}"}], "//", "ComplexExpand"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Sigma]", "[", 
+    RowBox[{"{", 
+     RowBox[{"z_", ",", "w_"}], "}"}], "]"}], ":=", 
+   RowBox[{"{", 
+    RowBox[{"w", ",", "z"}], "}"}]}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{" ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"g", "[", "\[CapitalAlpha]_", "]"}], "=", 
+    RowBox[{
+     RowBox[{"SterProj", "@", 
+      RowBox[{"{", 
+       RowBox[{"z", ",", "w"}], "}"}]}], "/.", 
+     RowBox[{"\[Alpha]", "\[Rule]", "\[CapitalAlpha]"}]}]}], 
+   ";"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "\[CapitalGamma]_", "]"}], "=", 
+   RowBox[{
+    RowBox[{"SterProj", "/@", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"z", ",", "w"}], "}"}], ",", 
+       RowBox[{"\[Sigma]", "@", 
+        RowBox[{"{", 
+         RowBox[{"z", ",", "w"}], "}"}]}]}], "}"}]}], "/.", 
+    RowBox[{"\[Gamma]", "\[Rule]", "\[CapitalGamma]"}]}]}], ";"}]}], "Input",
+ CellChangeTimes->{
+  3.6784683781222057`*^9, {3.6784684305682364`*^9, 3.678468439807823*^9}, {
+   3.678473498115654*^9, 3.678473507490177*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Show", "@", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"ParametricPlot3D", "[", 
+     RowBox[{
+      RowBox[{"g", "[", "i", "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\[Gamma]", ",", "0", ",", 
+        RowBox[{"\[Pi]", "/", "4"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\[Beta]", ",", "0", ",", 
+        RowBox[{"2", "\[Pi]"}]}], "}"}], ",", 
+      RowBox[{"PlotRange", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "\[Pi]"}], ",", "\[Pi]"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "\[Pi]"}], ",", "\[Pi]"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "\[Pi]"}], ",", "\[Pi]"}], "}"}]}], "}"}]}]}], "]"}], 
+    ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "0", ",", 
+      RowBox[{"2", "\[Pi]"}], ",", 
+      RowBox[{"\[Pi]", "/", "8"}]}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.678468380841016*^9, 3.6784683991363*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Show", "@", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"ParametricPlot3D", "[", 
+     RowBox[{
+      RowBox[{"f", "[", "i", "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\[Alpha]", ",", "0", ",", 
+        RowBox[{"2", "\[Pi]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"\[Beta]", ",", "0", ",", 
+        RowBox[{"2", "\[Pi]"}]}], "}"}], ",", 
+      RowBox[{"PlotRange", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "\[Pi]"}], ",", "\[Pi]"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "\[Pi]"}], ",", "\[Pi]"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "\[Pi]"}], ",", "\[Pi]"}], "}"}]}], "}"}]}]}], "]"}], 
+    ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "0", ",", 
+      RowBox[{"\[Pi]", "/", "4"}], ",", 
+      RowBox[{"\[Pi]", "/", 
+       RowBox[{"4", "^", "2"}]}]}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.67846844484091*^9, 3.678468608010684*^9}, {
+  3.678468869356283*^9, 3.678468880152842*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Clear", "[", "f", "]"}]], "Input",
+ CellChangeTimes->{{3.678468543832443*^9, 3.678468545866741*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"test", "[", 
+   RowBox[{"r_", ",", "\[Theta]_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{
+    SuperscriptBox[
+     RowBox[{"Abs", "[", "r", "]"}], "4"], 
+    RowBox[{"f2", "[", "\[Theta]", "]"}]}], "+", 
+   RowBox[{"2", "\[Pi]", " ", 
+    RowBox[{"n", "/", "q"}]}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Alpha]f", "[", 
+   RowBox[{"\[Gamma]_", ",", "\[Beta]_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{
+   RowBox[{
+    SuperscriptBox[
+     RowBox[{"Abs", "[", 
+      RowBox[{
+       RowBox[{"4", "/", "\[Pi]"}], " ", "\[Gamma]"}], "]"}], "4"], 
+    RowBox[{"f2", "[", "\[Beta]", "]"}]}], "+", 
+   RowBox[{"2", "\[Pi]", " ", 
+    RowBox[{"n", "/", "q"}]}]}]}]}], "Input",
+ CellChangeTimes->{{3.67847358734956*^9, 3.6784736038833647`*^9}, {
+  3.678473753236804*^9, 3.678473784978138*^9}, {3.678474003043865*^9, 
+  3.678474085643634*^9}, {3.678474194960581*^9, 3.678474197739637*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"test", "[", 
+    RowBox[{"1", ",", "\[Theta]", ",", "0"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\[Theta]", ",", "0", ",", 
+     RowBox[{"2", "\[Pi]"}]}], "}"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"test2", "[", 
+    RowBox[{
+     RowBox[{"\[Pi]", "/", "4"}], ",", "\[Beta]", ",", "0"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\[Beta]", ",", "0", ",", 
+     RowBox[{"2", "\[Pi]"}]}], "}"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"InsideWasher", "[", 
+    RowBox[{
+     RowBox[{"\[Pi]", "/", "4"}], ",", "\[Beta]", ",", "0"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\[Beta]", ",", "0", ",", 
+     RowBox[{"2", "\[Pi]"}]}], "}"}]}], 
+  "]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.6784736063496437`*^9, 3.678473679259774*^9}, {
+  3.678473760475016*^9, 3.67847379245044*^9}, {3.67847382390349*^9, 
+  3.678473861644553*^9}, {3.678474005003804*^9, 3.678474097483514*^9}, {
+  3.678474232514945*^9, 3.678474236391493*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"InsideWasher", "[", 
+    RowBox[{"\[Gamma]_", ",", "\[Beta]_", ",", "n_"}], "]"}], ":=", " ", 
+   RowBox[{"Module", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Alpha]", "=", 
+       RowBox[{"\[Alpha]f", "[", 
+        RowBox[{"\[Gamma]", ",", "\[Beta]", ",", "n"}], "]"}]}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"z", ",", "w"}], "}"}], "=", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Exp", "[", 
+           RowBox[{"I", " ", "\[Beta]"}], "]"}], 
+          RowBox[{"Sin", "[", "\[Gamma]", "]"}]}], ",", 
+         RowBox[{
+          RowBox[{"Exp", "[", 
+           RowBox[{"I", " ", "\[Alpha]"}], "]"}], 
+          RowBox[{"Cos", "[", "\[Gamma]", "]"}]}]}], "}"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"{", 
+       RowBox[{"z", ",", "w"}], "}"}]}]}], "]"}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"knot2", "[", 
+   RowBox[{"\[Theta]_", ",", "k_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"\[Alpha]", "=", "\[Theta]"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"z", ",", "w"}], "}"}], "=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Exp", "[", 
+          RowBox[{"I", " ", "\[Alpha]"}], "]"}], 
+         RowBox[{"Cos", "[", 
+          RowBox[{
+           FractionBox[
+            RowBox[{"q", " ", "\[Theta]"}], "p"], "+", 
+           RowBox[{"2", "\[Pi]", " ", 
+            RowBox[{"k", "/", "p"}]}]}], "]"}]}], ",", 
+        RowBox[{
+         RowBox[{"Exp", "[", 
+          RowBox[{"I", " ", "\[Alpha]"}], "]"}], 
+         RowBox[{"Sin", "[", 
+          RowBox[{
+           FractionBox[
+            RowBox[{"q", " ", "\[Theta]"}], "p"], "+", 
+           RowBox[{"2", "\[Pi]", " ", 
+            RowBox[{"k", "/", "p"}]}]}], "]"}]}]}], "}"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", "w"}], "}"}]}]}], 
+   "]"}]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.678474110446842*^9, 3.678474227049588*^9}, {
+  3.678474302419668*^9, 3.678474329698599*^9}, {3.678474825478751*^9, 
+  3.678474830040902*^9}, {3.678475188260063*^9, 3.678475207832374*^9}, {
+  3.67847524854211*^9, 3.678475282214014*^9}, {3.6784753862676497`*^9, 
+  3.6784754304434643`*^9}, {3.678475610050046*^9, 3.678475612266017*^9}, {
+  3.678475667287099*^9, 3.678475669539276*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ParametricPlot3D", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"SterProj", "@", 
+      RowBox[{"knot2", "[", 
+       RowBox[{"\[Theta]", ",", "0"}], "]"}]}], ",", 
+     RowBox[{"SterProj", "@", 
+      RowBox[{"knot2", "[", 
+       RowBox[{"\[Theta]", ",", "1"}], "]"}]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\[Theta]", ",", "0", ",", 
+     RowBox[{"2", "\[Pi]"}]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.678475285505599*^9, 3.678475305825186*^9}, {
+  3.678475434298173*^9, 3.6784755095902853`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{
+   RowBox[{"ParametricPlot3D", "[", 
+    RowBox[{
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"SterProj", "@", 
+        RowBox[{"InsideWasher", "[", 
+         RowBox[{"\[Gamma]", ",", "\[Beta]", ",", "n"}], "]"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"n", ",", "0", ",", "3"}], "}"}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Gamma]", ",", "0", ",", 
+       RowBox[{"\[Pi]", "/", "4"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Beta]", ",", "0", ",", 
+       RowBox[{"2", "\[Pi]"}]}], "}"}]}], "]"}], ",", 
+   RowBox[{"ParametricPlot3D", "[", 
+    RowBox[{
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"SterProj", "@", 
+        RowBox[{"\[Sigma]", "@", 
+         RowBox[{"InsideWasher", "[", 
+          RowBox[{"\[Gamma]", ",", "\[Beta]", ",", "n"}], "]"}]}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"n", ",", "0", ",", "3"}], "}"}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Gamma]", ",", "0", ",", 
+       RowBox[{"\[Pi]", "/", "4"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"\[Beta]", ",", "0", ",", 
+       RowBox[{"2", "\[Pi]"}]}], "}"}]}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.678474850461344*^9, 3.678474910260406*^9}, {
+  3.678475005955297*^9, 3.678475006157701*^9}, {3.678475747211556*^9, 
+  3.678475750306971*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ParametricPlot3D", "[", 
+  RowBox[{
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"SterProj", "@", 
+      RowBox[{"\[Sigma]", "@", 
+       RowBox[{"InsideWasher", "[", 
+        RowBox[{"\[Gamma]", ",", "\[Beta]", ",", "n"}], "]"}]}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"n", ",", "0", ",", "3"}], "}"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\[Gamma]", ",", "0", ",", 
+     RowBox[{"\[Pi]", "/", "4"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\[Beta]", ",", "0", ",", 
+     RowBox[{"2", "\[Pi]"}]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6784750900739107`*^9, 3.67847509208566*^9}}]
+},
+WindowSize->{808, 755},
+WindowMargins->{{Automatic, 125}, {Automatic, 40}},
+FrontEndVersion->"11.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 28, \
+2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 541, 16, 32, "Input"],
+Cell[1102, 38, 1905, 60, 181, "Input"],
+Cell[3010, 100, 1028, 30, 54, "Input"],
+Cell[4041, 132, 1106, 32, 54, "Input"],
+Cell[5150, 166, 124, 2, 32, "Input"],
+Cell[5277, 170, 934, 25, 54, "Input"],
+Cell[6214, 197, 1089, 28, 96, "Input"],
+Cell[7306, 227, 2578, 70, 255, "Input"],
+Cell[9887, 299, 557, 15, 32, "Input"],
+Cell[10447, 316, 1360, 36, 80, "Input"],
+Cell[11810, 354, 639, 17, 46, "Input"]
+}
+]
+*)
+
